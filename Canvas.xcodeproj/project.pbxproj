@@ -13,6 +13,8 @@
 		5FBFD3C8251EDC78007E651B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C7251EDC78007E651B /* Preview Assets.xcassets */; };
 		5FBFD3D4251EDC78007E651B /* CanvasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3D3251EDC78007E651B /* CanvasTests.swift */; };
 		5FBFD3DF251EDC78007E651B /* CanvasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3DE251EDC78007E651B /* CanvasUITests.swift */; };
+		5FBFD3F0251EE3B2007E651B /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3EF251EE3B2007E651B /* Dashboard.swift */; };
+		5FBFD3F5251EF537007E651B /* authentication.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* authentication.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		5FBFD3DA251EDC78007E651B /* CanvasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanvasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBFD3DE251EDC78007E651B /* CanvasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasUITests.swift; sourceTree = "<group>"; };
 		5FBFD3E0251EDC78007E651B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FBFD3EF251EE3B2007E651B /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		5FBFD3F4251EF537007E651B /* authentication.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = authentication.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +102,12 @@
 			children = (
 				5FBFD3C0251EDC77007E651B /* CanvasApp.swift */,
 				5FBFD3C2251EDC77007E651B /* ContentView.swift */,
+				5FBFD3EF251EE3B2007E651B /* Dashboard.swift */,
 				5FBFD3C4251EDC78007E651B /* Assets.xcassets */,
 				5FBFD3C9251EDC78007E651B /* Info.plist */,
 				5FBFD3CA251EDC78007E651B /* Canvas.entitlements */,
 				5FBFD3C6251EDC78007E651B /* Preview Content */,
+				5FBFD3F4251EF537007E651B /* authentication.json */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FBFD3F5251EF537007E651B /* authentication.json in Resources */,
 				5FBFD3C8251EDC78007E651B /* Preview Assets.xcassets in Resources */,
 				5FBFD3C5251EDC78007E651B /* Assets.xcassets in Resources */,
 			);
@@ -262,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */,
+				5FBFD3F0251EE3B2007E651B /* Dashboard.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
