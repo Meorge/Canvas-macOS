@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct CanvasApp: App {
+    @StateObject private var canvasAPI = Manager()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(canvasAPI)
         }
     }
 }

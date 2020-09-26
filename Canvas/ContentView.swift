@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var manager: Manager
+    
     var body: some View {
         NavigationView {
             
@@ -36,10 +38,13 @@ struct ContentView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.secondary)
                 
-                    CourseItem(courseName: "Biology", courseIcon: "leaf", courseGrade: "80%")
-                    CourseItem(courseName: "Math", courseIcon: "sum", courseGrade: "92.8%")
-                    CourseItem(courseName: "English", courseIcon: "book.closed", courseGrade: "100%")
-                    CourseItem(courseName: "Music", courseIcon: "pianokeys", courseGrade: "63%")
+                    ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
+                        NavigationLink(destination: CourseView(course: course)) {CourseItem(course: course)}
+                    }
+//                    CourseItem(courseName: "Biology", courseIcon: "leaf", courseGrade: "")
+//                    CourseItem(courseName: "Math", courseIcon: "sum", courseGrade: "")
+//                    CourseItem(courseName: "English", courseIcon: "book.closed", courseGrade: "")
+//                    CourseItem(courseName: "Music", courseIcon: "pianokeys", courseGrade: "")
                 }
             }.listStyle(SidebarListStyle())
 
@@ -49,18 +54,22 @@ struct ContentView: View {
 }
 
 struct CourseItem: View {
-    @State var courseName = "Course"
-    @State var courseIcon = "book"
-    @State var courseGrade = "100%"
+    @State var course: Course
+//    @State var courseName = "Course"
+//    @State var courseIcon = "book"
+//    @State var courseGrade = "100%"
     var body: some View {
         HStack {
-            Label(self.courseName, systemImage: self.courseIcon)
+            Label(self.course.name, systemImage: "book")
             Spacer()
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.secondary.opacity(0.5))
-                .frame(maxWidth: 50, maxHeight: 20)
-                .overlay(Text(self.courseGrade)
-                            .font(.caption))
+//            if (self.courseGrade != "") {
+//                RoundedRectangle(cornerRadius: 10)
+//                    .foregroundColor(Color.secondary.opacity(0.5))
+//                    .frame(maxWidth: 50, maxHeight: 20)
+//                    .overlay(Text(self.courseGrade)
+//                                .font(.caption))
+//                
+//            }
             
         }
     }
