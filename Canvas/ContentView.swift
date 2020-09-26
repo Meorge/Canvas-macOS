@@ -60,7 +60,7 @@ struct CourseItem: View {
 //    @State var courseGrade = "100%"
     var body: some View {
         HStack {
-            Label(self.course.name, systemImage: "book")
+            Label(self.course.name ?? "Unnamed Course", systemImage: "book")
             Spacer()
 //            if (self.courseGrade != "") {
 //                RoundedRectangle(cornerRadius: 10)

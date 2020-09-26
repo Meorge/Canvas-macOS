@@ -30,14 +30,14 @@ class CanvasAPI: ObservableObject {
         }
     }
     
-    func getModules(forCourse course: Course) -> [Module]? {
-        var modules: [Module]? = nil
-        let modulesRequest = AF.request("https://canvas.instructure.com/api/v1/courses/\(course.id)/modules", method: .get, parameters: ["access_token": self.token])
-        modulesRequest.responseDecodable(of: [Module].self) { data in
-            print(data)
-            modules = data.value!
-        }
+    func getModules(forCourse course: Course, handler: @escaping ((DataResponse<[Module], AFError>) -> Void)) {
+        let url = "https://canvas.instructure.com/api/v1/courses/\(course.id!)/modules"
+        print(url)
+        let modulesRequest = AF.request(url, method: .get, parameters: ["access_token": self.token])
         
-        return modules
+        modulesRequest.responseJSON { data in
+            print(data)
+        }
+        modulesRequest.responseDecodable(of: [Module].self, completionHandler: handler)
     }
 }

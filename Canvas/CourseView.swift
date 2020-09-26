@@ -12,7 +12,7 @@ struct CourseView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: ModuleListView(course: course)) { Label("Modules", systemImage: "folder") }
+                NavigationLink(destination: ModuleListView(course: course!)) { Label("Modules", systemImage: "folder") }
                 Label("Discussions", systemImage: "text.bubble")
                 Label("Grades", systemImage: "graduationcap")
                 Label("People", systemImage: "person")
@@ -25,18 +25,26 @@ struct CourseView: View {
 
 struct ModuleListView: View {
     @EnvironmentObject var manager: Manager
-    @State var course: Course?
+    @State var course: Course
 
     var body: some View {
-        List {
-            Text("haha")
-            Text("hehe")
-            Text("hoho")
+        List(self.course.modules, id: \.self) { module in
+            ModuleView(module: module)
         }
         .listStyle(InsetListStyle())
         .onAppear {
-            self.course?.updateModules()
+            print("update modules")
+            self.course.updateModules()
         }
+    }
+}
+
+struct ModuleView: View {
+    @State var module: Module?
+    
+    var body: some View {
+        Text(self.module!.name!)
+            .font(.title)
     }
 }
 
@@ -45,3 +53,9 @@ struct CourseView_Previews: PreviewProvider {
         CourseView(course: nil)
     }
 }
+
+//struct ModuleListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ModuleListView(course: nil)
+//    }
+//}

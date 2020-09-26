@@ -7,7 +7,15 @@
 
 import Foundation
 
-struct Module: Decodable, Hashable {
+class Module: Decodable, Hashable, ObservableObject {
+    static func == (lhs: Module, rhs: Module) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     let id: Int?
     let workflowState: String?
     let position: Int?

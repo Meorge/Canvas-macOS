@@ -6,14 +6,23 @@
 //
 
 import Foundation
+import Combine
 
-struct Course: Decodable, Hashable {
-    let name: String
-    let id: Int
-    let courseCode: String
-    let accountID: Int
+class Course: Decodable, Hashable, ObservableObject {
+    static func == (lhs: Course, rhs: Course) -> Bool {
+        return lhs.id == rhs.id
+    }
     
-    var modules: [Module]?
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    let name: String?
+    let id: Int?
+    let courseCode: String?
+    let accountID: Int?
+    
+    @Published var modules: [Module] = []
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -22,8 +31,16 @@ struct Course: Decodable, Hashable {
         case accountID = "account_id"
     }
     
-    mutating func updateModules() {
+    func updateModules() {
         print("update modules for \(name)")
-        self.modules = CanvasAPI.instance?.getModules(forCourse: self)
+        CanvasAPI.instance?.getModules(forCourse: self) { data in
+            self.modules = data.value!
+            print("course.modules = \(self.modules)")
+            print("The modules were updated successfully!")
+            self.objectWillChange.send()
+            
+            // its hacky but It Works
+            CanvasAPI.instance?.objectWillChange.send()
+        }
     }
 }
