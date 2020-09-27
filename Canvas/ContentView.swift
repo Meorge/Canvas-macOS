@@ -41,10 +41,6 @@ struct ContentView: View {
                     ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
                         NavigationLink(destination: CourseView(course: course)) {CourseItem(course: course)}
                     }
-//                    CourseItem(courseName: "Biology", courseIcon: "leaf", courseGrade: "")
-//                    CourseItem(courseName: "Math", courseIcon: "sum", courseGrade: "")
-//                    CourseItem(courseName: "English", courseIcon: "book.closed", courseGrade: "")
-//                    CourseItem(courseName: "Music", courseIcon: "pianokeys", courseGrade: "")
                 }
             }.listStyle(SidebarListStyle())
 
@@ -55,9 +51,6 @@ struct ContentView: View {
 
 struct CourseItem: View {
     @State var course: Course
-//    @State var courseName = "Course"
-//    @State var courseIcon = "book"
-//    @State var courseGrade = "100%"
     var body: some View {
         HStack {
             Label(self.course.name ?? "Unnamed Course", systemImage: "book")

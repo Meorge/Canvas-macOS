@@ -31,13 +31,16 @@ class Course: Decodable, Hashable, ObservableObject {
         case accountID = "account_id"
     }
     
+    
+    
     func updateModules() {
-        print("update modules for \(name)")
         CanvasAPI.instance?.getModules(forCourse: self) { data in
             self.modules = data.value!
-            print("course.modules = \(self.modules)")
-            print("The modules were updated successfully!")
-            self.objectWillChange.send()
+            
+            for module in self.modules {
+                module.course = self
+            }
+//            self.objectWillChange.send()
             
             // its hacky but It Works
             CanvasAPI.instance?.objectWillChange.send()

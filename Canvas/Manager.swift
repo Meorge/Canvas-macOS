@@ -29,8 +29,8 @@ class Manager: ObservableObject {
         self.canvasAPI = CanvasAPI(token)
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
-            print("canvas API object changed")
-            self?.objectWillChange.send()
+            print("Canvas API object changed, so send objectWillChange from the Manager")
+            self!.objectWillChange.send()
         }
     }
 }
