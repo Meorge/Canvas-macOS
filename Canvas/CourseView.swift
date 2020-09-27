@@ -30,6 +30,10 @@ struct ModuleListView: View {
     var body: some View {
         List(self.course.modules, id: \.self) { module in
             ModuleView(module: module)
+                .onAppear {
+                    print("update module items")
+                    module.updateModuleItems()
+                }
         }
 //        .listStyle(InsetListStyle())
         .onAppear {
@@ -51,13 +55,10 @@ struct ModuleView: View {
             
             
             // PROBLEM: it's only showing when there is little horizontal space for some weird reason
-            List(self.module.moduleItems!, id: \.self) { moduleItem in
+            ForEach(self.module.moduleItems!, id: \.self) { moduleItem in
                 ModuleItemView(moduleItem: moduleItem)
-                    .padding()
             }
-            .onAppear {
-                self.module.updateModuleItems()
-            }
+
             Divider()
         }
         
@@ -72,7 +73,7 @@ struct ModuleItemView: View {
             VStack(alignment: .leading) {
                 Text(self.moduleItem.title ?? "Module item")
                     .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title : .headline)
-                if (true) {
+                if (self.moduleItem.type != ModuleItemType.Header) {
                     Text("Subtitle")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -81,10 +82,7 @@ struct ModuleItemView: View {
         } icon: {
             Image(systemName: self.getIcon())
         }
-        .padding(.leading, 25 * CGFloat(self.moduleItem.indent ?? 0))
-        .onAppear {
-            print("Created ModuleItemView for item \"\(moduleItem.title)\"")
-        }
+        .padding(.leading, (self.moduleItem.type != ModuleItemType.Header ? 25 : 0) + (25 * CGFloat(self.moduleItem.indent ?? 0)))
         
     }
     

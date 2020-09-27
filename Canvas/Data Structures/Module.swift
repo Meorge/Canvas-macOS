@@ -55,8 +55,8 @@ class Module: Decodable, Hashable, ObservableObject {
             
             for i in self.moduleItems! {
                 i.module = self
+                print(i.title)
             }
-            print("module items for \"\(self.name!)\" updated (there are \(self.moduleItems!.count))")
             self.objectWillChange.send()
 //            self.course!.objectWillChange.send()
 //
