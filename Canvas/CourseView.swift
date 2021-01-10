@@ -10,6 +10,7 @@ import SwiftUI
 struct CourseView: View {
     @State var course: Course?
     var body: some View {
+        // NavigationView is here!
         NavigationView {
             List {
                 NavigationLink(destination: ModuleListView(course: course!)) { Label("Modules", systemImage: "folder") }
@@ -30,16 +31,8 @@ struct ModuleListView: View {
     var body: some View {
         List(self.course.modules, id: \.self) { module in
             ModuleView(module: module)
-                .onAppear {
-//                    print("update module items")
-//                    module.updateModuleItems()
-                }
         }
-//        .listStyle(InsetListStyle())
-        .onAppear {
-            print("MODULE LIST APPEARS")
-            self.course.updateModules()
-        }
+        .onAppear(perform: self.course.updateModules)
     }
 }
 
@@ -54,19 +47,22 @@ struct ModuleView: View {
                 .multilineTextAlignment(.leading)
                 .padding(10)
             
-            
-            // PROBLEM: it's only showing when there is little horizontal space for some weird reason
+
             ForEach(self.module.moduleItems!, id: \.self) { moduleItem in
-                ModuleItemView(moduleItem: moduleItem)
-            }
-            .onAppear {
-                print("in SwiftUI: \(self.module.moduleItems!.count)")
+                if moduleItem.type == ModuleItemType.Header
+                {
+                    ModuleItemView(moduleItem: moduleItem)
+                } else
+                {
+                    // PROBLEM: Always greyed out for some reason?
+                    NavigationLink(destination: Text("beep boop")) {
+                        ModuleItemView(moduleItem: moduleItem)
+                    }
+                }
             }
 
             Divider()
         }
-
-        
     }
 }
 
@@ -88,10 +84,6 @@ struct ModuleItemView: View {
             if self.getIcon() != "" { Image(systemName: self.getIcon()) }
         }
         .padding(.leading, (self.moduleItem.type != ModuleItemType.Header ? 25 : 0) + (25 * CGFloat(self.moduleItem.indent ?? 0)))
-        
-        .onAppear {
-            print(self.moduleItem.title!)
-        }
         
     }
     
@@ -117,6 +109,15 @@ struct ModuleItemView: View {
     }
 }
 
+struct ModuleItemDetailView: View {
+    @EnvironmentObject var manager: Manager
+    @ObservedObject var moduleItem: ModuleItem
+    
+    var body: some View {
+        Text("beep")
+    }
+}
+
 enum ModuleItemIcon : String {
     case None = ""
     case Page = "doc"
@@ -138,9 +139,3 @@ struct ModuleView_Previews: PreviewProvider {
         ModuleView(module: Module())
     }
 }
-
-//struct ModuleListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ModuleListView(course: nil)
-//    }
-//}
