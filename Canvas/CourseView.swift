@@ -31,12 +31,13 @@ struct ModuleListView: View {
         List(self.course.modules, id: \.self) { module in
             ModuleView(module: module)
                 .onAppear {
-                    print("update module items")
-                    module.updateModuleItems()
+//                    print("update module items")
+//                    module.updateModuleItems()
                 }
         }
 //        .listStyle(InsetListStyle())
         .onAppear {
+            print("MODULE LIST APPEARS")
             self.course.updateModules()
         }
     }
@@ -58,9 +59,13 @@ struct ModuleView: View {
             ForEach(self.module.moduleItems!, id: \.self) { moduleItem in
                 ModuleItemView(moduleItem: moduleItem)
             }
+            .onAppear {
+                print("in SwiftUI: \(self.module.moduleItems!.count)")
+            }
 
             Divider()
         }
+
         
     }
 }
@@ -80,9 +85,13 @@ struct ModuleItemView: View {
                 }
             }
         } icon: {
-            Image(systemName: self.getIcon())
+            if self.getIcon() != "" { Image(systemName: self.getIcon()) }
         }
         .padding(.leading, (self.moduleItem.type != ModuleItemType.Header ? 25 : 0) + (25 * CGFloat(self.moduleItem.indent ?? 0)))
+        
+        .onAppear {
+            print(self.moduleItem.title!)
+        }
         
     }
     

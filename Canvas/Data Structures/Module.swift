@@ -53,14 +53,16 @@ class Module: Decodable, Hashable, ObservableObject {
         CanvasAPI.instance?.getModuleItems(forModule: self) { data in
             self.moduleItems = data.value!
             
+//            print("self.moduleItems count is \(self.moduleItems!.count)")
+            
             for i in self.moduleItems! {
                 i.module = self
-                print(i.title)
+//                print("Module item title: \(i.title!)")
             }
             self.objectWillChange.send()
-//            self.course!.objectWillChange.send()
-//
-//            // its hacky but It Works
+            
+            // its hacky but It Works
+            print("Module items updated, new count is \(self.moduleItems!.count)")
             CanvasAPI.instance?.objectWillChange.send()
         }
     }
