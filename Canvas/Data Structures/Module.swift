@@ -62,7 +62,6 @@ class Module: Decodable, Hashable, ObservableObject {
             self.objectWillChange.send()
             
             // its hacky but It Works
-            print("Module items updated, new count is \(self.moduleItems!.count)")
             CanvasAPI.instance?.objectWillChange.send()
         }
     }

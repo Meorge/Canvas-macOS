@@ -44,7 +44,6 @@ class Course: Decodable, Hashable, ObservableObject {
 //            self.objectWillChange.send()
             
             // its hacky but It Works
-            print("Modules updated")
             CanvasAPI.instance?.objectWillChange.send()
         }
     }

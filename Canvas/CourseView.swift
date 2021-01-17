@@ -10,10 +10,13 @@ import SwiftUI
 struct CourseView: View {
     @State var course: Course?
     var body: some View {
-        // NavigationView is here!
         NavigationView {
             List {
-                NavigationLink(destination: ModuleListView(course: course!)) { Label("Modules", systemImage: "folder") }
+                NavigationLink(destination: ModuleListView(course: course!))
+                {
+                    Label("Modules", systemImage: "folder")
+                }
+                Label("Announcements", systemImage: "megaphone")
                 Label("Discussions", systemImage: "text.bubble")
                 Label("Grades", systemImage: "graduationcap")
                 Label("People", systemImage: "person")
@@ -29,10 +32,14 @@ struct ModuleListView: View {
     @ObservedObject var course: Course
 
     var body: some View {
-        List(self.course.modules, id: \.self) { module in
-            ModuleView(module: module)
+        NavigationView {
+            List(self.course.modules, id: \.id) { module in
+                // PROBLEM: Every one of these ModuleViews acts like they have their own NavigationLink
+                ModuleView(module: module)
+            }
         }
         .onAppear(perform: self.course.updateModules)
+        .navigationTitle((course.name ?? "Course") + " - Modules")
     }
 }
 
@@ -47,20 +54,21 @@ struct ModuleView: View {
                 .multilineTextAlignment(.leading)
                 .padding(10)
             
-
-            ForEach(self.module.moduleItems!, id: \.self) { moduleItem in
+            ForEach(self.module.moduleItems!, id: \.id) { moduleItem in
                 if moduleItem.type == ModuleItemType.Header
                 {
                     ModuleItemView(moduleItem: moduleItem)
                 } else
                 {
-                    // PROBLEM: Always greyed out for some reason?
-                    NavigationLink(destination: Text("beep boop")) {
+                    // PROBLEM: These NavigationLinks don't seem to work, since
+                    // the ModuleView as a whole acts like it's inside of one...
+                    // but the destinations from the ModuleView's NavigationLink
+                    // point to these??
+                    NavigationLink(destination: Text("\(moduleItem.title!)")) {
                         ModuleItemView(moduleItem: moduleItem)
                     }
                 }
             }
-
             Divider()
         }
     }
