@@ -36,7 +36,7 @@ class CanvasAPI: ObservableObject {
     
     func getModuleItems(forModule module: Module, handler: @escaping ((DataResponse<[ModuleItem], AFError>) -> Void)) {
         let url = "https://canvas.instructure.com/api/v1/courses/\(module.course!.id!)/modules/\(module.id!)/items"
-        let moduleItemsRequest = AF.request(url, method: .get, parameters: ["access_token": self.token])
+        let moduleItemsRequest = AF.request(url, method: .get, parameters: ["access_token": self.token, "include": ["content_details"]])
         moduleItemsRequest.responseDecodable(of: [ModuleItem].self, completionHandler: handler)
     }
 }

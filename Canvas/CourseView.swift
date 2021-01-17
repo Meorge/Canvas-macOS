@@ -32,18 +32,27 @@ struct ModuleListView: View {
     @ObservedObject var course: Course
 
     var body: some View {
-//        NavigationView {
-            List(self.course.modules, id: \.id) { module in
-                // PROBLEM: Every one of these ModuleViews acts like they have their own NavigationLink
-                ModuleView(module: module)
+        Group {
+            if self.course.modules.count > 0 {
+                List(self.course.modules, id: \.id) { module in
+                    ModuleView(module: module)
+                }
+
+            } else {
+                VStack {
+                    Text("No Modules")
+                    Text("There's nothing to show here.")
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-//        }
+        }
         .onAppear(perform: self.course.updateModules)
         .navigationTitle((course.name ?? "Course") + " - Modules")
     }
 }
 
 struct ModuleView: View {
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var manager: Manager
     @ObservedObject var module: Module
     var body: some View {
@@ -60,20 +69,23 @@ struct ModuleView: View {
                     ModuleItemView(moduleItem: moduleItem)
                 } else
                 {
-                    // PROBLEM: These NavigationLinks don't seem to work, since
-                    // the ModuleView as a whole acts like it's inside of one...
-                    // but the destinations from the ModuleView's NavigationLink
-                    // point to these??
-                    Button(action: {print("\(moduleItem.apiURL!)")}) {
+                    Button(action: {self.openModuleItem(moduleItem)}) {
                         ModuleItemView(moduleItem: moduleItem)
                     }
                     .buttonStyle(PlainButtonStyle())
-//                    NavigationLink(destination: Text("\(moduleItem.title!)")) {
-//                        ModuleItemView(moduleItem: moduleItem)
-//                    }
                 }
             }
             Divider()
+        }
+    }
+    
+    func openModuleItem(_ item: ModuleItem) {
+//        print(item.htmlURL!)
+//        print(item.contentDetails?.pointsPossible ?? "no points")
+//        print(item.contentDetails?.dueAt ?? "no date")
+        print(item.module!.course!.id)
+        if let url = URL(string: item.htmlURL!) {
+            openURL(url)
         }
     }
 }
@@ -88,16 +100,38 @@ struct ModuleItemView: View {
                     .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title : .headline)
                     .padding((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? 10 : 0)
                 if (self.moduleItem.type != ModuleItemType.Header) {
-                    Text("Subtitle")
-                        .font(.caption)
+                    Text(self.getSubtitle())
                         .foregroundColor(.secondary)
                 }
             }
         } icon: {
             if self.getIcon() != "" { Image(systemName: self.getIcon()) }
         }
+        .padding(5)
         .padding(.leading, (self.moduleItem.type != ModuleItemType.Header ? 25 : 0) + (25 * CGFloat(self.moduleItem.indent ?? 0)))
         
+    }
+    
+    func getSubtitle() -> String {
+        var output: [String] = []
+        if let details = self.moduleItem.contentDetails {
+            if let dueDate = details.dueAt {
+                // Get human-readable due date
+                
+                let formatter = DateFormatter()
+                formatter.dateStyle = .short
+                formatter.timeStyle = .short
+                
+                let dateString = formatter.string(from: dueDate)
+                output.append(dateString)
+            }
+            
+            if let pointsPossible = details.pointsPossible {
+                output.append("\(pointsPossible) pts")
+            }
+        }
+        
+        return output.joined(separator: " | ")
     }
     
     func getIcon() -> String {

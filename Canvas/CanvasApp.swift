@@ -15,5 +15,10 @@ struct CanvasApp: App {
             ContentView()
                 .environmentObject(canvasAPI)
         }
+        
+        WindowGroup("ExternalPage") {
+            PageView()
+        }
+        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
     }
 }

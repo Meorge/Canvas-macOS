@@ -42,6 +42,7 @@ struct ContentView: View {
                         NavigationLink(destination: CourseView(course: course)) {CourseItem(course: course)}
                     }
                 }
+                Spacer()
             }.listStyle(SidebarListStyle())
 
             
@@ -56,12 +57,12 @@ struct CourseItem: View {
             Label(self.course.name ?? "Unnamed Course", systemImage: "book")
             Spacer()
 //            if (self.courseGrade != "") {
-//                RoundedRectangle(cornerRadius: 10)
-//                    .foregroundColor(Color.secondary.opacity(0.5))
-//                    .frame(maxWidth: 50, maxHeight: 20)
-//                    .overlay(Text(self.courseGrade)
-//                                .font(.caption))
-//                
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color.secondary.opacity(0.5))
+                    .frame(maxWidth: 50, maxHeight: 20)
+                    .overlay(Text("100%")
+                                .font(.caption))
+                
 //            }
             
         }

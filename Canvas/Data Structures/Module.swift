@@ -51,7 +51,7 @@ class Module: Decodable, Hashable, ObservableObject {
     
     func updateModuleItems() {
         CanvasAPI.instance?.getModuleItems(forModule: self) { data in
-            self.moduleItems = data.value!
+            self.moduleItems = data.value ?? []
             
             for i in self.moduleItems! {
                 i.module = self
@@ -85,8 +85,8 @@ class ModuleItem: Decodable, Hashable, ObservableObject {
     var pageURL: String? = ""
     var externalURL: String? = ""
     var openInNewTab: Bool? = false
-    var completionRequirement: CompletionRequirement? = CompletionRequirement()
-    var contentDetails: ContentDetails? = ContentDetails()
+//    var completionRequirement: CompletionRequirement? = nil
+    var contentDetails: ContentDetails? = nil
     
     var module: Module? = nil
     
@@ -104,6 +104,47 @@ class ModuleItem: Decodable, Hashable, ObservableObject {
         case externalURL = "external_url"
         case openInNewTab = "new_tab"
         case contentDetails = "content_details"
+    }
+}
+
+class ModulePageItem: Decodable, Hashable, ObservableObject {
+    static func == (lhs: ModulePageItem, rhs: ModulePageItem) -> Bool {
+        return lhs.pageID == rhs.pageID
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(pageID)
+    }
+    
+    var title: String? = "Module Page Item"
+    var createdAt: Date? = Date()
+    var url: String? = ""
+    var editingRoles: String? = ""
+    var pageID: Int? = 0
+    var published: Bool? = false
+    var hideFromStudents: Bool? = false
+    var frontPage: Bool? = false
+    var htmlURL: String? = ""
+    var todoDate: Date? = Date()
+    var updatedAt: Date? = Date()
+    var lockedForUser: Bool? = false
+    var body: String? = ""
+    
+    var module: Module?
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case createdAt = "created_at"
+        case url
+        case editingRoles = "editing_roles"
+        case pageID = "page_id"
+        case published
+        case hideFromStudents = "hide_from_students"
+        case frontPage = "front_page"
+        case htmlURL = "html_url"
+        case todoDate = "todo_date"
+        case updatedAt = "updated_at"
+        case lockedForUser = "locked_for_user"
+        case body
     }
 }
 
@@ -155,10 +196,30 @@ class ContentDetails: Decodable, Hashable, ObservableObject {
         hasher.combine(lockExplanation)
     }
     
-    var pointsPossible: Int? = 0
-    var dueAt: String? = ""
-    var unlockAt: String? = ""
-    var lockAt: String? = ""
+    required init() { }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        pointsPossible = try? values.decode(Double?.self, forKey: .pointsPossible)
+        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
+        lockExplanation = try? values.decode(String?.self, forKey: .lockExplanation)
+        
+        let dateFormatter = ISO8601DateFormatter()
+        
+        let dueAtString = try? values.decode(String?.self, forKey: .dueAt)
+        let unlockAtString = try? values.decode(String?.self, forKey: .unlockAt)
+        let lockAtString = try? values.decode(String?.self, forKey: .lockAt)
+    
+        if dueAtString != nil { dueAt = dateFormatter.date(from: dueAtString!) }
+        if unlockAtString != nil { unlockAt = dateFormatter.date(from: unlockAtString!) }
+        if lockAtString != nil { lockAt = dateFormatter.date(from: lockAtString!) }
+    }
+    
+    var pointsPossible: Double? = 0
+    var dueAt: Date?
+    var unlockAt: Date?
+    var lockAt: Date?
     var lockedForUser: Bool? = false
     var lockExplanation: String? = "lock explanation?"
     // TODO: lock info
