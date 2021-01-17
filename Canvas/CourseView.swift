@@ -32,12 +32,12 @@ struct ModuleListView: View {
     @ObservedObject var course: Course
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             List(self.course.modules, id: \.id) { module in
                 // PROBLEM: Every one of these ModuleViews acts like they have their own NavigationLink
                 ModuleView(module: module)
             }
-        }
+//        }
         .onAppear(perform: self.course.updateModules)
         .navigationTitle((course.name ?? "Course") + " - Modules")
     }
@@ -64,9 +64,13 @@ struct ModuleView: View {
                     // the ModuleView as a whole acts like it's inside of one...
                     // but the destinations from the ModuleView's NavigationLink
                     // point to these??
-                    NavigationLink(destination: Text("\(moduleItem.title!)")) {
+                    Button(action: {print("\(moduleItem.apiURL!)")}) {
                         ModuleItemView(moduleItem: moduleItem)
                     }
+                    .buttonStyle(PlainButtonStyle())
+//                    NavigationLink(destination: Text("\(moduleItem.title!)")) {
+//                        ModuleItemView(moduleItem: moduleItem)
+//                    }
                 }
             }
             Divider()
@@ -82,6 +86,7 @@ struct ModuleItemView: View {
             VStack(alignment: .leading) {
                 Text(self.moduleItem.title ?? "Module item")
                     .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title : .headline)
+                    .padding((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? 10 : 0)
                 if (self.moduleItem.type != ModuleItemType.Header) {
                     Text("Subtitle")
                         .font(.caption)
