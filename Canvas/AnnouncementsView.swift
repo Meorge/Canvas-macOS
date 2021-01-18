@@ -4,7 +4,7 @@
 //
 //  Created by Malcolm Anderson on 1/17/21.
 //
-
+import Foundation
 import SwiftUI
 
 struct AnnouncementListView: View {
@@ -58,15 +58,24 @@ struct AnnouncementRowView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
             }
-            Text(self.announcement.message ?? "No content")
+            Text(self.getPreviewText())
                 .font(.body)
                 .truncationMode(.tail)
                 .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                .padding(.leading, 20)
         }
         .padding(.vertical, 8)
     }
     
+    func getPreviewText() -> String {
+        // from https://stackoverflow.com/a/41875127
+        let message = self.announcement.message ?? "No content"
+        let messageWithoutHTMLTags = message.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        let messageWithoutAmpersandThings = messageWithoutHTMLTags.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        return messageWithoutAmpersandThings
+        
+//        let attributed = try? NSAttributedString(data: (self.announcement.message?.data(using: .unicode))!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+//        return attributed?.string ?? nil
+    }
     func getDateAsString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

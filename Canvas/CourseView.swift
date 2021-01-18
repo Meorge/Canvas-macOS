@@ -123,7 +123,7 @@ struct ModuleItemView: View {
                 // Get human-readable due date
                 
                 let formatter = DateFormatter()
-                formatter.dateStyle = .short
+                formatter.dateStyle = .medium
                 formatter.timeStyle = .short
                 
                 let dateString = formatter.string(from: dueDate)
