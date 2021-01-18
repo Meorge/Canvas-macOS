@@ -196,25 +196,25 @@ class ContentDetails: Decodable, Hashable, ObservableObject {
         hasher.combine(lockExplanation)
     }
     
-    required init() { }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        pointsPossible = try? values.decode(Double?.self, forKey: .pointsPossible)
-        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
-        lockExplanation = try? values.decode(String?.self, forKey: .lockExplanation)
-        
-        let dateFormatter = ISO8601DateFormatter()
-        
-        let dueAtString = try? values.decode(String?.self, forKey: .dueAt)
-        let unlockAtString = try? values.decode(String?.self, forKey: .unlockAt)
-        let lockAtString = try? values.decode(String?.self, forKey: .lockAt)
-    
-        if dueAtString != nil { dueAt = dateFormatter.date(from: dueAtString!) }
-        if unlockAtString != nil { unlockAt = dateFormatter.date(from: unlockAtString!) }
-        if lockAtString != nil { lockAt = dateFormatter.date(from: lockAtString!) }
-    }
+//    required init() { }
+//    
+//    required init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        
+//        pointsPossible = try? values.decode(Double?.self, forKey: .pointsPossible)
+//        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
+//        lockExplanation = try? values.decode(String?.self, forKey: .lockExplanation)
+//        
+//        let dateFormatter = ISO8601DateFormatter()
+//        
+//        let dueAtString = try? values.decode(String?.self, forKey: .dueAt)
+//        let unlockAtString = try? values.decode(String?.self, forKey: .unlockAt)
+//        let lockAtString = try? values.decode(String?.self, forKey: .lockAt)
+//    
+//        if dueAtString != nil { dueAt = dateFormatter.date(from: dueAtString!) }
+//        if unlockAtString != nil { unlockAt = dateFormatter.date(from: unlockAtString!) }
+//        if lockAtString != nil { lockAt = dateFormatter.date(from: lockAtString!) }
+//    }
     
     var pointsPossible: Double? = 0
     var dueAt: Date?

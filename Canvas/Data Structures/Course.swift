@@ -23,15 +23,15 @@ class Course: Decodable, Hashable, ObservableObject {
     let accountID: Int?
     
     @Published var modules: [Module] = []
+    var enrollments: [Enrollment] = []
 
     enum CodingKeys: String, CodingKey {
         case name
         case id
         case courseCode = "course_code"
         case accountID = "account_id"
+        case enrollments
     }
-    
-    
     
     func updateModules() {
         CanvasAPI.instance?.getModules(forCourse: self) { data in
@@ -46,5 +46,29 @@ class Course: Decodable, Hashable, ObservableObject {
             // its hacky but It Works
             CanvasAPI.instance?.objectWillChange.send()
         }
+    }
+    
+    func getScoreAsString() -> String? {
+        if enrollments.count <= 0 {
+            return nil
+        }
+        
+        let myEnrollment = enrollments[0]
+        let percent = myEnrollment.computedCurrentScore
+        let grade = myEnrollment.computedCurrentGrade
+        
+        if percent == nil && grade == nil {
+            return "N/A"
+        }
+        
+        if grade == nil {
+            return "\(percent!)%"
+        }
+        
+        if percent == nil {
+            return "\(grade!)"
+        }
+        
+        return "\(percent!)% - \(grade!)"
     }
 }

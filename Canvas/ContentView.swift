@@ -56,14 +56,14 @@ struct CourseItem: View {
         HStack {
             Label(self.course.name ?? "Unnamed Course", systemImage: "book")
             Spacer()
-//            if (self.courseGrade != "") {
+            if (self.course.getScoreAsString() != nil) {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(Color.secondary.opacity(0.5))
                     .frame(maxWidth: 50, maxHeight: 20)
-                    .overlay(Text("100%")
-                                .font(.caption))
+                    .overlay(Text(self.course.getScoreAsString()!))
+                                .font(.caption)
                 
-//            }
+            }
             
         }
     }

@@ -16,11 +16,16 @@ struct CourseView: View {
                 {
                     Label("Modules", systemImage: "folder")
                 }
-                Label("Announcements", systemImage: "megaphone")
+                NavigationLink(destination: AnnouncementListView(course: course!))
+                {
+                    Label("Announcements", systemImage: "megaphone")
+                }
                 Label("Discussions", systemImage: "text.bubble")
                 Label("Grades", systemImage: "graduationcap")
                 Label("People", systemImage: "person")
                 Label("Syllabus", systemImage: "doc.text")
+                Divider()
+                Label("Customize", systemImage: "paintbrush")
             }
         }
         .navigationTitle(course?.name ?? "Course")
@@ -175,14 +180,14 @@ enum ModuleItemIcon : String {
     case Link = "link"
     
 }
-struct CourseView_Previews: PreviewProvider {
-    static var previews: some View {
-        CourseView(course: nil)
-    }
-}
-
-struct ModuleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ModuleView(module: Module())
-    }
-}
+//struct CourseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CourseView(course: nil)
+//    }
+//}
+//
+//struct ModuleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ModuleView(module: Module())
+//    }
+//}

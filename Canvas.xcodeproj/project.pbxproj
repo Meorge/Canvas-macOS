@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5F50A9BC25B4E48E00DD255B /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9BB25B4E48E00DD255B /* PageView.swift */; };
+		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
+		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
+		5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
 		5F879916251FD671009904BC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F879902251FD636009904BC /* Alamofire.framework */; };
 		5F879917251FD671009904BC /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5F879902251FD636009904BC /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
@@ -107,6 +110,9 @@
 
 /* Begin PBXFileReference section */
 		5F50A9BB25B4E48E00DD255B /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		5F50A9D125B51D1400DD255B /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
+		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
+		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
 		5F8798F3251FD636009904BC /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		5F879922251FD6BD009904BC /* CanvasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasAPI.swift; sourceTree = "<group>"; };
 		5F879926251FD72F009904BC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -181,7 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				5F87992D251FDA1A009904BC /* Course.swift */,
+				5F50A9D125B51D1400DD255B /* Enrollment.swift */,
 				5F879935251FE5B9009904BC /* Module.swift */,
+				5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 				5F879922251FD6BD009904BC /* CanvasAPI.swift */,
 				5F879926251FD72F009904BC /* Manager.swift */,
 				5F879931251FE382009904BC /* CourseView.swift */,
+				5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -445,11 +454,14 @@
 			files = (
 				5F87992E251FDA1A009904BC /* Course.swift in Sources */,
 				5F879932251FE382009904BC /* CourseView.swift in Sources */,
+				5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */,
+				5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */,
 				5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */,
 				5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */,
 				5FBFD3F0251EE3B2007E651B /* Dashboard.swift in Sources */,
 				5F879936251FE5B9009904BC /* Module.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
+				5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */,
 				5F50A9BC25B4E48E00DD255B /* PageView.swift in Sources */,
 				5F879927251FD72F009904BC /* Manager.swift in Sources */,
 			);
