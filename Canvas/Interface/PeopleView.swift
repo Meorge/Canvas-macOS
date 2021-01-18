@@ -35,6 +35,7 @@ struct PeopleRowView: View {
     @ObservedObject var person: User
     var body: some View {
         HStack {
+            AvatarView(avatar: Image("testAvatar"))
             VStack(alignment: .leading) {
                 Text(person.shortName ?? "No name")
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -62,11 +63,16 @@ struct PeopleRowView: View {
         }
     }
 }
-struct PeopleDetailView: View {
+
+struct AvatarView: View {
+    var avatar: Image
     var body: some View {
-        HStack {
-            Text("Person's Name")
-        }
+        avatar
+            .resizable()
+            .aspectRatio(1, contentMode: .fit)
+            .frame(maxWidth: 30, maxHeight: 30)
+            .clipShape(Circle())
+            
     }
 }
 
