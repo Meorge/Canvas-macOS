@@ -24,7 +24,7 @@ class User: Decodable, Hashable, ObservableObject {
     var sisImportID: Int?
     var integrationID: String?
     var loginID: String?
-    var avatarURL: String?
+    var avatarURL: URL?
     var enrollments: [Enrollment]?
     var email: String?
     var locale: String?
@@ -56,5 +56,4 @@ class User: Decodable, Hashable, ObservableObject {
         let enrollment = enrollments?.filter { $0.courseID == courseID }.first
         return enrollment
     }
-    
 }

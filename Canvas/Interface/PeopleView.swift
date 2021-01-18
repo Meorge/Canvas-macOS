@@ -6,14 +6,50 @@
 //
 
 import SwiftUI
+import Alamofire
+import SDWebImageSwiftUI
 
 struct PeopleView: View {
     @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
+    
+    @State var filter = FilterCategory.all
+    
+    @State var searchContent = ""
+    
+    enum FilterCategory: String, CaseIterable, Identifiable {
+        case all = "All"
+        case students = "Students"
+        case teachers = "Teachers"
+        case tas = "TAs"
+        case designers = "Designers"
+        case observers = "Observers"
+        
+        var id: FilterCategory { self }
+    }
+    
+    var filteredPeople: [User] {
+        self.course.people.filter { user in
+            self.filter == .all
+            ||
+            (
+                (self.filter.id == .students) && (user.getEnrollment(forCourse: course)?.role! == .StudentEnrollment)
+                ||
+                (self.filter.id == .teachers) && (user.getEnrollment(forCourse: course)?.role! == .TeacherEnrollment)
+                ||
+                (self.filter.id == .tas) && (user.getEnrollment(forCourse: course)?.role! == .TaEnrollment)
+                ||
+                (self.filter.id == .designers) && (user.getEnrollment(forCourse: course)?.role! == .DesignerEnrollment)
+                ||
+                (self.filter.id == .observers) && (user.getEnrollment(forCourse: course)?.role! == .ObserverEnrollment)
+            )
+        }
+    }
+    
     var body: some View {
         Group {
-            if self.course.people.count > 0 {
-                List(self.course.people, id: \.id) { person in
+            if self.filteredPeople.count > 0 {
+                List(self.filteredPeople, id: \.id) { person in
                     PeopleRowView(course: course, person: person)
                 }
             } else {
@@ -26,7 +62,33 @@ struct PeopleView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .navigationTitle("\(course.name!) - People")
         .onAppear(perform: self.course.updatePeople)
+        
+        .toolbar {
+            ToolbarItem {
+                Menu {
+                    Picker("Roles", selection: $filter) {
+                        ForEach(FilterCategory.allCases) { category in
+                            Text(category.rawValue).tag(category)
+                        }
+                    }
+                    .pickerStyle(InlinePickerStyle())
+                } label: {
+                    Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
+                }
+            }
+//            ToolbarItemGroup(placement: .automatic) {
+//                // adapting from https://github.com/Dimillian/RedditOS/blob/master/RedditOs/Features/Search/ToolbarSearchBar.swift
+//                TextField("Search", text: $searchContent)
+//                    .padding()
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .frame(width: 300)
+////                Button(action: {}) {
+////                    Label("Search", systemImage: "magnifyingglass")
+////                }
+//            }
+        }
     }
 }
 
@@ -35,7 +97,7 @@ struct PeopleRowView: View {
     @ObservedObject var person: User
     var body: some View {
         HStack {
-            AvatarView(avatar: Image("testAvatar"))
+            AvatarView(person: person)
             VStack(alignment: .leading) {
                 Text(person.shortName ?? "No name")
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -65,9 +127,9 @@ struct PeopleRowView: View {
 }
 
 struct AvatarView: View {
-    var avatar: Image
+    @ObservedObject var person: User
     var body: some View {
-        avatar
+        WebImage(url: person.avatarURL)
             .resizable()
             .aspectRatio(1, contentMode: .fit)
             .frame(maxWidth: 30, maxHeight: 30)
@@ -75,6 +137,7 @@ struct AvatarView: View {
             
     }
 }
+
 
 //struct PeopleView_Previews: PreviewProvider {
 //    static var previews: some View {
