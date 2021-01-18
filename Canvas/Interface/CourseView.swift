@@ -22,7 +22,10 @@ struct CourseView: View {
                 }
                 Label("Discussions", systemImage: "text.bubble")
                 Label("Grades", systemImage: "graduationcap")
-                Label("People", systemImage: "person")
+                
+                NavigationLink(destination: PeopleView(course: course!)) {
+                    Label("People", systemImage: "person")
+                }
                 Label("Syllabus", systemImage: "doc.text")
                 Divider()
                 Label("Customize", systemImage: "paintbrush")
@@ -102,10 +105,11 @@ struct ModuleItemView: View {
             VStack(alignment: .leading) {
                 Text(self.moduleItem.title ?? "Module item")
                     .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title : .headline)
+                    .fontWeight(.bold)
                     .padding((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? 10 : 0)
                 if (self.moduleItem.type != ModuleItemType.Header) {
                     Text(self.getSubtitle())
-                        .foregroundColor(.secondary)
+                        
                 }
             }
         } icon: {

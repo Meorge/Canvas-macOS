@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F50A9BC25B4E48E00DD255B /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9BB25B4E48E00DD255B /* PageView.swift */; };
 		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
 		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
 		5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
@@ -18,6 +17,8 @@
 		5F87992E251FDA1A009904BC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
 		5F879932251FE382009904BC /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879931251FE382009904BC /* CourseView.swift */; };
 		5F879936251FE5B9009904BC /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879935251FE5B9009904BC /* Module.swift */; };
+		5F9D16E125B5FFDB0098F1E4 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16E025B5FFDB0098F1E4 /* PeopleView.swift */; };
+		5F9D16E525B601A20098F1E4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16E425B601A20098F1E4 /* User.swift */; };
 		5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C0251EDC77007E651B /* CanvasApp.swift */; };
 		5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C2251EDC77007E651B /* ContentView.swift */; };
 		5FBFD3C5251EDC78007E651B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C4251EDC78007E651B /* Assets.xcassets */; };
@@ -109,7 +110,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5F50A9BB25B4E48E00DD255B /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		5F50A9D125B51D1400DD255B /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
@@ -119,6 +119,8 @@
 		5F87992D251FDA1A009904BC /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		5F879931251FE382009904BC /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		5F879935251FE5B9009904BC /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
+		5F9D16E025B5FFDB0098F1E4 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
+		5F9D16E425B601A20098F1E4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5FBFD3BD251EDC77007E651B /* Canvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBFD3C0251EDC77007E651B /* CanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasApp.swift; sourceTree = "<group>"; };
 		5FBFD3C2251EDC77007E651B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -190,8 +192,22 @@
 				5F50A9D125B51D1400DD255B /* Enrollment.swift */,
 				5F879935251FE5B9009904BC /* Module.swift */,
 				5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */,
+				5F9D16E425B601A20098F1E4 /* User.swift */,
 			);
 			path = "Data Structures";
+			sourceTree = "<group>";
+		};
+		5F9D16D625B5FF600098F1E4 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5FBFD3C0251EDC77007E651B /* CanvasApp.swift */,
+				5FBFD3C2251EDC77007E651B /* ContentView.swift */,
+				5FBFD3EF251EE3B2007E651B /* Dashboard.swift */,
+				5F879931251FE382009904BC /* CourseView.swift */,
+				5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */,
+				5F9D16E025B5FFDB0098F1E4 /* PeopleView.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		5FBFD3B4251EDC77007E651B = {
@@ -219,11 +235,8 @@
 		5FBFD3BF251EDC77007E651B /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
+				5F9D16D625B5FF600098F1E4 /* Interface */,
 				5F87992C251FDA0E009904BC /* Data Structures */,
-				5FBFD3C0251EDC77007E651B /* CanvasApp.swift */,
-				5F50A9BB25B4E48E00DD255B /* PageView.swift */,
-				5FBFD3C2251EDC77007E651B /* ContentView.swift */,
-				5FBFD3EF251EE3B2007E651B /* Dashboard.swift */,
 				5FBFD3C4251EDC78007E651B /* Assets.xcassets */,
 				5FBFD3C9251EDC78007E651B /* Info.plist */,
 				5FBFD3CA251EDC78007E651B /* Canvas.entitlements */,
@@ -231,8 +244,6 @@
 				5FBFD3F4251EF537007E651B /* token.txt */,
 				5F879922251FD6BD009904BC /* CanvasAPI.swift */,
 				5F879926251FD72F009904BC /* Manager.swift */,
-				5F879931251FE382009904BC /* CourseView.swift */,
-				5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -452,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F9D16E525B601A20098F1E4 /* User.swift in Sources */,
 				5F87992E251FDA1A009904BC /* Course.swift in Sources */,
 				5F879932251FE382009904BC /* CourseView.swift in Sources */,
 				5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */,
@@ -462,8 +474,8 @@
 				5F879936251FE5B9009904BC /* Module.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 				5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */,
-				5F50A9BC25B4E48E00DD255B /* PageView.swift in Sources */,
 				5F879927251FD72F009904BC /* Manager.swift in Sources */,
+				5F9D16E125B5FFDB0098F1E4 /* PeopleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

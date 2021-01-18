@@ -24,6 +24,7 @@ class Course: Decodable, Hashable, ObservableObject {
     
     @Published var modules: [Module] = []
     @Published var announcements: [DiscussionTopic] = []
+    @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
 
     enum CodingKeys: String, CodingKey {
@@ -52,6 +53,12 @@ class Course: Decodable, Hashable, ObservableObject {
     func updateAnnouncements() {
         CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
             self.announcements = data.value!
+        }
+    }
+    
+    func updatePeople() {
+        CanvasAPI.instance?.getUsers(forCourse: self) { data in
+            self.people = data.value!
         }
     }
     

@@ -77,6 +77,9 @@ struct AnnouncementRowView: View {
 //        return attributed?.string ?? nil
     }
     func getDateAsString() -> String {
+        if self.announcement.postedAt == nil {
+            return "???"
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
