@@ -25,7 +25,7 @@ class Enrollment: Decodable, Hashable {
     var enrollmentState: EnrollmentState? = nil
     var limitPrivilegesToCourseSection: Bool? = nil
     var rootAccountID: Int? = nil
-    var type: StudentEnrollmentType? = nil
+//    var type: StudentEnrollmentType? = nil
     var userID: Int? = nil
     var associatedUserID: Int? = nil
     var role: StudentEnrollmentType? = nil
@@ -126,7 +126,7 @@ class Enrollment: Decodable, Hashable {
         case enrollmentState = "enrollment_state"
         case limitPrivilegesToCourseSection = "limit_privileges_to_course_section"
         case rootAccountID = "root_account_id"
-        case type
+//        case type
         case userID = "user_id"
         case associatedUserID = "associated_user_id"
         case role
@@ -161,9 +161,9 @@ enum EnrollmentState: String, Decodable {
 }
 
 enum StudentEnrollmentType: String, Decodable {
-    case StudentEnrollment
-    case TeacherEnrollment
-    case TaEnrollment
-    case DesignerEnrollment
-    case ObserverEnrollment
+    case StudentEnrollment = "StudentEnrollment"
+    case TeacherEnrollment = "TeacherEnrollment"
+    case TaEnrollment = "TaEnrollment"
+    case DesignerEnrollment = "DesignerEnrollment"
+    case ObserverEnrollment = "ObserverEnrollment"
 }

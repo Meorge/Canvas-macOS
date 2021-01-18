@@ -23,7 +23,8 @@ class Course: Decodable, Hashable, ObservableObject {
     let accountID: Int?
     
     @Published var modules: [Module] = []
-    var enrollments: [Enrollment] = []
+    @Published var announcements: [DiscussionTopic] = []
+    var enrollments: [Enrollment]? = []
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -48,12 +49,20 @@ class Course: Decodable, Hashable, ObservableObject {
         }
     }
     
+    func updateAnnouncements() {
+        CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
+            self.announcements = data.value!
+        }
+    }
+    
     func getScoreAsString() -> String? {
-        if enrollments.count <= 0 {
-            return nil
+        if enrollments == nil { return "" }
+        
+        if enrollments!.count <= 0 {
+            return ""
         }
         
-        let myEnrollment = enrollments[0]
+        let myEnrollment = enrollments![0]
         let percent = myEnrollment.computedCurrentScore
         let grade = myEnrollment.computedCurrentGrade
         

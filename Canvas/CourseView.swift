@@ -26,6 +26,7 @@ struct CourseView: View {
                 Label("Syllabus", systemImage: "doc.text")
                 Divider()
                 Label("Customize", systemImage: "paintbrush")
+                    .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             }
         }
         .navigationTitle(course?.name ?? "Course")
@@ -46,6 +47,8 @@ struct ModuleListView: View {
             } else {
                 VStack {
                     Text("No Modules")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                     Text("There's nothing to show here.")
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,10 +88,6 @@ struct ModuleView: View {
     }
     
     func openModuleItem(_ item: ModuleItem) {
-//        print(item.htmlURL!)
-//        print(item.contentDetails?.pointsPossible ?? "no points")
-//        print(item.contentDetails?.dueAt ?? "no date")
-        print(item.module!.course!.id)
         if let url = URL(string: item.htmlURL!) {
             openURL(url)
         }
