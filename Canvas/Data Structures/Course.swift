@@ -15,6 +15,10 @@ class Course: Decodable, Hashable, ObservableObject {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+//        hasher.combine(announcements.hashValue)
+//        hasher.combine(modules)
+//        hasher.combine(announcements)
+//        hasher.combine(people)
     }
     
     let name: String?
@@ -23,15 +27,19 @@ class Course: Decodable, Hashable, ObservableObject {
     let accountID: Int?
     
     @Published var modules: [Module] = []
-    @Published var announcements: [DiscussionTopic] = []
+    
+    // Not updating to show read status...
+    // Maybe it's because the same elements (same ID, etc) are here
+    // even though they have different properties?
+    // If I switch to another view first, though, it updates correctly...
+    @Published var announcements: [DiscussionTopic] = [] {
+        didSet {
+            print("did set announcements for \(self.name!)!")
+            self.objectWillChange.send()
+        }
+    }
     @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
-    
-    
-    // Updating statuses
-    @Published var updatingModules: Bool = false
-    @Published var updatingAnnouncements: Bool = false
-    @Published var updatingPeople: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -48,7 +56,6 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func updateModules() {
-        self.updatingModules = true
         CanvasAPI.instance?.getModules(forCourse: self) { data in
             self.modules = data.value!
             
@@ -57,32 +64,24 @@ class Course: Decodable, Hashable, ObservableObject {
                 module.updateModuleItems()
             }
             
-            self.updatingModules = false
-            
             // its hacky but It Works
 //            CanvasAPI.instance?.objectWillChange.send()
-            
-            
         }
     }
     
     func updateAnnouncements() {
-        self.updatingAnnouncements = true
         CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
-            self.announcements = data.value!
-            self.updatingAnnouncements = false
-//            CanvasAPI.instance?.objectWillChange.send()
+            let newAnnouncements = data.value!
+            
+            self.announcements = newAnnouncements
+            
+            self.objectWillChange.send()
         }
     }
     
     func updatePeople() {
-        self.updatingPeople = true
-//        print("self.updatingPeople for \(self.name!) = \(self.updatingPeople)")
         CanvasAPI.instance?.getUsers(forCourse: self) { data in
             self.people = data.value!
-            self.updatingPeople = false
-//            CanvasAPI.instance?.objectWillChange.send()
-//            print("self.updatingPeople for \(self.name!) = \(self.updatingPeople)")
         }
     }
     

@@ -43,10 +43,6 @@ struct ModuleListView: View {
     var body: some View {
         Group {
             VStack {
-                if self.course.updatingModules {
-                    ProgressView()
-                }
-                
                 if self.course.modules.count > 0 {
                     List(self.course.modules, id: \.id) { module in
                         ModuleView(module: module)
@@ -63,7 +59,7 @@ struct ModuleListView: View {
                 }
             }
         }
-//        .onAppear(perform: self.course.updateModules)
+        .onAppear(perform: self.course.updateModules)
         .navigationTitle((course.name ?? "Course") + " - Modules")
     }
 }

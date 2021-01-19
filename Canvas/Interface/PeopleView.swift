@@ -49,10 +49,6 @@ struct PeopleView: View {
     var body: some View {
         Group {
         VStack {
-//            if self.course.updatingPeople {
-//                ProgressView()
-//            }
-            
             if self.filteredPeople.count > 0 {
                 List(self.filteredPeople, id: \.id) { person in
                     PeopleRowView(course: course, person: person)
@@ -69,16 +65,9 @@ struct PeopleView: View {
         }
         }
         .navigationTitle("\(course.name ?? "Course") - People")
-//        .onAppear(perform: self.course.updatePeople)
+        .onAppear(perform: self.course.updatePeople)
         
         .toolbar {
-            ToolbarItem(placement: .navigation) {
-                if self.course.updatingPeople {
-                    ProgressView()
-                        .onAppear { print("progress view should appear") }
-                }
-            }
-            
             ToolbarItemGroup(placement: .primaryAction) {
                 Menu {
                     Picker("Roles", selection: $filter) {

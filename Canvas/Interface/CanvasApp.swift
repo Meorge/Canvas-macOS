@@ -15,6 +15,12 @@ struct CanvasApp: App {
             ContentView()
                 .environmentObject(canvasAPI)
                 .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        if self.canvasAPI.canvasAPI.numberOfActiveRequests > 0 {
+                            ProgressView()
+                                .frame(maxHeight: 20)
+                        }
+                    }
                     ToolbarItem {
                         Button(action: self.canvasAPI.refresh) {
                             Label("Refresh", systemImage: "arrow.clockwise")

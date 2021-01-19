@@ -17,6 +17,7 @@ class CanvasAPI: ObservableObject {
     let jsonDecoder = JSONDecoder()
     
     @Published var courses: [Course] = []
+    @Published var numberOfActiveRequests: Int = 0
     
     init(_ token: String) {
         // set up date decoding strategy
@@ -77,6 +78,11 @@ class CanvasAPI: ObservableObject {
         var parameters: [String: Any] = ["access_token": self.token]
         parameters.merge(custom_parameters) { (_, new) in new }
         let request = AF.request(CanvasAPI.baseURL + url, method: .get, parameters: parameters)
-        request.responseDecodable(of: T.self, decoder: jsonDecoder, completionHandler: handler)
+        
+        self.numberOfActiveRequests += 1
+        request.responseDecodable(of: T.self, decoder: jsonDecoder) { response in
+            self.numberOfActiveRequests -= 1
+            handler(response)
+        }
     }
 }

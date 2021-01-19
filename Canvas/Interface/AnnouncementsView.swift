@@ -15,12 +15,13 @@ struct AnnouncementListView: View {
         Group {
             VStack {
                 if self.course.announcements.count > 0 {
-                    List(self.course.announcements, id: \.id) { announcement in
+                    List(self.course.announcements, id: \.self) { announcement in
                         Button(action: {self.openAnnouncement(announcement)}) {
                             AnnouncementRowView(announcement: announcement)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
+                    .id(UUID())
                     .listStyle(InsetListStyle())
                     .frame(minWidth: 300)
                 } else {
@@ -34,14 +35,7 @@ struct AnnouncementListView: View {
                 }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                if self.course.updatingAnnouncements {
-                    ProgressView()
-                        .onAppear { print("progress view should appear") }
-                }
-            }
-        }
+        .onAppear(perform: self.course.updateAnnouncements)
         .navigationTitle((course.name ?? "Course") + " - Announcements")
     }
     

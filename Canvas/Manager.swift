@@ -12,6 +12,7 @@ import Combine
 class Manager: ObservableObject {
     @Published var canvasAPI: CanvasAPI
     
+    
     var anyCancellable: AnyCancellable? = nil
     init() {
         var token = ""
@@ -29,7 +30,6 @@ class Manager: ObservableObject {
         self.canvasAPI = CanvasAPI(token)
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [self] (_) in
-//            print("Canvas API object changed, so send objectWillChange from the Manager")
             self.objectWillChange.send()
         }
     }
