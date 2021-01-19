@@ -15,7 +15,11 @@ struct CanvasApp: App {
             ContentView()
                 .environmentObject(canvasAPI)
                 .toolbar {
-                    Spacer()
+                    ToolbarItem {
+                        Button(action: self.canvasAPI.refresh) {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                        }
+                    }
                 }
         }
     }

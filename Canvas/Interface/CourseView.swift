@@ -42,22 +42,28 @@ struct ModuleListView: View {
 
     var body: some View {
         Group {
-            if self.course.modules.count > 0 {
-                List(self.course.modules, id: \.id) { module in
-                    ModuleView(module: module)
+            VStack {
+                if self.course.updatingModules {
+                    ProgressView()
                 }
+                
+                if self.course.modules.count > 0 {
+                    List(self.course.modules, id: \.id) { module in
+                        ModuleView(module: module)
+                    }
 
-            } else {
-                VStack {
-                    Text("No Modules")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Text("There's nothing to show here.")
+                } else {
+                    VStack {
+                        Text("No Modules")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("There's nothing to show here.")
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .onAppear(perform: self.course.updateModules)
+//        .onAppear(perform: self.course.updateModules)
         .navigationTitle((course.name ?? "Course") + " - Modules")
     }
 }

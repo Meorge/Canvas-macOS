@@ -14,8 +14,7 @@ struct Dashboard: View {
         GridItem(.adaptive(minimum: 250))
     ]
     var body: some View {
-//        Text("idk what to put here")
-        ProgressView()
+        Text("idk what to put here")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

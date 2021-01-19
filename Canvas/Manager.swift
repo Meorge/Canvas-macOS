@@ -33,4 +33,8 @@ class Manager: ObservableObject {
             self.objectWillChange.send()
         }
     }
+    
+    func refresh() {
+        self.canvasAPI.getCourses()
+    }
 }

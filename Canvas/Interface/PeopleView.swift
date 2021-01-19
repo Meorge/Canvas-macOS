@@ -48,6 +48,11 @@ struct PeopleView: View {
     
     var body: some View {
         Group {
+        VStack {
+//            if self.course.updatingPeople {
+//                ProgressView()
+//            }
+            
             if self.filteredPeople.count > 0 {
                 List(self.filteredPeople, id: \.id) { person in
                     PeopleRowView(course: course, person: person)
@@ -62,11 +67,19 @@ struct PeopleView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .navigationTitle("\(course.name!) - People")
-        .onAppear(perform: self.course.updatePeople)
+        }
+        .navigationTitle("\(course.name ?? "Course") - People")
+//        .onAppear(perform: self.course.updatePeople)
         
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .navigation) {
+                if self.course.updatingPeople {
+                    ProgressView()
+                        .onAppear { print("progress view should appear") }
+                }
+            }
+            
+            ToolbarItemGroup(placement: .primaryAction) {
                 Menu {
                     Picker("Roles", selection: $filter) {
                         ForEach(FilterCategory.allCases) { category in
@@ -78,7 +91,7 @@ struct PeopleView: View {
                     Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
                 }
             }
-//            ToolbarItemGroup(placement: .automatic) {
+//            ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                // adapting from https://github.com/Dimillian/RedditOS/blob/master/RedditOs/Features/Search/ToolbarSearchBar.swift
 //                TextField("Search", text: $searchContent)
 //                    .padding()

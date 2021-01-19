@@ -26,6 +26,12 @@ class Course: Decodable, Hashable, ObservableObject {
     @Published var announcements: [DiscussionTopic] = []
     @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
+    
+    
+    // Updating statuses
+    @Published var updatingModules: Bool = false
+    @Published var updatingAnnouncements: Bool = false
+    @Published var updatingPeople: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -35,7 +41,14 @@ class Course: Decodable, Hashable, ObservableObject {
         case enrollments
     }
     
+    func update() {
+        updateModules()
+        updatePeople()
+        updateAnnouncements()
+    }
+    
     func updateModules() {
+        self.updatingModules = true
         CanvasAPI.instance?.getModules(forCourse: self) { data in
             self.modules = data.value!
             
@@ -43,22 +56,33 @@ class Course: Decodable, Hashable, ObservableObject {
                 module.course = self
                 module.updateModuleItems()
             }
-//            self.objectWillChange.send()
+            
+            self.updatingModules = false
             
             // its hacky but It Works
-            CanvasAPI.instance?.objectWillChange.send()
+//            CanvasAPI.instance?.objectWillChange.send()
+            
+            
         }
     }
     
     func updateAnnouncements() {
+        self.updatingAnnouncements = true
         CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
             self.announcements = data.value!
+            self.updatingAnnouncements = false
+//            CanvasAPI.instance?.objectWillChange.send()
         }
     }
     
     func updatePeople() {
+        self.updatingPeople = true
+//        print("self.updatingPeople for \(self.name!) = \(self.updatingPeople)")
         CanvasAPI.instance?.getUsers(forCourse: self) { data in
             self.people = data.value!
+            self.updatingPeople = false
+//            CanvasAPI.instance?.objectWillChange.send()
+//            print("self.updatingPeople for \(self.name!) = \(self.updatingPeople)")
         }
     }
     

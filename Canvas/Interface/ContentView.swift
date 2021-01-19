@@ -15,10 +15,6 @@ struct ContentView: View {
             
             List {
                 Group {
-                    Text("Favorites")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
                     NavigationLink(destination: Dashboard()) {
                         Label("Dashboard", systemImage: "square.grid.2x2")
                     }

@@ -13,26 +13,36 @@ struct AnnouncementListView: View {
     @ObservedObject var course: Course
     var body: some View {
         Group {
-            if self.course.announcements.count > 0 {
-                List(self.course.announcements, id: \.id) { announcement in
-                    Button(action: {self.openAnnouncement(announcement)}) {
-                        AnnouncementRowView(announcement: announcement)
+            VStack {
+                if self.course.announcements.count > 0 {
+                    List(self.course.announcements, id: \.id) { announcement in
+                        Button(action: {self.openAnnouncement(announcement)}) {
+                            AnnouncementRowView(announcement: announcement)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .listStyle(InsetListStyle())
+                    .frame(minWidth: 300)
+                } else {
+                    VStack {
+                        Text("No Announcements")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("There's nothing to show here.")
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .listStyle(InsetListStyle())
-                .frame(minWidth: 300)
-            } else {
-                VStack {
-                    Text("No Announcements")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Text("There's nothing to show here.")
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .onAppear(perform: self.course.updateAnnouncements)
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                if self.course.updatingAnnouncements {
+                    ProgressView()
+                        .onAppear { print("progress view should appear") }
+                }
+            }
+        }
+        .navigationTitle((course.name ?? "Course") + " - Announcements")
     }
     
     func openAnnouncement(_ item: DiscussionTopic) {
