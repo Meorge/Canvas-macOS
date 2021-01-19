@@ -14,7 +14,9 @@ struct CanvasApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(canvasAPI)
-                .toolbar {}
+                .toolbar {
+                    Spacer()
+                }
         }
     }
 }
