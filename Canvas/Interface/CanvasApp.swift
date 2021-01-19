@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AppKit
+
 
 @main
 struct CanvasApp: App {

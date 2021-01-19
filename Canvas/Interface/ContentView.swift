@@ -47,7 +47,7 @@ struct ContentView: View {
 }
 
 struct CourseItem: View {
-    @State var course: Course
+    @ObservedObject var course: Course
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -55,7 +55,7 @@ struct CourseItem: View {
                 Spacer()
                 
                 if self.course.unreadAnnouncements > 0 {
-                    Badge(text: "\(self.course.unreadAnnouncements)", color: Color.red, minWidth: 55)
+                    Badge(text: "\(self.course.unreadAnnouncements)", color: Color.red, minWidth: 25)
                 }
                 if (self.course.getScoreAsString() != nil) {
                     Badge(text: self.course.getScoreAsString()!, color: Color.secondary.opacity(0.5), minWidth: 60)

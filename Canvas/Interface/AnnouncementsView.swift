@@ -47,6 +47,7 @@ struct AnnouncementListView: View {
 }
 
 struct AnnouncementRowView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var announcement: DiscussionTopic
     var body: some View {
         VStack(alignment: .leading) {

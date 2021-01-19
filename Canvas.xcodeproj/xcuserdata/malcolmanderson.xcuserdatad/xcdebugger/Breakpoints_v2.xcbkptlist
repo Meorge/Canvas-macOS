@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "DA436675-3B64-4425-999D-CADCBCE53F3E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Canvas/CanvasAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "getCourses()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD - 7239142e2eae3980"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Canvas.CanvasAPI.getCourses() -&gt; ()"
+                  moduleName = "Canvas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/CanvasAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "71">
+               </Location>
+               <Location
+                  uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD - dc4e123273db2ae5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #2 (Alamofire.DataResponse&lt;Swift.Array&lt;Canvas.Course&gt;, Alamofire.AFError&gt;) -&gt; () in implicit closure #1 (Canvas.CanvasAPI) -&gt; (Alamofire.DataResponse&lt;Swift.Array&lt;Canvas.Course&gt;, Alamofire.AFError&gt;) -&gt; () in Canvas.CanvasAPI.getCourses() -&gt; ()"
+                  moduleName = "Canvas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/CanvasAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

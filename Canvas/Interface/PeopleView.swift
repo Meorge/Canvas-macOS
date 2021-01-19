@@ -95,6 +95,7 @@ struct PeopleView: View {
 }
 
 struct PeopleRowView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
     @ObservedObject var person: User
     var body: some View {
@@ -129,6 +130,7 @@ struct PeopleRowView: View {
 }
 
 struct AvatarView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var person: User
     var body: some View {
         WebImage(url: person.avatarURL)

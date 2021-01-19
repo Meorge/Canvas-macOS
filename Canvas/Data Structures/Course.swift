@@ -29,14 +29,9 @@ class Course: Decodable, Hashable, ObservableObject {
     
     @Published var modules: [Module] = []
     
-    // Not updating to show read status...
-    // Maybe it's because the same elements (same ID, etc) are here
-    // even though they have different properties?
-    // If I switch to another view first, though, it updates correctly...
     @Published var announcements: [DiscussionTopic] = [] {
         didSet {
             self.unreadAnnouncements = self.announcements.filter { $0.readState! == .Unread }.count
-            print("\(self.name!) has \(self.unreadAnnouncements) unread announcements")
             self.objectWillChange.send()
         }
     }

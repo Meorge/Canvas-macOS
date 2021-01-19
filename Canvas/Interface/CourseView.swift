@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CourseView: View {
-    @State var course: Course
+    @EnvironmentObject var manager: Manager
+    @ObservedObject var course: Course
     var body: some View {
         NavigationView {
             List {
