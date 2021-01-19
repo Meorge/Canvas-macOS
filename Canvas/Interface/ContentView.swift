@@ -49,20 +49,58 @@ struct ContentView: View {
 struct CourseItem: View {
     @State var course: Course
     var body: some View {
-        HStack {
-            Label(self.course.name ?? "Unnamed Course", systemImage: "book")
-            Spacer()
-            if (self.course.getScoreAsString() != nil) {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color.secondary.opacity(0.5))
-                    .frame(maxWidth: 50, maxHeight: 20)
-                    .overlay(Text(self.course.getScoreAsString()!))
-                                .font(.caption)
+        VStack(alignment: .leading) {
+            HStack {
+                Label(self.course.name ?? "Unnamed Course", systemImage: "book")
+                Spacer()
+                
+                if self.course.unreadAnnouncements > 0 {
+                    Badge(text: "\(self.course.unreadAnnouncements)", color: Color.red, minWidth: 55)
+                }
+                if (self.course.getScoreAsString() != nil) {
+                    Badge(text: self.course.getScoreAsString()!, color: Color.secondary.opacity(0.5), minWidth: 60)
+                    
+                }
                 
             }
-            
+//            Text("course name")
+//                .foregroundColor(.secondary)
+//                .font(.caption)
         }
     }
+}
+
+struct Badge: View {
+    @State var text: String
+    @State var color: Color
+    @State var minWidth: Double = 0.0
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 50)
+                .foregroundColor(color)
+                .frame(minWidth: CGFloat(minWidth), maxHeight: .infinity)
+            Text(self.text)
+                .foregroundColor(.white)
+                .font(.caption)
+//                .padding(5)
+        }
+        .fixedSize()
+    }
+//    var body: some View {
+//        Text(self.text)
+//            .foregroundColor(.clear)
+//            .frame(minWidth: CGFloat(self.minWidth))
+//            .overlay(
+//                ZStack {
+//                    RoundedRectangle(cornerRadius: 50)
+//                        .foregroundColor(color)
+//                        .frame(minWidth: 25, minHeight: 25)
+//                    Text(self.text)
+//                        .foregroundColor(.primary)
+//                }
+//            )
+//    }
 }
 
 struct Calendar: View {

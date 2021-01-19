@@ -83,7 +83,7 @@ class DiscussionTopic: Identifiable, Decodable, Hashable, ObservableObject {
         onlyGradersCanRate = try? container.decode(Bool?.self, forKey: .onlyGradersCanRate)
         sortByRating = try? container.decode(Bool?.self, forKey: .sortByRating)
         
-        print("\(title!) - \(readState?.rawValue ?? "nil")")
+//        print("\(title!) - \(readState?.rawValue ?? "nil")")
     }
     
     enum CodingKeys: String, CodingKey {

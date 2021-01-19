@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct CourseView: View {
-    @State var course: Course?
+    @State var course: Course
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: ModuleListView(course: course!))
+                NavigationLink(destination: ModuleListView(course: course))
                 {
                     Label("Modules", systemImage: "folder")
                 }
-                NavigationLink(destination: AnnouncementListView(course: course!))
+                NavigationLink(destination: AnnouncementListView(course: course))
                 {
-                    Label("Announcements", systemImage: "megaphone")
+                    HStack {
+                        Label("Announcements", systemImage: "megaphone")
+                        Spacer()
+                        if self.course.unreadAnnouncements > 0 { Badge(text: "\(self.course.unreadAnnouncements)", color: .red, minWidth: 25) }
+                    }
                 }
                 Label("Discussions", systemImage: "text.bubble")
                 Label("Grades", systemImage: "graduationcap")
                 
-                NavigationLink(destination: PeopleView(course: course!)) {
+                NavigationLink(destination: PeopleView(course: course)) {
                     Label("People", systemImage: "person")
                 }
                 Label("Syllabus", systemImage: "doc.text")
@@ -32,7 +36,7 @@ struct CourseView: View {
                     .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             }
         }
-        .navigationTitle(course?.name ?? "Course")
+        .navigationTitle(course.name ?? "Course")
     }
 }
 

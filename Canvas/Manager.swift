@@ -26,11 +26,10 @@ class Manager: ObservableObject {
             print("not found")
         }
         
-        
         self.canvasAPI = CanvasAPI(token)
         
-        anyCancellable = self.canvasAPI.objectWillChange.sink { [self] (_) in
-            self.objectWillChange.send()
+        anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
+            self!.objectWillChange.send()
         }
     }
     

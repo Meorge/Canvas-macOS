@@ -10,7 +10,7 @@ import Combine
 
 class Enrollment: Decodable, Hashable {
     static func == (lhs: Enrollment, rhs: Enrollment) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.hashValue == rhs.hashValue
     }
     
     func hash(into hasher: inout Hasher) {

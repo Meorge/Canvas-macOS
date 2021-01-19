@@ -66,7 +66,7 @@ class Module: Decodable, Hashable, ObservableObject {
 
 class ModuleItem: Decodable, Hashable, ObservableObject {
     static func == (lhs: ModuleItem, rhs: ModuleItem) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.hashValue == rhs.hashValue
     }
     
     func hash(into hasher: inout Hasher) {

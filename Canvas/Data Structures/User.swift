@@ -9,11 +9,21 @@ import Foundation
 
 class User: Decodable, Hashable, ObservableObject {
     static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.hashValue == rhs.hashValue
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(sortableName)
+        hasher.combine(shortName)
+        hasher.combine(loginID)
+        hasher.combine(avatarURL)
+        hasher.combine(email)
+        hasher.combine(locale)
+        hasher.combine(lastLogin)
+        hasher.combine(timeZone)
+        hasher.combine(bio)
     }
     
     var id: Int?

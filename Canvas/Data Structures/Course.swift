@@ -10,11 +10,12 @@ import Combine
 
 class Course: Decodable, Hashable, ObservableObject {
     static func == (lhs: Course, rhs: Course) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.hashValue == rhs.hashValue
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+//        hasher.combine(unreadAnnouncements)
 //        hasher.combine(announcements.hashValue)
 //        hasher.combine(modules)
 //        hasher.combine(announcements)
@@ -34,10 +35,14 @@ class Course: Decodable, Hashable, ObservableObject {
     // If I switch to another view first, though, it updates correctly...
     @Published var announcements: [DiscussionTopic] = [] {
         didSet {
-            print("did set announcements for \(self.name!)!")
+            self.unreadAnnouncements = self.announcements.filter { $0.readState! == .Unread }.count
+            print("\(self.name!) has \(self.unreadAnnouncements) unread announcements")
             self.objectWillChange.send()
         }
     }
+    
+    @Published var unreadAnnouncements: Int = 0
+    
     @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
 
