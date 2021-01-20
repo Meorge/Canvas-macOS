@@ -10,7 +10,8 @@ import Alamofire
 import SwiftUI
 
 class CanvasAPI: ObservableObject {
-    static var baseURL = "https://canvas.instructure.com/api/v1"
+    static var subdomain = "wsu"
+    static var baseURL = "https://\(subdomain).instructure.com/api/v1"
     static var instance: CanvasAPI? = nil
     
     let token: String
@@ -58,6 +59,11 @@ class CanvasAPI: ObservableObject {
         for course in self.courses {
             course.update()
         }
+    }
+    
+    func getCourseTabs(forCourse course: Course, handler: @escaping ((DataResponse<[Tab], AFError>) -> Void)) {
+        let url = "/courses/\(course.id!)/tabs"
+        makeRequest(url, handler: handler)
     }
     
     func getModules(forCourse course: Course, handler: @escaping ((DataResponse<[Module], AFError>) -> Void)) {

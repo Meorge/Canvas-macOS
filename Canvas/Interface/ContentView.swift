@@ -97,24 +97,9 @@ struct Badge: View {
             Text(self.text)
                 .foregroundColor(.white)
                 .font(.caption)
-//                .padding(5)
         }
         .fixedSize()
     }
-//    var body: some View {
-//        Text(self.text)
-//            .foregroundColor(.clear)
-//            .frame(minWidth: CGFloat(self.minWidth))
-//            .overlay(
-//                ZStack {
-//                    RoundedRectangle(cornerRadius: 50)
-//                        .foregroundColor(color)
-//                        .frame(minWidth: 25, minHeight: 25)
-//                    Text(self.text)
-//                        .foregroundColor(.primary)
-//                }
-//            )
-//    }
 }
 
 struct Calendar: View {

@@ -15,25 +15,28 @@ struct CourseView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: ModuleListView(course: course))
-                {
-                    Label("Modules", systemImage: "folder")
+                ForEach(self.course.tabs, id: \.self) { tab in
+                    CourseTabView(course: course, tab: tab)
                 }
-                NavigationLink(destination: AnnouncementListView(course: course))
-                {
-                    HStack {
-                        Label("Announcements", systemImage: "megaphone")
-                        Spacer()
-                        if self.course.unreadAnnouncements > 0 { Badge(text: "\(self.course.unreadAnnouncements)", color: .red, minWidth: 25) }
-                    }
-                }
-                Label("Discussions", systemImage: "text.bubble")
-                Label("Grades", systemImage: "graduationcap")
-                
-                NavigationLink(destination: PeopleView(course: course)) {
-                    Label("People", systemImage: "person")
-                }
-                Label("Syllabus", systemImage: "doc.text")
+//                NavigationLink(destination: ModuleListView(course: course))
+//                {
+//                    Label("Modules", systemImage: "folder")
+//                }
+//                NavigationLink(destination: AnnouncementListView(course: course))
+//                {
+//                    HStack {
+//                        Label("Announcements", systemImage: "megaphone")
+//                        Spacer()
+//                        if self.course.unreadAnnouncements > 0 { Badge(text: "\(self.course.unreadAnnouncements)", color: .red, minWidth: 25) }
+//                    }
+//                }
+//                Label("Discussions", systemImage: "text.bubble")
+//                Label("Grades", systemImage: "graduationcap")
+//
+//                NavigationLink(destination: PeopleView(course: course)) {
+//                    Label("People", systemImage: "person")
+//                }
+//                Label("Syllabus", systemImage: "doc.text")
                 Divider()
                 Button(action: self.openCustomizationSheet) { Label("Customize", systemImage: "paintbrush")}
                     .buttonStyle(PlainButtonStyle())

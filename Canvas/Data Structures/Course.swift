@@ -28,9 +28,12 @@ class Course: Decodable, Hashable, ObservableObject {
     let id: Int?
     let courseCode: String?
     let accountID: Int?
+    let defaultView: String?
     
     @Published var courseColor: Color? = Color.accentColor
     @Published var courseIcon: String? = ""
+    
+    @Published var tabs: [Tab] = []
     @Published var modules: [Module] = []
     @Published var announcements: [DiscussionTopic] = [] {
         didSet {
@@ -50,11 +53,13 @@ class Course: Decodable, Hashable, ObservableObject {
         case courseCode = "course_code"
         case accountID = "account_id"
         case enrollments
+        case defaultView = "default_view"
     }
     
     func update() {
         updateCourseIcon()
         updateCourseColor()
+        updateTabs()
         updateModules()
         updatePeople()
         updateAnnouncements()
@@ -70,6 +75,18 @@ class Course: Decodable, Hashable, ObservableObject {
     func updateCourseColor() {
         CanvasAPI.instance!.getCourseColor(forCourse: self) { result in
             self.courseColor = (result.value ?? CustomColor()).asColor
+        }
+    }
+    
+    func updateTabs() {
+        CanvasAPI.instance!.getCourseTabs(forCourse: self) { result in
+            self.tabs = result.value ?? []
+            
+            print("Tabs for \(self.id!):")
+            for tab in self.tabs {
+                print(tab.id!)
+            }
+            print("-----")
         }
     }
     func updateModules() {
