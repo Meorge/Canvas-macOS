@@ -10,6 +10,8 @@ import SwiftUI
 struct CourseView: View {
     @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
+    
+    @State var customizationSheetVisible: Bool = false
     var body: some View {
         NavigationView {
             List {
@@ -33,11 +35,21 @@ struct CourseView: View {
                 }
                 Label("Syllabus", systemImage: "doc.text")
                 Divider()
-                Label("Customize", systemImage: "paintbrush")
-                    .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                
+                Button(action: self.openCustomizationSheet) {
+                    Label("Customize", systemImage: "paintbrush")
+                }
+                .buttonStyle(PlainButtonStyle())
             }
         }
         .navigationTitle(course.name ?? "Course")
+        .sheet(isPresented: self.$customizationSheetVisible) {
+            CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course)
+        }
+    }
+    
+    func openCustomizationSheet() {
+        self.customizationSheetVisible = true
     }
 }
 

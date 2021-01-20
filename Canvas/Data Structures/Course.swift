@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class Course: Decodable, Hashable, ObservableObject {
     static func == (lhs: Course, rhs: Course) -> Bool {
@@ -15,6 +16,7 @@ class Course: Decodable, Hashable, ObservableObject {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(name)
 //        hasher.combine(unreadAnnouncements)
 //        hasher.combine(announcements.hashValue)
 //        hasher.combine(modules)
@@ -27,8 +29,9 @@ class Course: Decodable, Hashable, ObservableObject {
     let courseCode: String?
     let accountID: Int?
     
+    @Published var courseColor: Color? = Color.accentColor
+    @Published var courseIcon: String? = ""
     @Published var modules: [Module] = []
-    
     @Published var announcements: [DiscussionTopic] = [] {
         didSet {
             self.unreadAnnouncements = self.announcements.filter { $0.readState! == .Unread }.count
@@ -50,14 +53,30 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func update() {
+        updateCourseIcon()
+        updateCourseColor()
         updateModules()
         updatePeople()
         updateAnnouncements()
     }
     
+    func updateCourseIcon() {
+        print("update course icon...")
+        CanvasAPI.instance!.getCourseIcon(forCourse: self) { result in
+            
+            let ico = CanvasAPI.instance!.courseIconData.data["\(self.id!)"]
+            self.courseIcon = ico
+        }
+    }
+    
+    func updateCourseColor() {
+        CanvasAPI.instance!.getCourseColor(forCourse: self) { result in
+            self.courseColor = (result.value ?? CustomColor()).asColor
+        }
+    }
     func updateModules() {
         CanvasAPI.instance?.getModules(forCourse: self) { data in
-            self.modules = data.value!
+            self.modules = data.value ?? []
             
             for module in self.modules {
                 module.course = self
@@ -71,7 +90,7 @@ class Course: Decodable, Hashable, ObservableObject {
     
     func updateAnnouncements() {
         CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
-            let newAnnouncements = data.value!
+            let newAnnouncements = data.value ?? []
             
             self.announcements = newAnnouncements
             
@@ -81,7 +100,7 @@ class Course: Decodable, Hashable, ObservableObject {
     
     func updatePeople() {
         CanvasAPI.instance?.getUsers(forCourse: self) { data in
-            self.people = data.value!
+            self.people = data.value ?? []
         }
     }
     
@@ -110,4 +129,20 @@ class Course: Decodable, Hashable, ObservableObject {
         
         return "\(percent!)% - \(grade!)"
     }
+}
+
+class CourseNickname: Decodable, Hashable {
+    static func == (lhs: CourseNickname, rhs: CourseNickname) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(courseID)
+    }
+    
+    var courseID: Int? = nil
+    var name: String? = nil
+    var nickname: String? = nil
+    
+    
 }

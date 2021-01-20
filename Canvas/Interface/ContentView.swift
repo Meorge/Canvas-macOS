@@ -35,7 +35,8 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                 
                     ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
-                        NavigationLink(destination: CourseView(course: course)) {CourseItem(course: course)}
+                        NavigationLink(destination: CourseView(course: course).accentColor(course.courseColor)) {CourseItem(course: course)}
+                            .accentColor(course.courseColor)
                     }
                 }
                 Spacer()
@@ -51,7 +52,8 @@ struct CourseItem: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Label(self.course.name ?? "Unnamed Course", systemImage: "book")
+                Label(self.course.name ?? "Unnamed Course", systemImage: self.getCourseIcon())
+                    
                 Spacer()
                 
                 if self.course.unreadAnnouncements > 0 {
@@ -63,10 +65,15 @@ struct CourseItem: View {
                 }
                 
             }
-//            Text("course name")
-//                .foregroundColor(.secondary)
-//                .font(.caption)
         }
+    }
+    
+    func getCourseIcon() -> String {
+        if self.course.courseIcon == nil || self.course.courseIcon! == "" {
+            return "book"
+        }
+        
+        return self.course.courseIcon!
     }
 }
 
