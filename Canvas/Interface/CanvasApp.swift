@@ -23,11 +23,6 @@ struct CanvasApp: App {
                                 .frame(maxHeight: 20)
                         }
                     }
-                    ToolbarItem {
-                        Button(action: self.canvasAPI.refresh) {
-                            Label("Refresh", systemImage: "arrow.clockwise")
-                        }
-                    }
                 }
         }
     }

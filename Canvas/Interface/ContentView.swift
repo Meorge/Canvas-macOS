@@ -41,6 +41,13 @@ struct ContentView: View {
                 }
                 Spacer()
             }.listStyle(SidebarListStyle())
+            .toolbar {
+                ToolbarItem {
+                    Button(action: self.manager.refresh) {
+                        Label("Refresh", systemImage: "arrow.clockwise")
+                    }
+                }
+            }
 
             
         }
