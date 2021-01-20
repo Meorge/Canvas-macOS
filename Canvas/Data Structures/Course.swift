@@ -61,9 +61,7 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func updateCourseIcon() {
-        print("update course icon...")
         CanvasAPI.instance!.getCourseIcon(forCourse: self) { result in
-            
             let ico = CanvasAPI.instance!.courseIconData.data["\(self.id!)"]
             self.courseIcon = ico
         }

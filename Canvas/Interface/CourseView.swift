@@ -35,17 +35,15 @@ struct CourseView: View {
                 }
                 Label("Syllabus", systemImage: "doc.text")
                 Divider()
-                
-                Button(action: self.openCustomizationSheet) {
-                    Label("Customize", systemImage: "paintbrush")
-                }
-                .buttonStyle(PlainButtonStyle())
+                Button(action: self.openCustomizationSheet) { Label("Customize", systemImage: "paintbrush")}
+                    .buttonStyle(PlainButtonStyle())
             }
         }
         .navigationTitle(course.name ?? "Course")
         .sheet(isPresented: self.$customizationSheetVisible) {
             CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course)
         }
+        
     }
     
     func openCustomizationSheet() {

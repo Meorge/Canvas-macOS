@@ -68,7 +68,7 @@ struct PeopleView: View {
         .onAppear(perform: self.course.updatePeople)
         
         .toolbar {
-            ToolbarItemGroup(placement: .primaryAction) {
+            ToolbarItem(placement: .primaryAction) {
                 Menu {
                     Picker("Roles", selection: $filter) {
                         ForEach(FilterCategory.allCases) { category in
