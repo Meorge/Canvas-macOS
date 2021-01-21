@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var manager: Manager
     
     var body: some View {
@@ -48,8 +49,12 @@ struct ContentView: View {
                     }
                 }
             }
-
-            
+        }
+        .onChange(of: scenePhase) { phase in
+            print(phase)
+            if phase == .active {
+                self.manager.refresh()
+            }
         }
     }
 }

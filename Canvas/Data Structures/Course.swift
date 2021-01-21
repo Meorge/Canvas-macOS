@@ -81,12 +81,6 @@ class Course: Decodable, Hashable, ObservableObject {
     func updateTabs() {
         CanvasAPI.instance!.getCourseTabs(forCourse: self) { result in
             self.tabs = result.value ?? []
-            
-            print("Tabs for \(self.id!):")
-            for tab in self.tabs {
-                print(tab.id!)
-            }
-            print("-----")
         }
     }
     func updateModules() {
