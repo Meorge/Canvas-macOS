@@ -42,6 +42,27 @@ class AssignmentGroup: Decodable, Identifiable, ObservableObject {
         assignments = try? v.decode([Assignment]?.self, forKey: .assignments)
         rules = try? v.decode(GradingRules?.self, forKey: .rules)
     }
+    
+    var groupScore: (Double, Double)? {
+        var totalPossible: Double = 0
+        var pointsGotten: Double = 0
+        
+        if assignments == nil { return nil }
+        
+        for assignment in assignments! {
+            // If this assignment should be ommitted, then omit it!
+            if (assignment.omitFromFinalGrade ?? false) { continue }
+            
+            // If there's a score, add it
+            if assignment.pointsPossible != nil && assignment.submission!.score != nil {
+                totalPossible += assignment.pointsPossible!
+                pointsGotten += assignment.submission!.score!
+            }
+        }
+        
+        if totalPossible == 0 && pointsGotten == 0 { return nil }
+        return (pointsGotten, totalPossible)
+    }
 }
 
 class GradingRules: Decodable, ObservableObject {

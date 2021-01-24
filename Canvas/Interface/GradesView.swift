@@ -23,7 +23,7 @@ struct GradesView: View {
             Divider()
             List {
                 ForEach(self.course.assignmentGroups ?? [], id: \.id) { group in
-                    Section(header: AssignmentGroupHeaderView(assignmentGroup: group), footer: Divider()) {
+                    Section(header: AssignmentGroupHeaderView(assignmentGroup: group)) {
                         ForEach(group.assignments ?? [], id: \.id) { assignment in
                             SingleGradeRowView(assignment: assignment)
                             
@@ -45,15 +45,28 @@ struct AssignmentGroupHeaderView: View {
                 Text(assignmentGroup.name ?? "Untitled Assignment Group")
                     .font(.title)
                     .bold()
-                Text(assignmentGroup.groupWeight != nil ? "\(assignmentGroup.groupWeight!)% of total grade" : "No weight assigned")
+                Text(assignmentGroup.groupWeight != nil ? "\(assignmentGroup.groupWeight!.removeTrailingZeroes())% of total grade" : "No weight assigned")
                     .font(.subheadline)
             }
             Spacer()
-            Text("75%")
-                .font(.title)
-                .bold()
+            VStack(alignment: .trailing) {
+                Text(assignmentGroup.groupScore != nil ? "\(self.getGroupScoreMultiplied().removeTrailingZeroes())%" : "N/A")
+                    .font(.title)
+                    .bold()
+                Text(assignmentGroup.groupScore != nil ? self.getGroupScoreFraction() : "")
+            }
         }
     }
+    
+    func getGroupScoreMultiplied() -> Double {
+        let score = assignmentGroup.groupScore!
+        return (score.0 / score.1) * 100
+    }
+    func getGroupScoreFraction() -> String {
+        let score = assignmentGroup.groupScore!
+        return "\(score.0.removeTrailingZeroes()) / \(score.1.removeTrailingZeroes())"
+    }
+    
 }
 
 struct SingleGradeRowView: View {
@@ -72,9 +85,19 @@ struct SingleGradeRowView: View {
                 .font(.title3)
                 .bold()
         }
+        .padding(0)
     }
     
 
+}
+
+extension Double {
+    func removeTrailingZeroes() -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: self))!
+    }
 }
 
 //struct GradesView_Previews: PreviewProvider {

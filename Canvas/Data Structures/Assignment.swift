@@ -236,12 +236,12 @@ class Assignment: Decodable, ObservableObject {
         case .Points:
             var pointsReceived = "-"
             if submission?.score != nil {
-                pointsReceived = String(submission!.score!)
+                pointsReceived = submission!.score!.removeTrailingZeroes()
             }
             
             var possiblePoints = "-"
             if pointsPossible != nil {
-                possiblePoints = String(pointsPossible!)
+                possiblePoints = pointsPossible!.removeTrailingZeroes()
             }
             
             return "\(pointsReceived) / \(possiblePoints)"
