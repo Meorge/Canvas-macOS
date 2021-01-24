@@ -16,7 +16,7 @@ struct ContentView: View {
             
             List {
                 Group {
-                    NavigationLink(destination: Dashboard()) {
+                    NavigationLink(destination: DashboardView()) {
                         Label("Dashboard", systemImage: "square.grid.2x2")
                     }
                     NavigationLink(destination: Calendar()) {
