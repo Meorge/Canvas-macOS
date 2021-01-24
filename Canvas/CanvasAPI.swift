@@ -136,6 +136,11 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics"]], handler: handler)
     }
     
+    func getAssignmentGroups(forCourse course: Course, handler: @escaping ((DataResponse<[AssignmentGroup], AFError>) -> Void)) {
+        let url = "/courses/\(course.id!)/assignment_groups"
+        makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics", "assignments"]], handler: handler)
+    }
+    
     func makeRequest<T>(_ url: String, custom_parameters: [String: Any] = [:], method: HTTPMethod = .get, handler: @escaping ((DataResponse<T, AFError>) -> Void) = {_ in }) where T: Decodable {
         var parameters: [String: Any] = ["access_token": self.token]
         parameters.merge(custom_parameters) { (_, new) in new }

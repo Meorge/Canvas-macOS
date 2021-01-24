@@ -21,11 +21,38 @@ struct GradesView: View {
                     .bold()
             }
             Divider()
-            List(self.course.assignments ?? [], id: \.id) { assignment in
-                SingleGradeRowView(assignment: assignment)
-            }
+            List {
+                ForEach(self.course.assignmentGroups ?? [], id: \.id) { group in
+                    Section(header: AssignmentGroupHeaderView(assignmentGroup: group), footer: Divider()) {
+                        ForEach(group.assignments ?? [], id: \.id) { assignment in
+                            SingleGradeRowView(assignment: assignment)
+                            
+                        }
+                    }
+                }
+            }.padding(0)
         }
         .padding()
+    }
+}
+
+struct AssignmentGroupHeaderView: View {
+    @ObservedObject var assignmentGroup: AssignmentGroup
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(assignmentGroup.name ?? "Untitled Assignment Group")
+                    .font(.title)
+                    .bold()
+                Text(assignmentGroup.groupWeight != nil ? "\(assignmentGroup.groupWeight!)% of total grade" : "No weight assigned")
+                    .font(.subheadline)
+            }
+            Spacer()
+            Text("75%")
+                .font(.title)
+                .bold()
+        }
     }
 }
 

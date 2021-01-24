@@ -47,6 +47,7 @@ class Course: Decodable, Hashable, ObservableObject {
     @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
     
+    @Published var assignmentGroups: [AssignmentGroup]? = []
     @Published var assignments: [Assignment]? = []
 
     enum CodingKeys: String, CodingKey {
@@ -79,6 +80,7 @@ class Course: Decodable, Hashable, ObservableObject {
         updateAnnouncements()
         
         updateAssignments()
+        updateAssignmentGroups()
     }
     
     func updateCourseIcon() {
@@ -132,6 +134,12 @@ class Course: Decodable, Hashable, ObservableObject {
     func updateAssignments() {
         CanvasAPI.instance?.getAssignments(forCourse: self) { data in
             self.assignments = data.value ?? []
+        }
+    }
+    
+    func updateAssignmentGroups() {
+        CanvasAPI.instance?.getAssignmentGroups(forCourse: self) { data in
+            self.assignmentGroups = data.value ?? []
         }
     }
     

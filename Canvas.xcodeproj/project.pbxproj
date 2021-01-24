@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
 		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
 		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
 		5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentGroup.swift; sourceTree = "<group>"; };
 		5F50A9D125B51D1400DD255B /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */,
 				5F9D16E425B601A20098F1E4 /* User.swift */,
 				5FA7223325BD3962007D05E0 /* Assignment.swift */,
+				5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				5F879936251FE5B9009904BC /* Module.swift in Sources */,
 				5FB2199E25B7A49000428CC3 /* CustomizeCourseView.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
+				5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */,
 				5F91BEB225B89970009B1BD9 /* Tab.swift in Sources */,
 				5FA7223425BD3962007D05E0 /* Assignment.swift in Sources */,
 				5FA7222825BD1B51007D05E0 /* SinglePersonView.swift in Sources */,
