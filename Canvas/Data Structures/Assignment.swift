@@ -7,13 +7,9 @@
 
 import Foundation
 
-class Assignment: Decodable, Hashable, ObservableObject {
+class Assignment: Decodable, ObservableObject {
     static func == (lhs: Assignment, rhs: Assignment) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        return lhs.id == rhs.id
     }
     
     @Published var id: Int?
@@ -27,8 +23,8 @@ class Assignment: Decodable, Hashable, ObservableObject {
     @Published var hasOverrides: Bool?
     // todo: allDates (type unknown)
     @Published var courseID: Int?
-    @Published var htmlURL: String?
-    @Published var submissionDownloadURL: String?
+    @Published var htmlURL: URL?
+    @Published var submissionDownloadURL: URL?
     @Published var assignmentGroupID: Int?
     @Published var dueDateRequired: Bool?
     @Published var allowedExtensions: [String]?
@@ -147,6 +143,7 @@ class Assignment: Decodable, Hashable, ObservableObject {
         case finalGraderID = "final_grader_id"
         case graderCommentsVisibleToGraders = "grader_comments_visible_to_graders"
         case gradersAnonymousToGarders = "graders_anonymous_to_graders"
+        case graderNamesVisibleToFinalGraders = "grader_names_visible_to_final_graders"
         case anonymousGrading = "anonymous_grading"
         case allowedAttempts = "allowed_attempts"
         case postManually = "post_manually"
@@ -157,7 +154,77 @@ class Assignment: Decodable, Hashable, ObservableObject {
     // wow I do not envy you lol
     // - malcolm, 23 jan 2021 at 9:58 pm
     required init(from decoder: Decoder) throws {
-        <#code#>
+        let v = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try? v.decode(Int?.self, forKey: .id)
+        name = try? v.decode(String?.self, forKey: .name)
+        description = try? v.decode(String?.self, forKey: .description)
+        createdAt = try? v.decode(Date?.self, forKey: .createdAt)
+        updatedAt = try? v.decode(Date?.self, forKey: .updatedAt)
+        dueAt = try? v.decode(Date?.self, forKey: .dueAt)
+        lockAt = try? v.decode(Date?.self, forKey: .lockAt)
+        unlockAt = try? v.decode(Date?.self, forKey: .unlockAt)
+        hasOverrides = try? v.decode(Bool?.self, forKey: .hasOverrides)
+        
+        courseID = try? v.decode(Int?.self, forKey: .courseID)
+        htmlURL = try? v.decode(URL?.self, forKey: .htmlURL)
+        submissionDownloadURL = try? v.decode(URL?.self, forKey: .submissionDownloadURL)
+        assignmentGroupID = try? v.decode(Int?.self, forKey: .assignmentGroupID)
+        dueDateRequired = try? v.decode(Bool?.self, forKey: .dueDateRequired)
+        allowedExtensions = try? v.decode([String]?.self, forKey: .allowedExtensions)
+        maxNameLength = try? v.decode(Int?.self, forKey: .maxNameLength)
+        turnitinEnabled = try? v.decode(Bool?.self, forKey: .turnitinEnabled)
+        vericiteEnabled = try? v.decode(Bool?.self, forKey: .vericiteEnabled)
+        
+        gradeGroupStudentsIndividually = try? v.decode(Bool?.self, forKey: .gradeGroupStudentsIndividually)
+        
+        peerReviews = try? v.decode(Bool?.self, forKey: .peerReviews)
+        automaticPeerReviews = try? v.decode(Bool?.self, forKey: .automaticPeerReviews)
+        peerReviewCount = try? v.decode(Int?.self, forKey: .peerReviewCount)
+        peerReviewsAssignAt = try? v.decode(Date?.self, forKey: .peerReviewsAssignAt)
+        intraGroupPeerReviews = try? v.decode(Bool?.self, forKey: .intraGroupPeerReviews)
+        groupCategoryID = try? v.decode(Int?.self, forKey: .groupCategoryID)
+        needsGradingCount = try? v.decode(Int?.self, forKey: .needsGradingCount)
+        
+        position = try? v.decode(Int?.self, forKey: .position)
+        postToSIS = try? v.decode(Bool?.self, forKey: .postToSIS)
+        integrationID = try? v.decode(String?.self, forKey: .integrationID)
+        
+        pointsPossible = try? v.decode(Double?.self, forKey: .pointsPossible)
+        submissionTypes = try? v.decode([SubmissionType]?.self, forKey: .submissionTypes)
+        hasSubmittedSubmissions = try? v.decode(Bool?.self, forKey: .hasSubmittedSubmissions)
+        gradingType = try? v.decode(GradingType?.self, forKey: .gradingType)
+        
+        published = try? v.decode(Bool?.self, forKey: .published)
+        unpublishable = try? v.decode(Bool?.self, forKey: .unpublishable)
+        onlyVisibleToOverrides = try? v.decode(Bool?.self, forKey: .onlyVisibleToOverrides)
+        lockedForUser = try? v.decode(Bool?.self, forKey: .lockedForUser)
+        
+        lockExplanation = try? v.decode(String?.self, forKey: .lockExplanation)
+        quizID = try? v.decode(Int?.self, forKey: .quizID)
+        anonymousSubmissions = try? v.decode(Bool?.self, forKey: .anonymousSubmissions)
+        discussionTopic = try? v.decode(DiscussionTopic?.self, forKey: .discussionTopic)
+        freezeOnCopy = try? v.decode(Bool?.self, forKey: .freezeOnCopy)
+        frozen = try? v.decode(Bool?.self, forKey: .frozen)
+        
+        submission = try? v.decode(Submission?.self, forKey: .submission)
+        useRubricForGrading = try? v.decode(Bool?.self, forKey: .useRubricForGrading)
+        
+        
+        assignmentVisibility = try? v.decode([Int]?.self, forKey: .assignmentVisibility)
+        
+        omitFromFinalGrade = try? v.decode(Bool?.self, forKey: .omitFromFinalGrade)
+        moderatedGrading = try? v.decode(Bool?.self, forKey: .moderatedGrading)
+        graderCount = try? v.decode(Int?.self, forKey: .graderCount)
+        finalGraderID = try? v.decode(Int?.self, forKey: .finalGraderID)
+        graderCommentsVisibleToGraders = try? v.decode(Bool?.self, forKey: .graderCommentsVisibleToGraders)
+        gradersAnonymousToGraders = try? v.decode(Bool?.self, forKey: .gradersAnonymousToGarders)
+        graderNamesVisibleToFinalGraders = try? v.decode(Bool?.self, forKey: .graderNamesVisibleToFinalGraders)
+        anonymousGrading = try? v.decode(Bool?.self, forKey: .anonymousGrading)
+        allowedAttempts = try? v.decode(Int?.self, forKey: .allowedAttempts)
+        postManually = try? v.decode(Bool?.self, forKey: .postManually)
+        scoreStatistics = try? v.decode(ScoreStatistic?.self, forKey: .scoreStatistics)
+        canSubmit = try? v.decode(Bool?.self, forKey: .canSubmit)
     }
 }
 
@@ -191,9 +258,65 @@ class Submission: Decodable, ObservableObject {
     @Published var anonymousID: String?
     @Published var postedAt: Date?
     
-    // TODO: Finish this! and the init!
     enum CodingKeys: String, CodingKey {
         case assignmentID = "assignment_id"
+        
+        case attempt
+        case body
+        case grade
+        case gradeMatchesCurrentSubmission = "grade_matches_current_submission"
+        case htmlURL = "html_url"
+        case previewURL = "preview_url"
+        case score
+        case submissionComments = "submission_comments"
+        case submissionType = "submission_type"
+        case submittedAt = "submitted_at"
+        case url
+        case userID = "user_id"
+        case graderID = "grader_id"
+        case gradedAt = "graded_at"
+        case late
+        case assignmentVisible = "assignment_visible"
+        case excused
+        case missing
+        case latePolicyStatus = "late_policy_status"
+        case pointsDeducted = "points_deducted"
+        case secondsLate = "seconds_late"
+        case workflowState = "workflow_state"
+        case extraAttempts = "extra_attempts"
+        case anonymousID = "anonymous_id"
+        case postedAt = "posted_at"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let v = try decoder.container(keyedBy: CodingKeys.self)
+        
+        assignmentID = try? v.decode(Int?.self, forKey: .assignmentID)
+        attempt = try? v.decode(Int?.self, forKey: .attempt)
+        body = try? v.decode(String?.self, forKey: .body)
+        grade = try? v.decode(String?.self, forKey: .grade)
+        gradeMatchesCurrentSubmission = try? v.decode(Bool?.self, forKey: .gradeMatchesCurrentSubmission)
+        htmlURL = try? v.decode(URL?.self, forKey: .htmlURL)
+        previewURL = try? v.decode(URL?.self, forKey: .previewURL)
+        score = try? v.decode(Double?.self, forKey: .score)
+        submissionComments = try? v.decode([SubmissionComment]?.self, forKey: .submissionComments)
+        submissionType = try? v.decode(SubmissionType?.self, forKey: .submissionType)
+        submittedAt = try? v.decode(Date?.self, forKey: .submittedAt)
+        url = try? v.decode(URL?.self, forKey: .url)
+        userID = try? v.decode(Int?.self, forKey: .userID)
+        graderID = try? v.decode(Int?.self, forKey: .graderID)
+        gradedAt = try? v.decode(Date?.self, forKey: .gradedAt)
+        late = try? v.decode(Bool?.self, forKey: .late)
+        assignmentVisible = try? v.decode(Bool?.self, forKey: .assignmentVisible)
+        excused = try? v.decode(Bool?.self, forKey: .excused)
+        missing = try? v.decode(Bool?.self, forKey: .missing)
+        latePolicyStatus = try? v.decode(LatePolicyStatus?.self, forKey: .latePolicyStatus)
+        pointsDeducted = try? v.decode(Double?.self, forKey: .pointsDeducted)
+        secondsLate = try? v.decode(Double?.self, forKey: .secondsLate)
+        workflowState = try? v.decode(String?.self, forKey: .workflowState)
+        extraAttempts = try? v.decode(Int?.self, forKey: .extraAttempts)
+        anonymousID = try? v.decode(String?.self, forKey: .anonymousID)
+        postedAt = try? v.decode(Date?.self, forKey: .postedAt)
     }
     
 }
