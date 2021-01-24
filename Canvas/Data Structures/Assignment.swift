@@ -226,6 +226,52 @@ class Assignment: Decodable, ObservableObject {
         scoreStatistics = try? v.decode(ScoreStatistic?.self, forKey: .scoreStatistics)
         canSubmit = try? v.decode(Bool?.self, forKey: .canSubmit)
     }
+    
+    func getScoreAsString() -> String {
+        if submission == nil {
+            return "-"
+        }
+        
+        switch (gradingType!) {
+        case .Points:
+            var pointsReceived = "-"
+            if submission?.score != nil {
+                pointsReceived = String(submission!.score!)
+            }
+            
+            var possiblePoints = "-"
+            if pointsPossible != nil {
+                possiblePoints = String(pointsPossible!)
+            }
+            
+            return "\(pointsReceived) / \(possiblePoints)"
+            
+        default:
+            return submission?.grade ?? "-"
+        }
+    }
+    
+    func getFormattedDueDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        
+        if unlockAt != nil && Date() < unlockAt! {
+            return "Unlocks \(formatter.string(from: unlockAt!))"
+        }
+        
+        else if lockAt != nil && Date() < lockAt! {
+            return "Locks \(formatter.string(from: lockAt!))"
+        }
+        
+        else if dueAt != nil {
+            return "Due \(formatter.string(from: dueAt!))"
+        }
+        
+        else {
+            return "-"
+        }
+    }
 }
 
 class Submission: Decodable, ObservableObject {

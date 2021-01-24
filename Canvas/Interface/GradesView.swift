@@ -21,10 +21,8 @@ struct GradesView: View {
                     .bold()
             }
             Divider()
-            List {
-                SingleGradeRowView()
-                SingleGradeRowView()
-                SingleGradeRowView()
+            List(self.course.assignments ?? [], id: \.id) { assignment in
+                SingleGradeRowView(assignment: assignment)
             }
         }
         .padding()
@@ -32,21 +30,24 @@ struct GradesView: View {
 }
 
 struct SingleGradeRowView: View {
+    @ObservedObject var assignment: Assignment
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                Text("Assignment Name")
+                Text(self.assignment.name ?? "Assignment")
                     .font(.title3)
                     .bold()
-                Text("Due Jan 2, 2021 by 10:30 AM")
+                Text(self.assignment.getFormattedDueDate())
                     .font(.subheadline)
             }
             Spacer()
-            Text("10 / 10")
+            Text(self.assignment.getScoreAsString())
                 .font(.title3)
                 .bold()
         }
     }
+    
+
 }
 
 //struct GradesView_Previews: PreviewProvider {
