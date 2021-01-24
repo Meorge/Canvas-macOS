@@ -48,21 +48,23 @@ struct PeopleView: View {
     
     var body: some View {
         Group {
-        VStack {
-            if self.filteredPeople.count > 0 {
-                List(self.filteredPeople, id: \.id) { person in
-                    PeopleRowView(course: course, person: person)
+            VStack {
+                if self.filteredPeople.count > 0 {
+                    NavigationView {
+                        List(self.filteredPeople, id: \.id) { person in
+                            PeopleRowView(course: course, person: person)
+                        }
+                    }
+                } else {
+                    VStack {
+                        Text("No People")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("There's nothing to show here.")
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-            } else {
-                VStack {
-                    Text("No People")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Text("There's nothing to show here.")
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-        }
         }
         .navigationTitle("\(course.name ?? "Course") - People")
         .onAppear(perform: self.course.updatePeople)
@@ -99,12 +101,14 @@ struct PeopleRowView: View {
     @ObservedObject var course: Course
     @ObservedObject var person: User
     var body: some View {
-        HStack {
-            AvatarView(person: person)
-            VStack(alignment: .leading) {
-                Text(person.shortName ?? "No name")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                Text(self.getPositionInCourse())
+        NavigationLink(destination: SinglePersonView(person: person)) {
+            HStack {
+                AvatarView(person: person)
+                VStack(alignment: .leading) {
+                    Text(person.shortName ?? "No name")
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    Text(self.getPositionInCourse())
+                }
             }
         }
     }
@@ -132,11 +136,12 @@ struct PeopleRowView: View {
 struct AvatarView: View {
     @EnvironmentObject var manager: Manager
     @ObservedObject var person: User
+    @State var size: Double = 30
     var body: some View {
         WebImage(url: person.avatarURL)
             .resizable()
             .aspectRatio(1, contentMode: .fit)
-            .frame(maxWidth: 30, maxHeight: 30)
+            .frame(maxWidth: CGFloat(size), maxHeight: CGFloat(size))
             .clipShape(Circle())
             
     }

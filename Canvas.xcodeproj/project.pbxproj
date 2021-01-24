@@ -22,6 +22,7 @@
 		5F9D16F025B615780098F1E4 /* AsyncImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16EF25B615780098F1E4 /* AsyncImageLoader.swift */; };
 		5F9D16F525B616F70098F1E4 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9D16F425B616F70098F1E4 /* SDWebImageSwiftUI */; };
 		5F9D16FC25B617430098F1E4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9D16FB25B617430098F1E4 /* Alamofire */; };
+		5FA7222825BD1B51007D05E0 /* SinglePersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7222725BD1B51007D05E0 /* SinglePersonView.swift */; };
 		5FB2199E25B7A49000428CC3 /* CustomizeCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB2199D25B7A49000428CC3 /* CustomizeCourseView.swift */; };
 		5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C0251EDC77007E651B /* CanvasApp.swift */; };
 		5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C2251EDC77007E651B /* ContentView.swift */; };
@@ -77,6 +78,7 @@
 		5F9D16E025B5FFDB0098F1E4 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
 		5F9D16E425B601A20098F1E4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5F9D16EF25B615780098F1E4 /* AsyncImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageLoader.swift; sourceTree = "<group>"; };
+		5FA7222725BD1B51007D05E0 /* SinglePersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePersonView.swift; sourceTree = "<group>"; };
 		5FB2199D25B7A49000428CC3 /* CustomizeCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeCourseView.swift; sourceTree = "<group>"; };
 		5FBFD3BD251EDC77007E651B /* Canvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBFD3C0251EDC77007E651B /* CanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasApp.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				5F9D16E025B5FFDB0098F1E4 /* PeopleView.swift */,
 				5F9D16EF25B615780098F1E4 /* AsyncImageLoader.swift */,
 				5F91BEB525B8A292009B1BD9 /* CourseTabView.swift */,
+				5FA7222725BD1B51007D05E0 /* SinglePersonView.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				5FB2199E25B7A49000428CC3 /* CustomizeCourseView.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 				5F91BEB225B89970009B1BD9 /* Tab.swift in Sources */,
+				5FA7222825BD1B51007D05E0 /* SinglePersonView.swift in Sources */,
 				5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */,
 				5F879927251FD72F009904BC /* Manager.swift in Sources */,
 				5F9D16E125B5FFDB0098F1E4 /* PeopleView.swift in Sources */,
