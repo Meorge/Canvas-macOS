@@ -12,7 +12,7 @@ import SwiftUI
 class CanvasAPI: ObservableObject {
     static var subdomain = "wsu"
     static var baseURL = "https://\(subdomain).instructure.com/api/v1"
-    static var instance: CanvasAPI? = nil
+//    static var instance: CanvasAPI? = nil
     
     let token: String
     
@@ -27,15 +27,14 @@ class CanvasAPI: ObservableObject {
         self.jsonDecoder.dateDecodingStrategy = .iso8601
         
         self.token = token
-        CanvasAPI.instance = self
-        self.getCourses()
+//        CanvasAPI.instance = self
+//        self.getCourses()
     }
 
     // TODO: Instead of using this to get the courses, use the enrollments:
     // https://canvas.instructure.com/api/v1/users/self/enrollments
     func getCourses() {
         let url = "/courses"
-//        self.courses.removeAll()
         makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: self.updateAllCourses)
     }
     

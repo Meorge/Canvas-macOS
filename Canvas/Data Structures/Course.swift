@@ -84,25 +84,25 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func updateCourseIcon() {
-        CanvasAPI.instance!.getCourseIcon(forCourse: self) { result in
-            let ico = CanvasAPI.instance!.courseIconData.data["\(self.id!)"]
+        Manager.instance?.canvasAPI.getCourseIcon(forCourse: self) { result in
+            let ico = Manager.instance?.canvasAPI.courseIconData.data["\(self.id!)"]
             self.courseIcon = ico
         }
     }
     
     func updateCourseColor() {
-        CanvasAPI.instance!.getCourseColor(forCourse: self) { result in
+        Manager.instance?.canvasAPI.getCourseColor(forCourse: self) { result in
             self.courseColor = (result.value ?? CustomColor()).asColor
         }
     }
     
     func updateTabs() {
-        CanvasAPI.instance!.getCourseTabs(forCourse: self) { result in
+        Manager.instance?.canvasAPI.getCourseTabs(forCourse: self) { result in
             self.tabs = result.value ?? []
         }
     }
     func updateModules() {
-        CanvasAPI.instance?.getModules(forCourse: self) { data in
+        Manager.instance?.canvasAPI.getModules(forCourse: self) { data in
             self.modules = data.value ?? []
             
             for module in self.modules {
@@ -116,7 +116,7 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func updateAnnouncements() {
-        CanvasAPI.instance?.getAnnouncements(forCourse: self) { data in
+        Manager.instance?.canvasAPI.getAnnouncements(forCourse: self) { data in
             let newAnnouncements = data.value ?? []
             
             self.announcements = newAnnouncements
@@ -126,19 +126,19 @@ class Course: Decodable, Hashable, ObservableObject {
     }
     
     func updatePeople() {
-        CanvasAPI.instance?.getUsers(forCourse: self) { data in
+        Manager.instance?.canvasAPI.getUsers(forCourse: self) { data in
             self.people = data.value ?? []
         }
     }
     
     func updateAssignments() {
-        CanvasAPI.instance?.getAssignments(forCourse: self) { data in
+        Manager.instance?.canvasAPI.getAssignments(forCourse: self) { data in
             self.assignments = data.value ?? []
         }
     }
     
     func updateAssignmentGroups() {
-        CanvasAPI.instance?.getAssignmentGroups(forCourse: self) { data in
+        Manager.instance?.canvasAPI.getAssignmentGroups(forCourse: self) { data in
             self.assignmentGroups = data.value ?? []
         }
     }

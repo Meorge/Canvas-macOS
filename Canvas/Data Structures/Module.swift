@@ -67,7 +67,7 @@ class Module: Decodable, Hashable, ObservableObject {
     }
     
     func updateModuleItems() {
-        CanvasAPI.instance?.getModuleItems(forModule: self) { data in
+        Manager.instance?.canvasAPI.getModuleItems(forModule: self) { data in
             self.moduleItems = data.value ?? []
             
             for i in self.moduleItems! {
@@ -76,7 +76,7 @@ class Module: Decodable, Hashable, ObservableObject {
             self.objectWillChange.send()
             
             // its hacky but It Works
-            CanvasAPI.instance?.objectWillChange.send()
+            Manager.instance?.canvasAPI.objectWillChange.send()
         }
     }
 }

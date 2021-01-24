@@ -1,18 +1,16 @@
 //
-//  Manager.swift
+//  WidgetManager.swift
 //  Canvas
 //
-//  Created by Test Account on 9/26/20.
+//  Created by Malcolm Anderson on 1/24/21.
 //
 
 import Foundation
-import SwiftUI
 import Combine
 
-class Manager: ObservableObject {
-    static var instance: Manager? = nil
+class WidgetManager: ObservableObject {
+    static var instance: WidgetManager? = nil
     @Published var canvasAPI: CanvasAPI
-    
     
     var anyCancellable: AnyCancellable? = nil
     init() {
@@ -33,12 +31,9 @@ class Manager: ObservableObject {
             self!.objectWillChange.send()
         }
         
-        Manager.instance = self
+        WidgetManager.instance = self
         
-        self.refresh()
-    }
-    
-    func refresh() {
+        // TODO: only get the grades n stuff
         self.canvasAPI.getCourses()
     }
 }

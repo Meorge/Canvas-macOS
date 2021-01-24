@@ -8,6 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
+		5F301E2025BE2DEE00A6ECCB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */; };
+		5F301E2225BE2DEE00A6ECCB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F301E2125BE2DEE00A6ECCB /* SwiftUI.framework */; };
+		5F301E2525BE2DEE00A6ECCB /* Canvas_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E2425BE2DEE00A6ECCB /* Canvas_Widgets.swift */; };
+		5F301E2825BE2DF000A6ECCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F301E2725BE2DF000A6ECCB /* Assets.xcassets */; };
+		5F301E2B25BE2DF000A6ECCB /* Canvas_Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E2625BE2DEE00A6ECCB /* Canvas_Widgets.intentdefinition */; };
+		5F301E2C25BE2DF000A6ECCB /* Canvas_Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E2625BE2DEE00A6ECCB /* Canvas_Widgets.intentdefinition */; };
+		5F301E2F25BE2DF000A6ECCB /* Canvas WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5F301E1E25BE2DEE00A6ECCB /* Canvas WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5F301E3725BE2FA500A6ECCB /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
+		5F301E3825BE2FA500A6ECCB /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
+		5F301E3925BE2FA500A6ECCB /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F91BEB125B89970009B1BD9 /* Tab.swift */; };
+		5F301E3A25BE2FA500A6ECCB /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7223325BD3962007D05E0 /* Assignment.swift */; };
+		5F301E3B25BE2FA500A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
+		5F301E3C25BE2FA500A6ECCB /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879935251FE5B9009904BC /* Module.swift */; };
+		5F301E3D25BE2FA500A6ECCB /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
+		5F301E3E25BE2FA500A6ECCB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16E425B601A20098F1E4 /* User.swift */; };
+		5F301E4225BE2FAC00A6ECCB /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
+		5F301E4625BE2FB000A6ECCB /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
+		5F301E4B25BE317700A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
+		5F301E4F25BE318300A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
+		5F301E5425BE31EA00A6ECCB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5F301E5325BE31EA00A6ECCB /* Alamofire */; };
+		5F301E6725BE37B500A6ECCB /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* token.txt */; };
+		5F301E7025BE3B4200A6ECCB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */; };
+		5F301E7125BE3B4200A6ECCB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F301E2125BE2DEE00A6ECCB /* SwiftUI.framework */; };
+		5F301E7425BE3B4300A6ECCB /* Canvas_Static_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E7325BE3B4300A6ECCB /* Canvas_Static_Widgets.swift */; };
+		5F301E7625BE3B4300A6ECCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F301E7525BE3B4300A6ECCB /* Assets.xcassets */; };
+		5F301E7B25BE3B4300A6ECCB /* Canvas Static WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5F301E6F25BE3B4200A6ECCB /* Canvas Static WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5F301E8325BE3BF200A6ECCB /* WidgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E5B25BE375300A6ECCB /* WidgetManager.swift */; };
+		5F301E8825BE3BFF00A6ECCB /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
+		5F301E8D25BE3C0400A6ECCB /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F91BEB125B89970009B1BD9 /* Tab.swift */; };
+		5F301E8E25BE3C0400A6ECCB /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
+		5F301E8F25BE3C0400A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
+		5F301E9025BE3C0400A6ECCB /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
+		5F301E9125BE3C0400A6ECCB /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7223325BD3962007D05E0 /* Assignment.swift */; };
+		5F301E9225BE3C0400A6ECCB /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
+		5F301E9325BE3C0400A6ECCB /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879935251FE5B9009904BC /* Module.swift */; };
+		5F301E9425BE3C0400A6ECCB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16E425B601A20098F1E4 /* User.swift */; };
+		5F301E9925BE3C6000A6ECCB /* WidgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E5B25BE375300A6ECCB /* WidgetManager.swift */; };
+		5F301E9E25BE3C9100A6ECCB /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
+		5F301EA325BE3C9A00A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
+		5F301EA825BE3CB400A6ECCB /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* token.txt */; };
+		5F301EAE25BE3CD400A6ECCB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5F301EAD25BE3CD400A6ECCB /* Alamofire */; };
 		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
 		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
 		5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
@@ -39,6 +80,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5F301E2D25BE2DF000A6ECCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FBFD3B5251EDC77007E651B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F301E1D25BE2DEE00A6ECCB;
+			remoteInfo = "Canvas WidgetsExtension";
+		};
+		5F301E7925BE3B4300A6ECCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FBFD3B5251EDC77007E651B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F301E6E25BE3B4200A6ECCB;
+			remoteInfo = "Canvas Static WidgetsExtension";
+		};
 		5FBFD3D0251EDC78007E651B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5FBFD3B5251EDC77007E651B /* Project object */;
@@ -56,6 +111,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5F301E3325BE2DF000A6ECCB /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5F301E7B25BE3B4300A6ECCB /* Canvas Static WidgetsExtension.appex in Embed App Extensions */,
+				5F301E2F25BE2DF000A6ECCB /* Canvas WidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F879918251FD671009904BC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -70,6 +137,21 @@
 
 /* Begin PBXFileReference section */
 		5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentGroup.swift; sourceTree = "<group>"; };
+		5F301E1E25BE2DEE00A6ECCB /* Canvas WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Canvas WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		5F301E2125BE2DEE00A6ECCB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		5F301E2425BE2DEE00A6ECCB /* Canvas_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas_Widgets.swift; sourceTree = "<group>"; };
+		5F301E2625BE2DEE00A6ECCB /* Canvas_Widgets.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Canvas_Widgets.intentdefinition; sourceTree = "<group>"; };
+		5F301E2725BE2DF000A6ECCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F301E2925BE2DF000A6ECCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F301E2A25BE2DF000A6ECCB /* Canvas_Widgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Canvas_Widgets.entitlements; sourceTree = "<group>"; };
+		5F301E4A25BE317700A6ECCB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5F301E5B25BE375300A6ECCB /* WidgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetManager.swift; sourceTree = "<group>"; };
+		5F301E6F25BE3B4200A6ECCB /* Canvas Static WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Canvas Static WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F301E7325BE3B4300A6ECCB /* Canvas_Static_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas_Static_Widgets.swift; sourceTree = "<group>"; };
+		5F301E7525BE3B4300A6ECCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F301E7725BE3B4300A6ECCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F301E7825BE3B4300A6ECCB /* Canvas_Static_Widgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Canvas_Static_Widgets.entitlements; sourceTree = "<group>"; };
 		5F50A9D125B51D1400DD255B /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
@@ -106,6 +188,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5F301E1B25BE2DEE00A6ECCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301E5425BE31EA00A6ECCB /* Alamofire in Frameworks */,
+				5F301E2225BE2DEE00A6ECCB /* SwiftUI.framework in Frameworks */,
+				5F301E2025BE2DEE00A6ECCB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F301E6C25BE3B4200A6ECCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301EAE25BE3CD400A6ECCB /* Alamofire in Frameworks */,
+				5F301E7125BE3B4200A6ECCB /* SwiftUI.framework in Frameworks */,
+				5F301E7025BE3B4200A6ECCB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5FBFD3BA251EDC77007E651B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,9 +234,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F301E2325BE2DEE00A6ECCB /* Canvas Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				5F301E2425BE2DEE00A6ECCB /* Canvas_Widgets.swift */,
+				5F301E2625BE2DEE00A6ECCB /* Canvas_Widgets.intentdefinition */,
+				5F301E2725BE2DF000A6ECCB /* Assets.xcassets */,
+				5F301E2925BE2DF000A6ECCB /* Info.plist */,
+				5F301E2A25BE2DF000A6ECCB /* Canvas_Widgets.entitlements */,
+			);
+			path = "Canvas Widgets";
+			sourceTree = "<group>";
+		};
+		5F301E7225BE3B4300A6ECCB /* Canvas Static Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				5F301E5B25BE375300A6ECCB /* WidgetManager.swift */,
+				5F301E7325BE3B4300A6ECCB /* Canvas_Static_Widgets.swift */,
+				5F301E7525BE3B4300A6ECCB /* Assets.xcassets */,
+				5F301E7725BE3B4300A6ECCB /* Info.plist */,
+				5F301E7825BE3B4300A6ECCB /* Canvas_Static_Widgets.entitlements */,
+			);
+			path = "Canvas Static Widgets";
+			sourceTree = "<group>";
+		};
 		5F879915251FD671009904BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */,
+				5F301E2125BE2DEE00A6ECCB /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -179,6 +307,8 @@
 				5FBFD3BF251EDC77007E651B /* Canvas */,
 				5FBFD3D2251EDC78007E651B /* CanvasTests */,
 				5FBFD3DD251EDC78007E651B /* CanvasUITests */,
+				5F301E2325BE2DEE00A6ECCB /* Canvas Widgets */,
+				5F301E7225BE3B4300A6ECCB /* Canvas Static Widgets */,
 				5FBFD3BE251EDC77007E651B /* Products */,
 				5F879915251FD671009904BC /* Frameworks */,
 			);
@@ -190,6 +320,8 @@
 				5FBFD3BD251EDC77007E651B /* Canvas.app */,
 				5FBFD3CF251EDC78007E651B /* CanvasTests.xctest */,
 				5FBFD3DA251EDC78007E651B /* CanvasUITests.xctest */,
+				5F301E1E25BE2DEE00A6ECCB /* Canvas WidgetsExtension.appex */,
+				5F301E6F25BE3B4200A6ECCB /* Canvas Static WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,6 +338,7 @@
 				5FBFD3F4251EF537007E651B /* token.txt */,
 				5F879922251FD6BD009904BC /* CanvasAPI.swift */,
 				5F879926251FD72F009904BC /* Manager.swift */,
+				5F301E4A25BE317700A6ECCB /* Extensions.swift */,
 			);
 			path = Canvas;
 			sourceTree = "<group>";
@@ -239,6 +372,46 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5F301E1D25BE2DEE00A6ECCB /* Canvas WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F301E3025BE2DF000A6ECCB /* Build configuration list for PBXNativeTarget "Canvas WidgetsExtension" */;
+			buildPhases = (
+				5F301E1A25BE2DEE00A6ECCB /* Sources */,
+				5F301E1B25BE2DEE00A6ECCB /* Frameworks */,
+				5F301E1C25BE2DEE00A6ECCB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Canvas WidgetsExtension";
+			packageProductDependencies = (
+				5F301E5325BE31EA00A6ECCB /* Alamofire */,
+			);
+			productName = "Canvas WidgetsExtension";
+			productReference = 5F301E1E25BE2DEE00A6ECCB /* Canvas WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		5F301E6E25BE3B4200A6ECCB /* Canvas Static WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F301E7C25BE3B4300A6ECCB /* Build configuration list for PBXNativeTarget "Canvas Static WidgetsExtension" */;
+			buildPhases = (
+				5F301E6B25BE3B4200A6ECCB /* Sources */,
+				5F301E6C25BE3B4200A6ECCB /* Frameworks */,
+				5F301E6D25BE3B4200A6ECCB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Canvas Static WidgetsExtension";
+			packageProductDependencies = (
+				5F301EAD25BE3CD400A6ECCB /* Alamofire */,
+			);
+			productName = "Canvas Static WidgetsExtension";
+			productReference = 5F301E6F25BE3B4200A6ECCB /* Canvas Static WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5FBFD3BC251EDC77007E651B /* Canvas */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5FBFD3E3251EDC78007E651B /* Build configuration list for PBXNativeTarget "Canvas" */;
@@ -247,10 +420,13 @@
 				5FBFD3BA251EDC77007E651B /* Frameworks */,
 				5FBFD3BB251EDC77007E651B /* Resources */,
 				5F879918251FD671009904BC /* Embed Frameworks */,
+				5F301E3325BE2DF000A6ECCB /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5F301E2E25BE2DF000A6ECCB /* PBXTargetDependency */,
+				5F301E7A25BE3B4300A6ECCB /* PBXTargetDependency */,
 			);
 			name = Canvas;
 			packageProductDependencies = (
@@ -303,9 +479,15 @@
 		5FBFD3B5251EDC77007E651B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					5F301E1D25BE2DEE00A6ECCB = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					5F301E6E25BE3B4200A6ECCB = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					5FBFD3BC251EDC77007E651B = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -340,11 +522,31 @@
 				5FBFD3BC251EDC77007E651B /* Canvas */,
 				5FBFD3CE251EDC78007E651B /* CanvasTests */,
 				5FBFD3D9251EDC78007E651B /* CanvasUITests */,
+				5F301E1D25BE2DEE00A6ECCB /* Canvas WidgetsExtension */,
+				5F301E6E25BE3B4200A6ECCB /* Canvas Static WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5F301E1C25BE2DEE00A6ECCB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301E6725BE37B500A6ECCB /* token.txt in Resources */,
+				5F301E2825BE2DF000A6ECCB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F301E6D25BE3B4200A6ECCB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301EA825BE3CB400A6ECCB /* token.txt in Resources */,
+				5F301E7625BE3B4300A6ECCB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5FBFD3BB251EDC77007E651B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,6 +574,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5F301E1A25BE2DEE00A6ECCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301E3A25BE2FA500A6ECCB /* Assignment.swift in Sources */,
+				5F301E9925BE3C6000A6ECCB /* WidgetManager.swift in Sources */,
+				5F301E3725BE2FA500A6ECCB /* Course.swift in Sources */,
+				5F301E2B25BE2DF000A6ECCB /* Canvas_Widgets.intentdefinition in Sources */,
+				5F301E3D25BE2FA500A6ECCB /* DiscussionTopic.swift in Sources */,
+				5F301E3925BE2FA500A6ECCB /* Tab.swift in Sources */,
+				5F301E3B25BE2FA500A6ECCB /* AssignmentGroup.swift in Sources */,
+				5F301E3C25BE2FA500A6ECCB /* Module.swift in Sources */,
+				5F301E4625BE2FB000A6ECCB /* Manager.swift in Sources */,
+				5F301E4F25BE318300A6ECCB /* Extensions.swift in Sources */,
+				5F301E4225BE2FAC00A6ECCB /* CanvasAPI.swift in Sources */,
+				5F301E2525BE2DEE00A6ECCB /* Canvas_Widgets.swift in Sources */,
+				5F301E3E25BE2FA500A6ECCB /* User.swift in Sources */,
+				5F301E3825BE2FA500A6ECCB /* Enrollment.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F301E6B25BE3B4200A6ECCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F301E7425BE3B4300A6ECCB /* Canvas_Static_Widgets.swift in Sources */,
+				5F301E9225BE3C0400A6ECCB /* Enrollment.swift in Sources */,
+				5F301E9025BE3C0400A6ECCB /* Course.swift in Sources */,
+				5F301E9325BE3C0400A6ECCB /* Module.swift in Sources */,
+				5F301E8325BE3BF200A6ECCB /* WidgetManager.swift in Sources */,
+				5F301E8825BE3BFF00A6ECCB /* CanvasAPI.swift in Sources */,
+				5F301E9125BE3C0400A6ECCB /* Assignment.swift in Sources */,
+				5F301E9E25BE3C9100A6ECCB /* Manager.swift in Sources */,
+				5F301EA325BE3C9A00A6ECCB /* Extensions.swift in Sources */,
+				5F301E8E25BE3C0400A6ECCB /* DiscussionTopic.swift in Sources */,
+				5F301E8F25BE3C0400A6ECCB /* AssignmentGroup.swift in Sources */,
+				5F301E8D25BE3C0400A6ECCB /* Tab.swift in Sources */,
+				5F301E9425BE3C0400A6ECCB /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5FBFD3B9251EDC77007E651B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -392,8 +635,10 @@
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 				5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */,
 				5F91BEB225B89970009B1BD9 /* Tab.swift in Sources */,
+				5F301E2C25BE2DF000A6ECCB /* Canvas_Widgets.intentdefinition in Sources */,
 				5FA7223425BD3962007D05E0 /* Assignment.swift in Sources */,
 				5FA7222825BD1B51007D05E0 /* SinglePersonView.swift in Sources */,
+				5F301E4B25BE317700A6ECCB /* Extensions.swift in Sources */,
 				5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */,
 				5F879927251FD72F009904BC /* Manager.swift in Sources */,
 				5F9D16E125B5FFDB0098F1E4 /* PeopleView.swift in Sources */,
@@ -420,6 +665,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5F301E2E25BE2DF000A6ECCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F301E1D25BE2DEE00A6ECCB /* Canvas WidgetsExtension */;
+			targetProxy = 5F301E2D25BE2DF000A6ECCB /* PBXContainerItemProxy */;
+		};
+		5F301E7A25BE3B4300A6ECCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F301E6E25BE3B4200A6ECCB /* Canvas Static WidgetsExtension */;
+			targetProxy = 5F301E7925BE3B4300A6ECCB /* PBXContainerItemProxy */;
+		};
 		5FBFD3D1251EDC78007E651B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5FBFD3BC251EDC77007E651B /* Canvas */;
@@ -433,6 +688,102 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5F301E3125BE2DF000A6ECCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Canvas Widgets/Canvas_Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CPHKV97KA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Canvas Widgets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.malcolminyo.Canvas.Canvas-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5F301E3225BE2DF000A6ECCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Canvas Widgets/Canvas_Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CPHKV97KA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Canvas Widgets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.malcolminyo.Canvas.Canvas-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5F301E7D25BE3B4300A6ECCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Canvas Static Widgets/Canvas_Static_Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CPHKV97KA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Canvas Static Widgets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.malcolminyo.Canvas.Canvas-Static-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5F301E7E25BE3B4300A6ECCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Canvas Static Widgets/Canvas_Static_Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8CPHKV97KA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Canvas Static Widgets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.malcolminyo.Canvas.Canvas-Static-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		5FBFD3E1251EDC78007E651B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -551,6 +902,7 @@
 		5FBFD3E4251EDC78007E651B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Canvas/Canvas.entitlements;
@@ -576,6 +928,7 @@
 		5FBFD3E5251EDC78007E651B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Canvas/Canvas.entitlements;
@@ -685,6 +1038,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5F301E3025BE2DF000A6ECCB /* Build configuration list for PBXNativeTarget "Canvas WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F301E3125BE2DF000A6ECCB /* Debug */,
+				5F301E3225BE2DF000A6ECCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5F301E7C25BE3B4300A6ECCB /* Build configuration list for PBXNativeTarget "Canvas Static WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F301E7D25BE3B4300A6ECCB /* Debug */,
+				5F301E7E25BE3B4300A6ECCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5FBFD3B8251EDC77007E651B /* Build configuration list for PBXProject "Canvas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -751,6 +1122,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5F301E5325BE31EA00A6ECCB /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9D16FA25B617430098F1E4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		5F301EAD25BE3CD400A6ECCB /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9D16FA25B617430098F1E4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		5F9D16F425B616F70098F1E4 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5F9D16F325B616F70098F1E4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

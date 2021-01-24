@@ -45,7 +45,7 @@ struct CustomizeCourseView: View {
     }
     
     func getCurrentCourseNickname() {
-        CanvasAPI.instance!.getCourseNickname(forCourse: self.course) { result in
+        Manager.instance!.canvasAPI.getCourseNickname(forCourse: self.course) { result in
             self.className = result.value!.nickname ?? ""
             self.defaultClassName = result.value!.name ?? "Course"
         }
@@ -64,15 +64,15 @@ struct CustomizeCourseView: View {
         
         self.course.courseColor = self.courseColor
         
-        CanvasAPI.instance!.setCourseNickname(forCourse: self.course, to: self.className) { result in
+        Manager.instance!.canvasAPI.setCourseNickname(forCourse: self.course, to: self.className) { result in
             self.manager.refresh()
         }
         
-        CanvasAPI.instance!.setCourseIcon(forCourse: self.course, to: self.iconID) { result in
+        Manager.instance!.canvasAPI.setCourseIcon(forCourse: self.course, to: self.iconID) { result in
             self.manager.refresh()
         }
         
-        CanvasAPI.instance!.setCourseColor(forCourse: self.course, to: self.courseColor) { result in
+        Manager.instance!.canvasAPI.setCourseColor(forCourse: self.course, to: self.courseColor) { result in
             self.manager.refresh()
         }
     }
