@@ -26,21 +26,21 @@ class User: Decodable, Hashable, ObservableObject {
         hasher.combine(bio)
     }
     
-    var id: Int?
-    var name: String?
-    var sortableName: String?
-    var shortName: String?
-    var sisUserID: String?
-    var sisImportID: Int?
-    var integrationID: String?
-    var loginID: String?
-    var avatarURL: URL?
-    var enrollments: [Enrollment]?
-    var email: String?
-    var locale: String?
-    var lastLogin: Date?
-    var timeZone: String?
-    var bio: String?
+    @Published var id: Int?
+    @Published var name: String?
+    @Published var sortableName: String?
+    @Published var shortName: String?
+    @Published var sisUserID: String?
+    @Published var sisImportID: Int?
+    @Published var integrationID: String?
+    @Published var loginID: String?
+    @Published var avatarURL: URL?
+    @Published var enrollments: [Enrollment]?
+    @Published var email: String?
+    @Published var locale: String?
+    @Published var lastLogin: Date?
+    @Published var timeZone: String?
+    @Published var bio: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -58,6 +58,26 @@ class User: Decodable, Hashable, ObservableObject {
         case lastLogin = "last_login"
         case timeZone = "time_zone"
         case bio
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try? values.decode(Int?.self, forKey: .id)
+        name = try? values.decode(String?.self, forKey: .name)
+        sortableName = try? values.decode(String?.self, forKey: .sortableName)
+        shortName = try? values.decode(String?.self, forKey: .shortName)
+        sisUserID = try? values.decode(String?.self, forKey: .sisUserID)
+        sisImportID = try? values.decode(Int?.self, forKey: .sisImportID)
+        integrationID = try? values.decode(String?.self, forKey: .integrationID)
+        loginID = try? values.decode(String?.self, forKey: .loginID)
+        avatarURL = try? values.decode(URL?.self, forKey: .avatarURL)
+        enrollments = try? values.decode([Enrollment]?.self, forKey: .enrollments)
+        email = try? values.decode(String?.self, forKey: .email)
+        locale = try? values.decode(String?.self, forKey: .locale)
+        lastLogin = try? values.decode(Date?.self, forKey: .lastLogin)
+        timeZone = try? values.decode(String?.self, forKey: .timeZone)
+        bio = try? values.decode(String?.self, forKey: .bio)
     }
     
     func getEnrollment(forCourse course: Course) -> Enrollment? {

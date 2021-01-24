@@ -24,11 +24,11 @@ class Course: Decodable, Hashable, ObservableObject {
 //        hasher.combine(people)
     }
     
-    let name: String?
-    let id: Int?
-    let courseCode: String?
-    let accountID: Int?
-    let defaultView: String?
+    @Published var name: String?
+    @Published var id: Int?
+    @Published var courseCode: String?
+    @Published var accountID: Int?
+    @Published var defaultView: String?
     
     @Published var courseColor: Color? = Color.accentColor
     @Published var courseIcon: String? = ""
@@ -54,6 +54,18 @@ class Course: Decodable, Hashable, ObservableObject {
         case accountID = "account_id"
         case enrollments
         case defaultView = "default_view"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        name = try? values.decode(String?.self, forKey: .name)
+        id = try? values.decode(Int?.self, forKey: .id)
+        courseCode = try? values.decode(String?.self, forKey: .courseCode)
+        accountID = try? values.decode(Int?.self, forKey: .accountID)
+        enrollments = try? values.decode([Enrollment]?.self, forKey: .enrollments)
+        defaultView = try? values.decode(String?.self, forKey: .defaultView)
+
     }
     
     func update() {

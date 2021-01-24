@@ -16,21 +16,21 @@ class Module: Decodable, Hashable, ObservableObject {
         hasher.combine(id)
     }
     
-    var id: Int? = 0
-    var workflowState: String? = "active"
-    var position: Int? = 1
-    var name: String? = "This is a module"
-    var unlockAt: String? = ""
-    var requireSequentialProgress: Bool? = false
-    var prerequisiteModuleIDs: [Int]? = []
-    var itemsCount: Int? = 0
-    var itemsURL: String? = ""
-    var state: String? = "started"
-    var completedAt: String? = ""
-    var publishFinalGrade: Bool? = false
-    var published: Bool? = true
+    @Published var id: Int? = 0
+    @Published var workflowState: String? = "active"
+    @Published var position: Int? = 1
+    @Published var name: String? = "This is a module"
+    @Published var unlockAt: Date? = nil
+    @Published var requireSequentialProgress: Bool? = false
+    @Published var prerequisiteModuleIDs: [Int]? = []
+    @Published var itemsCount: Int? = 0
+    @Published var itemsURL: String? = ""
+    @Published var state: String? = "started"
+    @Published var completedAt: Date? = nil
+    @Published var publishFinalGrade: Bool? = false
+    @Published var published: Bool? = true
     
-    var course: Course?
+    @Published var course: Course?
     @Published var moduleItems: [ModuleItem]? = []
     
     enum CodingKeys: String, CodingKey {
@@ -47,6 +47,23 @@ class Module: Decodable, Hashable, ObservableObject {
         case completedAt = "completed_at"
         case publishFinalGrade = "publish_final_grade"
         case published
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try? values.decode(Int?.self, forKey: .id)
+        workflowState = try? values.decode(String?.self, forKey: .workflowState)
+        position = try? values.decode(Int?.self, forKey: .position)
+        name = try? values.decode(String?.self, forKey: .name)
+        unlockAt = try? values.decode(Date?.self, forKey: .unlockAt)
+        requireSequentialProgress = try? values.decode(Bool?.self, forKey: .requireSequentialProgress)
+        prerequisiteModuleIDs = try? values.decode([Int]?.self, forKey: .prerequisiteModuleIDs)
+        itemsCount = try? values.decode(Int?.self, forKey: .itemsCount)
+        itemsURL = try? values.decode(String?.self, forKey: .itemsURL)
+        state = try? values.decode(String?.self, forKey: .state)
+        completedAt = try? values.decode(Date?.self, forKey: .completedAt)
+        publishFinalGrade = try? values.decode(Bool?.self, forKey: .publishFinalGrade)
+        published = try? values.decode(Bool?.self, forKey: .published)
     }
     
     func updateModuleItems() {
@@ -73,22 +90,22 @@ class ModuleItem: Decodable, Hashable, ObservableObject {
         hasher.combine(id)
     }
     
-    var id: Int? = 0
-    var moduleID: Int? = 0
-    var position: Int? = 1
-    var title: String? = "Module Item Title"
-    var indent: Int? = 0
-    var type: ModuleItemType? = .Page
-    var contentID: Int? = 0
-    var htmlURL: String? = ""
-    var apiURL: String? = ""
-    var pageURL: String? = ""
-    var externalURL: String? = ""
-    var openInNewTab: Bool? = false
+    @Published var id: Int? = 0
+    @Published var moduleID: Int? = 0
+    @Published var position: Int? = 1
+    @Published var title: String? = "Module Item Title"
+    @Published var indent: Int? = 0
+    @Published var type: ModuleItemType? = .Page
+    @Published var contentID: Int? = 0
+    @Published var htmlURL: String? = ""
+    @Published var apiURL: String? = ""
+    @Published var pageURL: String? = ""
+    @Published var externalURL: String? = ""
+    @Published var openInNewTab: Bool? = false
 //    var completionRequirement: CompletionRequirement? = nil
-    var contentDetails: ContentDetails? = nil
+    @Published var contentDetails: ContentDetails? = nil
     
-    var module: Module? = nil
+    @Published var module: Module? = nil
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -105,6 +122,24 @@ class ModuleItem: Decodable, Hashable, ObservableObject {
         case openInNewTab = "new_tab"
         case contentDetails = "content_details"
     }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try? values.decode(Int?.self, forKey: .id)
+        moduleID = try? values.decode(Int?.self, forKey: .moduleID)
+        position = try? values.decode(Int?.self, forKey: .position)
+        title = try? values.decode(String?.self, forKey: .title)
+        indent = try? values.decode(Int?.self, forKey: .indent)
+        type = try? values.decode(ModuleItemType?.self, forKey: .type)
+        contentID = try? values.decode(Int?.self, forKey: .contentID)
+        htmlURL = try? values.decode(String?.self, forKey: .htmlURL)
+        apiURL = try? values.decode(String?.self, forKey: .apiURL)
+        pageURL = try? values.decode(String?.self, forKey: .pageURL)
+        externalURL = try? values.decode(String?.self, forKey: .externalURL)
+        openInNewTab = try? values.decode(Bool?.self, forKey: .openInNewTab)
+        contentDetails = try? values.decode(ContentDetails?.self, forKey: .contentDetails)
+    }
 }
 
 class ModulePageItem: Decodable, Hashable, ObservableObject {
@@ -115,21 +150,21 @@ class ModulePageItem: Decodable, Hashable, ObservableObject {
         hasher.combine(pageID)
     }
     
-    var title: String? = "Module Page Item"
-    var createdAt: Date? = Date()
-    var url: String? = ""
-    var editingRoles: String? = ""
-    var pageID: Int? = 0
-    var published: Bool? = false
-    var hideFromStudents: Bool? = false
-    var frontPage: Bool? = false
-    var htmlURL: String? = ""
-    var todoDate: Date? = Date()
-    var updatedAt: Date? = Date()
-    var lockedForUser: Bool? = false
-    var body: String? = ""
+    @Published var title: String? = "Module Page Item"
+    @Published var createdAt: Date? = Date()
+    @Published var url: String? = ""
+    @Published var editingRoles: String? = ""
+    @Published var pageID: Int? = 0
+    @Published var published: Bool? = false
+    @Published var hideFromStudents: Bool? = false
+    @Published var frontPage: Bool? = false
+    @Published var htmlURL: String? = ""
+    @Published var todoDate: Date? = Date()
+    @Published var updatedAt: Date? = Date()
+    @Published var lockedForUser: Bool? = false
+    @Published var body: String? = ""
     
-    var module: Module?
+    @Published var module: Module?
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -146,6 +181,24 @@ class ModulePageItem: Decodable, Hashable, ObservableObject {
         case lockedForUser = "locked_for_user"
         case body
     }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        title = try? values.decode(String?.self, forKey: .title)
+        createdAt = try? values.decode(Date?.self, forKey: .createdAt)
+        url = try? values.decode(String?.self, forKey: .url)
+        editingRoles = try? values.decode(String?.self, forKey: .editingRoles)
+        pageID = try? values.decode(Int?.self, forKey: .pageID)
+        published = try? values.decode(Bool?.self, forKey: .published)
+        hideFromStudents = try? values.decode(Bool?.self, forKey: .hideFromStudents)
+        frontPage = try? values.decode(Bool?.self, forKey: .frontPage)
+        htmlURL = try? values.decode(String?.self, forKey: .htmlURL)
+        todoDate = try? values.decode(Date?.self, forKey: .todoDate)
+        updatedAt = try? values.decode(Date?.self, forKey: .updatedAt)
+        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
+        body = try? values.decode(String?.self, forKey: .body)
+    }
 }
 
 class CompletionRequirement: Decodable, Hashable, ObservableObject {
@@ -159,14 +212,22 @@ class CompletionRequirement: Decodable, Hashable, ObservableObject {
         hasher.combine(completed)
     }
     
-    var type: CompletionRequirementType = .MustView
-    var minScore: Double? = 0.0
-    var completed: Bool? = false
+    @Published var type: CompletionRequirementType? = .MustView
+    @Published var minScore: Double? = 0.0
+    @Published var completed: Bool? = false
     
     enum CodingKeys: String, CodingKey {
         case type
         case minScore = "min_score"
         case completed
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        type = try? values.decode(CompletionRequirementType?.self, forKey: .type)
+        minScore = try? values.decode(Double?.self, forKey: .minScore)
+        completed = try? values.decode(Bool?.self, forKey: .completed)
     }
 }
 
@@ -195,33 +256,25 @@ class ContentDetails: Decodable, Hashable, ObservableObject {
         hasher.combine(lockedForUser)
         hasher.combine(lockExplanation)
     }
+     
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        pointsPossible = try? values.decode(Double?.self, forKey: .pointsPossible)
+        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
+        lockExplanation = try? values.decode(String?.self, forKey: .lockExplanation)
+        
+        dueAt = try? values.decode(Date?.self, forKey: .dueAt)
+        unlockAt = try? values.decode(Date?.self, forKey: .unlockAt)
+        lockAt = try? values.decode(Date?.self, forKey: .lockAt)
+    }
     
-//    required init() { }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        
-//        pointsPossible = try? values.decode(Double?.self, forKey: .pointsPossible)
-//        lockedForUser = try? values.decode(Bool?.self, forKey: .lockedForUser)
-//        lockExplanation = try? values.decode(String?.self, forKey: .lockExplanation)
-//        
-//        let dateFormatter = ISO8601DateFormatter()
-//        
-//        let dueAtString = try? values.decode(String?.self, forKey: .dueAt)
-//        let unlockAtString = try? values.decode(String?.self, forKey: .unlockAt)
-//        let lockAtString = try? values.decode(String?.self, forKey: .lockAt)
-//    
-//        if dueAtString != nil { dueAt = dateFormatter.date(from: dueAtString!) }
-//        if unlockAtString != nil { unlockAt = dateFormatter.date(from: unlockAtString!) }
-//        if lockAtString != nil { lockAt = dateFormatter.date(from: lockAtString!) }
-//    }
-    
-    var pointsPossible: Double? = 0
-    var dueAt: Date?
-    var unlockAt: Date?
-    var lockAt: Date?
-    var lockedForUser: Bool? = false
-    var lockExplanation: String? = "lock explanation?"
+    @Published var pointsPossible: Double? = 0
+    @Published var dueAt: Date?
+    @Published var unlockAt: Date?
+    @Published var lockAt: Date?
+    @Published var lockedForUser: Bool? = false
+    @Published var lockExplanation: String? = "lock explanation?"
     // TODO: lock info
     
     enum CodingKeys: String, CodingKey {

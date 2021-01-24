@@ -59,7 +59,13 @@ struct CourseTabView: View {
     }
     
     var label: some View {
-        Label(self.tab.label ?? "Tab", systemImage: icon)
+        HStack {
+            Label(self.tab.label ?? "Tab", systemImage: icon)
+            Spacer()
+            if self.tab.id == "announcements" && self.course.unreadAnnouncements > 0 {
+                Badge(text: "\(self.course.unreadAnnouncements)", color: .red, minWidth: 25)
+            }
+        }
     }
     
     var link: some View {

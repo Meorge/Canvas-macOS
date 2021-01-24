@@ -19,105 +19,105 @@ class Enrollment: Decodable, Hashable {
     
     // TODO: SIS information
     
-    var id: Int? = nil
-    var courseID: Int? = nil
-    var courseSectionID: Int? = nil
-    var enrollmentState: EnrollmentState? = nil
-    var limitPrivilegesToCourseSection: Bool? = nil
-    var rootAccountID: Int? = nil
+    @Published var id: Int? = nil
+    @Published var courseID: Int? = nil
+    @Published var courseSectionID: Int? = nil
+    @Published var enrollmentState: EnrollmentState? = nil
+    @Published var limitPrivilegesToCourseSection: Bool? = nil
+    @Published var rootAccountID: Int? = nil
 //    var type: StudentEnrollmentType? = nil
-    var userID: Int? = nil
-    var associatedUserID: Int? = nil
-    var role: StudentEnrollmentType? = nil
-    var roleID: Int? = nil
-    var createdAt: Date? = nil
-    var updatedAt: Date? = nil
-    var startAt: Date? = nil
-    var endAt: Date? = nil
-    var lastActivityAt: Date? = nil
-    var lastAttendedAt: Date? = nil
-    var totalActivityTime: Int? = nil
-    var htmlURL: String? = nil
+    @Published var userID: Int? = nil
+    @Published var associatedUserID: Int? = nil
+    @Published var role: StudentEnrollmentType? = nil
+    @Published var roleID: Int? = nil
+    @Published var createdAt: Date? = nil
+    @Published var updatedAt: Date? = nil
+    @Published var startAt: Date? = nil
+    @Published var endAt: Date? = nil
+    @Published var lastActivityAt: Date? = nil
+    @Published var lastAttendedAt: Date? = nil
+    @Published var totalActivityTime: Int? = nil
+    @Published var htmlURL: String? = nil
     // TODO: grades
     // TODO: user
-    var computedCurrentGrade: String? = nil
-    var computedCurrentScore: Double? = nil
-    var computedFinalGrade: String? = nil
-    var computedFinalScore: Double? = nil
-    var overrideGrade: String? = nil
-    var overrideScore: Double? = nil
+    @Published var computedCurrentGrade: String? = nil
+    @Published var computedCurrentScore: Double? = nil
+    @Published var computedFinalGrade: String? = nil
+    @Published var computedFinalScore: Double? = nil
+    @Published var overrideGrade: String? = nil
+    @Published var overrideScore: Double? = nil
     // TODO: unpostedCurrentGrade
     // TODO: unpostedFinalGrade
     // TODO: unpostedCurrentScore
     // TODO: unpostedFinalScore
-    var hasGradingPeriods: Bool? = nil
-    var totalsForAllGradingPeriodsOption: Bool? = nil
-    var currentGradingPeriodTitle: String? = nil
-    var currentGradingPeriodID: Int? = nil
-    var currentPeriodOverrideGrade: String? = nil
-    var currentPeriodOverrideScore: Double? = nil
+    @Published var hasGradingPeriods: Bool? = nil
+    @Published var totalsForAllGradingPeriodsOption: Bool? = nil
+    @Published var currentGradingPeriodTitle: String? = nil
+    @Published var currentGradingPeriodID: Int? = nil
+    @Published var currentPeriodOverrideGrade: String? = nil
+    @Published var currentPeriodOverrideScore: Double? = nil
     // TODO: currentPeriodUnpostedCurrentScore
     // TODO: currentPeriodUnpostedFinalScore
     // TODO: currentPeriodUnpostedCurrentGrade
     // TODO: currentPeriodUnpostedFinalGrade
     
-//    required init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        
-//        id = try? values.decode(Int?.self, forKey: .id)
-//        courseID = try? values.decode(Int?.self, forKey: .courseID)
-//        courseSectionID = try? values.decode(Int?.self, forKey: .courseSectionID)
-//        enrollmentState = try? values.decode(EnrollmentState?.self, forKey: .enrollmentState)
-//        limitPrivilegesToCourseSection = try? values.decode(Bool?.self, forKey: .limitPrivilegesToCourseSection)
-//        rootAccountID = try? values.decode(Int?.self, forKey: .rootAccountID)
-//        type = try? values.decode(StudentEnrollmentType?.self, forKey: .type)
-//        userID = try? values.decode(Int?.self, forKey: .userID)
-//        associatedUserID = try? values.decode(Int?.self, forKey: .associatedUserID)
-//        role = try? values.decode(StudentEnrollmentType?.self, forKey: .role)
-//        roleID = try? values.decode(Int?.self, forKey: .roleID)
-//        
-//        // date stuff
-//        let dateFormatter = ISO8601DateFormatter()
-//        if let createdAtString = try? values.decode(String?.self, forKey: .createdAt) {
-//            createdAt = dateFormatter.date(from: createdAtString)
-//        }
-//        if let updatedAtString = try? values.decode(String?.self, forKey: .updatedAt) {
-//            updatedAt = dateFormatter.date(from: updatedAtString)
-//        }
-//        if let startAtString = try? values.decode(String?.self, forKey: .startAt) {
-//            startAt = dateFormatter.date(from: startAtString)
-//        }
-//        if let endAtString = try? values.decode(String?.self, forKey: .endAt) {
-//            endAt = dateFormatter.date(from: endAtString)
-//        }
-//        if let lastActivityAtString = try? values.decode(String?.self, forKey: .lastActivityAt) {
-//            lastActivityAt = dateFormatter.date(from: lastActivityAtString)
-//        }
-//        if let lastAttendedAtString = try? values.decode(String?.self, forKey: .lastAttendedAt) {
-//            lastAttendedAt = dateFormatter.date(from: lastAttendedAtString)
-//        }
-//        
-//
-//        
-//        
-//        totalActivityTime = try? values.decode(Int?.self, forKey: .totalActivityTime)
-//        htmlURL = try? values.decode(String?.self, forKey: .htmlURL)
-//        
-//        computedCurrentGrade = try? values.decode(String?.self, forKey: .computedCurrentGrade)
-//        computedCurrentScore = try? values.decode(Double?.self, forKey: .computedCurrentScore)
-//        computedFinalGrade = try? values.decode(String?.self, forKey: .computedFinalGrade)
-//        computedFinalScore = try? values.decode(Double?.self, forKey: .computedFinalScore)
-//        
-//        overrideGrade = try? values.decode(String?.self, forKey: .overrideGrade)
-//        overrideScore = try? values.decode(Double?.self, forKey: .overrideScore)
-//        
-//        hasGradingPeriods = try? values.decode(Bool?.self, forKey: .hasGradingPeriods)
-//        totalsForAllGradingPeriodsOption = try? values.decode(Bool?.self, forKey: .totalsForAllGradingPeriodsOption)
-//        currentGradingPeriodTitle = try? values.decode(String?.self, forKey: .currentGradingPeriodTitle)
-//        currentGradingPeriodID = try? values.decode(Int?.self, forKey: .currentGradingPeriodID)
-//        currentPeriodOverrideGrade = try? values.decode(String?.self, forKey: .currentPeriodOverrideGrade)
-//        currentPeriodOverrideScore = try? values.decode(Double?.self, forKey: .currentPeriodOverrideScore)
-//    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try? values.decode(Int?.self, forKey: .id)
+        courseID = try? values.decode(Int?.self, forKey: .courseID)
+        courseSectionID = try? values.decode(Int?.self, forKey: .courseSectionID)
+        enrollmentState = try? values.decode(EnrollmentState?.self, forKey: .enrollmentState)
+        limitPrivilegesToCourseSection = try? values.decode(Bool?.self, forKey: .limitPrivilegesToCourseSection)
+        rootAccountID = try? values.decode(Int?.self, forKey: .rootAccountID)
+//        self.type = try? values.decode(StudentEnrollmentType?.self, forKey: .type)
+        userID = try? values.decode(Int?.self, forKey: .userID)
+        associatedUserID = try? values.decode(Int?.self, forKey: .associatedUserID)
+        role = try? values.decode(StudentEnrollmentType?.self, forKey: .role)
+        roleID = try? values.decode(Int?.self, forKey: .roleID)
+
+        // date stuff
+        let dateFormatter = ISO8601DateFormatter()
+        if let createdAtString = try? values.decode(String?.self, forKey: .createdAt) {
+            createdAt = dateFormatter.date(from: createdAtString)
+        }
+        if let updatedAtString = try? values.decode(String?.self, forKey: .updatedAt) {
+            updatedAt = dateFormatter.date(from: updatedAtString)
+        }
+        if let startAtString = try? values.decode(String?.self, forKey: .startAt) {
+            startAt = dateFormatter.date(from: startAtString)
+        }
+        if let endAtString = try? values.decode(String?.self, forKey: .endAt) {
+            endAt = dateFormatter.date(from: endAtString)
+        }
+        if let lastActivityAtString = try? values.decode(String?.self, forKey: .lastActivityAt) {
+            lastActivityAt = dateFormatter.date(from: lastActivityAtString)
+        }
+        if let lastAttendedAtString = try? values.decode(String?.self, forKey: .lastAttendedAt) {
+            lastAttendedAt = dateFormatter.date(from: lastAttendedAtString)
+        }
+
+
+
+
+        totalActivityTime = try? values.decode(Int?.self, forKey: .totalActivityTime)
+        htmlURL = try? values.decode(String?.self, forKey: .htmlURL)
+
+        computedCurrentGrade = try? values.decode(String?.self, forKey: .computedCurrentGrade)
+        computedCurrentScore = try? values.decode(Double?.self, forKey: .computedCurrentScore)
+        computedFinalGrade = try? values.decode(String?.self, forKey: .computedFinalGrade)
+        computedFinalScore = try? values.decode(Double?.self, forKey: .computedFinalScore)
+
+        overrideGrade = try? values.decode(String?.self, forKey: .overrideGrade)
+        overrideScore = try? values.decode(Double?.self, forKey: .overrideScore)
+
+        hasGradingPeriods = try? values.decode(Bool?.self, forKey: .hasGradingPeriods)
+        totalsForAllGradingPeriodsOption = try? values.decode(Bool?.self, forKey: .totalsForAllGradingPeriodsOption)
+        currentGradingPeriodTitle = try? values.decode(String?.self, forKey: .currentGradingPeriodTitle)
+        currentGradingPeriodID = try? values.decode(Int?.self, forKey: .currentGradingPeriodID)
+        currentPeriodOverrideGrade = try? values.decode(String?.self, forKey: .currentPeriodOverrideGrade)
+        currentPeriodOverrideScore = try? values.decode(Double?.self, forKey: .currentPeriodOverrideScore)
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
