@@ -31,7 +31,7 @@ class Course: Decodable, Hashable, ObservableObject {
     @Published var defaultView: String?
     
     @Published var courseColor: Color? = Color.accentColor
-    @Published var courseIcon: String? = ""
+    @Published var courseIcon: String? = "book"
     
     @Published var tabs: [Tab] = []
     @Published var modules: [Module] = []

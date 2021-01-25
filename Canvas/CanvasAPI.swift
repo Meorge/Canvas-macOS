@@ -33,9 +33,34 @@ class CanvasAPI: ObservableObject {
 
     // TODO: Instead of using this to get the courses, use the enrollments:
     // https://canvas.instructure.com/api/v1/users/self/enrollments
-    func getCourses() {
+    func getCourses(onlyTopLevelInfo: Bool = false) {
         let url = "/courses"
-        makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: self.updateAllCourses)
+        makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: onlyTopLevelInfo ? self.updateAllCoursesTopLevel : self.updateAllCourses)
+    }
+    
+    // TODO: clean this up
+    // it's the same code as the other function but without quite as much updating
+    func updateAllCoursesTopLevel(data: DataResponse<[Course], AFError>) {
+        let newCourses = data.value ?? []
+        
+        // If a course has been added, add it!
+        for course in newCourses {
+            if !self.courses.contains(course) {
+                self.courses.append(course)
+            }
+        }
+        
+        // If a course has been removed, remove it!
+        for course in self.courses {
+            if !newCourses.contains(course) {
+                self.courses.remove(at: self.courses.firstIndex(of: course)!)
+            }
+        }
+        
+        for course in self.courses {
+            course.updateCourseIcon()
+            course.updateCourseColor()
+        }
     }
     
     func updateAllCourses(data: DataResponse<[Course], AFError>) {

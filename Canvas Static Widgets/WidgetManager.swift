@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import WidgetKit
 
 class WidgetManager: ObservableObject {
     static var instance: WidgetManager? = nil
@@ -29,11 +30,14 @@ class WidgetManager: ObservableObject {
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
             self!.objectWillChange.send()
+            
+            print("widget stuff should update now")
+            WidgetCenter.shared.reloadTimelines(ofKind: "com.malcolminyo.Canvas.Canvas-Static-Widgets")
         }
         
         WidgetManager.instance = self
         
         // TODO: only get the grades n stuff
-        self.canvasAPI.getCourses()
+        self.canvasAPI.getCourses(onlyTopLevelInfo: true)
     }
 }

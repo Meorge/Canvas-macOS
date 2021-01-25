@@ -24,7 +24,7 @@ struct Provider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset * 10, to: currentDate)!
             let entry = GradesEntry(date: entryDate)
             entries.append(entry)
         }
@@ -45,16 +45,12 @@ struct Canvas_Static_WidgetsEntryView : View {
 
     var body: some View {
         VStack {
-//            if (WidgetManager.instance != nil) { Text("Widget manager exists")}
-            if WidgetManager.instance != nil {
-                ForEach(WidgetManager.instance!.canvasAPI.courses, id: \.id) { course in
-                    SingleCourseRow(course: course)
-                }
-            } else {
-                Text("CanvasAPI.instance is nil")
+            ForEach(canvasAPI.canvasAPI.courses, id: \.id) { course in
+                SingleCourseRow(course: course)
             }
-            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("WidgetBackground"))
     }
 }
 
@@ -62,24 +58,30 @@ struct SingleCourseRow: View {
     @ObservedObject var course: Course
     var body: some View {
         HStack {
-            Label(self.course.name ?? "Course", systemImage: "book")
+            Label(self.course.name ?? "Course", systemImage: self.course.courseIcon ?? "book")
+                .foregroundColor(.white)
                 .accentColor(self.course.courseColor ?? .accentColor)
             Spacer()
             Text(self.course.getScoreAsString() ?? "N/A")
+                .foregroundColor(.white)
+                .bold()
         }
+//        .background(self.course.courseColor ?? .clear)
         .padding()
     }
 }
 
 @main
 struct Canvas_Static_Widgets: Widget {
-    let kind: String = "Canvas_Static_Widgets"
+    let kind: String = "com.malcolminyo.Canvas.Canvas-Static-Widgets"
 
     @StateObject private var canvasAPI: WidgetManager = WidgetManager()
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Canvas_Static_WidgetsEntryView(entry: entry)
+                .environmentObject(canvasAPI)
+                
         }
         .configurationDisplayName("Course Scores")
         .description("View all of your current course grades.")
