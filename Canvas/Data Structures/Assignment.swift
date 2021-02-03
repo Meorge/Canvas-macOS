@@ -274,6 +274,42 @@ class Assignment: Decodable, ObservableObject {
             return "-"
         }
     }
+    
+    func getIcon() -> String {
+        let submitted = (submission?.workflowState ?? .Unsubmitted) != .Unsubmitted
+        
+        var outString = ""
+        
+        if submissionTypes?.contains(.DiscussionTopic) ?? false {
+            outString += "bubble.left.and.bubble.right"
+        }
+        
+        else if submissionTypes?.contains(.OnlineQuiz) ?? false {
+            outString += "flag"
+        }
+        
+        else if submissionTypes?.contains(.OnlineUpload) ?? false {
+            outString += "arrow.up.doc"
+        }
+        
+        else if submissionTypes?.contains(.MediaRecording) ?? false {
+            outString += "camera"
+        }
+        
+        else if submissionTypes?.contains(.OnlineURL) ?? false {
+            outString += "link"
+        }
+        
+        else if submissionTypes?.contains(.OnlineTextEntry) ?? false {
+            outString += "doc.text"
+        }
+        
+        if (outString == "") {
+            outString = "doc"
+        }
+        
+        return outString + (submitted ? ".fill" : "")
+    }
 }
 
 class Submission: Decodable, ObservableObject {
@@ -478,4 +514,5 @@ enum SubmissionState: String, Decodable {
     case Unsubmitted = "unsubmitted"
     case Submitted = "submitted"
     case Graded = "graded"
+    case PendingReview = "pending_review"
 }

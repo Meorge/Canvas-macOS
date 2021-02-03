@@ -22,7 +22,7 @@ struct AnnouncementListView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     .id(UUID())
-                    .listStyle(InsetListStyle())
+                    .listStyle(DefaultListStyle())
                     .frame(minWidth: 300)
                 } else {
                     VStack {
@@ -36,7 +36,8 @@ struct AnnouncementListView: View {
             }
         }
         .onAppear(perform: self.course.updateAnnouncements)
-        .navigationTitle((course.name ?? "Course") + " - Announcements")
+        .navigationTitle("Announcements")
+        .navigationSubtitle(course.name ?? "Course")
     }
     
     func openAnnouncement(_ item: DiscussionTopic) {

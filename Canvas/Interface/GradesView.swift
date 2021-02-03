@@ -32,6 +32,8 @@ struct GradesView: View {
             }.padding(0)
         }
         .padding()
+        .navigationTitle("Grades")
+        .navigationSubtitle(course.name ?? "Course")
     }
 }
 
@@ -70,34 +72,37 @@ struct AssignmentGroupHeaderView: View {
 
 struct SingleGradeRowView: View {
     @ObservedObject var assignment: Assignment
-    @State var detailsOpen: Bool = false
+    var allowModifyingGrade: Bool = false
+    
+    var scoreLabel: some View {
+        Text(self.assignment.getScoreAsString())
+            .font(.title3)
+            .bold()
+    }
+    
     var body: some View {
-        Button(action: { self.detailsOpen.toggle() }) {
-            VStack {
-                HStack(alignment: .center) {
-                    VStack(alignment: .leading) {
-                        Text(self.assignment.name ?? "Assignment")
-                            .font(.title3)
-                            .bold()
-                        Text(self.assignment.getFormattedDueDate())
-                            .font(.subheadline)
-                    }
-                    Spacer()
-                    Text(self.assignment.getScoreAsString())
+        Label {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading) {
+                    Text(self.assignment.name ?? "Assignment")
                         .font(.title3)
                         .bold()
+                    Text(self.assignment.getFormattedDueDate())
+                        .font(.subheadline)
+                }
+                Spacer()
+                
+                if allowModifyingGrade {
+                    Button(action: {}) { scoreLabel }
+                        .buttonStyle(PlainButtonStyle())
+                } else {
+                    scoreLabel
                 }
                 
-                if self.detailsOpen {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("\(minAsString) - \(meanAsString) - \(maxAsString)")
-                    }
-                }
             }
+        } icon: {
+            Image(systemName: assignment.getIcon())
         }
-        .buttonStyle(PlainButtonStyle())
-        .padding(0)
     }
     
     var minAsString: String {

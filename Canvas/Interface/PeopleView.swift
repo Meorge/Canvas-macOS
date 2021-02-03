@@ -66,7 +66,8 @@ struct PeopleView: View {
                 }
             }
         }
-        .navigationTitle("\(course.name ?? "Course") - People")
+        .navigationTitle("People")
+        .navigationSubtitle(course.name ?? "Course")
         .onAppear(perform: self.course.updatePeople)
         
         .toolbar {

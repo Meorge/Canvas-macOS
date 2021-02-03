@@ -24,6 +24,7 @@ struct CourseView: View {
             }
         }
         .navigationTitle(course.name ?? "Course")
+//        .navigationSubtitle(course.name!)
         .sheet(isPresented: self.$customizationSheetVisible) {
             CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course)
         }
@@ -59,7 +60,8 @@ struct ModuleListView: View {
             }
         }
         .onAppear(perform: self.course.updateModules)
-        .navigationTitle((course.name ?? "Course") + " - Modules")
+        .navigationTitle("Modules")
+        .navigationSubtitle(course.name ?? "Course")
     }
 }
 
@@ -70,10 +72,10 @@ struct ModuleView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(self.module.name!)
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
-                .padding(10)
+//                .padding(10)
             
             ForEach(self.module.moduleItems!, id: \.id) { moduleItem in
                 if moduleItem.type == ModuleItemType.Header
@@ -105,9 +107,9 @@ struct ModuleItemView: View {
         Label {
             VStack(alignment: .leading) {
                 Text(self.moduleItem.title ?? "Module item")
-                    .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title : .headline)
+                    .font((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? .title2 : .headline)
                     .fontWeight(.bold)
-                    .padding((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? 10 : 0)
+//                    .padding((self.moduleItem.type ?? ModuleItemType.Page) == ModuleItemType.Header ? 10 : 0)
                 if (self.moduleItem.type != ModuleItemType.Header) {
                     Text(self.getSubtitle())
                         
@@ -117,7 +119,7 @@ struct ModuleItemView: View {
             if self.getIcon() != "" { Image(systemName: self.getIcon()) }
         }
         .padding(5)
-        .padding(.leading, (self.moduleItem.type != ModuleItemType.Header ? 25 : 0) + (25 * CGFloat(self.moduleItem.indent ?? 0)))
+        .padding(.leading, 25 * CGFloat(self.moduleItem.indent ?? 0))
         
     }
     
