@@ -281,7 +281,7 @@ class Assignment: Decodable, ObservableObject {
         var outString = ""
         
         if submissionTypes?.contains(.DiscussionTopic) ?? false {
-            outString += "bubble.left.and.bubble.right"
+            outString += "bubble.left"
         }
         
         else if submissionTypes?.contains(.OnlineQuiz) ?? false {

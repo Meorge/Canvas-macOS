@@ -20,7 +20,7 @@ class DiscussionTopic: Identifiable, Decodable, Hashable, ObservableObject {
     @Published var id: Int? = nil
     @Published var title: String? = nil
     @Published var message: String? = nil
-    @Published var htmlURL: String? = nil
+    @Published var htmlURL: URL? = nil
     @Published var postedAt: Date? = nil
     @Published var lastReplyAt: Date? = nil
     @Published var requireInitialPost: Bool? = nil
@@ -42,7 +42,7 @@ class DiscussionTopic: Identifiable, Decodable, Hashable, ObservableObject {
     @Published var userName: String? = nil
     // TODO: groupTopicChildren
     // TODO: rootTopicID
-    @Published var podcastURL: String? = nil
+    @Published var podcastURL: URL? = nil
     @Published var discussionType: DiscussionType? = nil
     @Published var groupCategoryID: Int? = nil
     // TODO: attachments
@@ -57,7 +57,7 @@ class DiscussionTopic: Identifiable, Decodable, Hashable, ObservableObject {
         id = try? container.decode(Int?.self, forKey: .id)
         title = try? container.decode(String?.self, forKey: .title)
         message = try? container.decode(String?.self, forKey: .message)
-        htmlURL = try? container.decode(String?.self, forKey: .htmlURL)
+        htmlURL = try? container.decode(URL?.self, forKey: .htmlURL)
         postedAt = try? container.decode(Date?.self, forKey: .postedAt)
         lastReplyAt = try? container.decode(Date?.self, forKey: .lastReplyAt)
         requireInitialPost = try? container.decode(Bool?.self, forKey: .requireInitialPost)
@@ -76,7 +76,7 @@ class DiscussionTopic: Identifiable, Decodable, Hashable, ObservableObject {
         lockedForUser = try? container.decode(Bool?.self, forKey: .lockedForUser)
         lockExplanation = try? container.decode(String?.self, forKey: .lockExplanation)
         userName = try? container.decode(String?.self, forKey: .userName)
-        podcastURL = try? container.decode(String?.self, forKey: .podcastURL)
+        podcastURL = try? container.decode(URL?.self, forKey: .podcastURL)
         discussionType = try? container.decode(DiscussionType?.self, forKey: .discussionType)
         groupCategoryID = try? container.decode(Int?.self, forKey: .groupCategoryID)
         allowRating = try? container.decode(Bool?.self, forKey: .allowRating)

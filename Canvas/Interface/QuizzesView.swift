@@ -19,6 +19,8 @@ struct QuizzesView: View {
         List(quizzes, id: \.id) { quiz in
             SingleGradeRowView(assignment: quiz)
         }
+        .navigationTitle("Quizzes")
+        .navigationSubtitle(course.name ?? "Course")
     }
 }
 

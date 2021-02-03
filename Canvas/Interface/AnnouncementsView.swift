@@ -8,7 +8,6 @@ import Foundation
 import SwiftUI
 
 struct AnnouncementListView: View {
-    @Environment(\.openURL) var openURL
     @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
     var body: some View {
@@ -16,10 +15,7 @@ struct AnnouncementListView: View {
             VStack {
                 if self.course.announcements.count > 0 {
                     List(self.course.announcements, id: \.self) { announcement in
-                        Button(action: {self.openAnnouncement(announcement)}) {
-                            AnnouncementRowView(announcement: announcement)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+                        AnnouncementRowView(announcement: announcement)
                     }
                     .id(UUID())
                     .listStyle(DefaultListStyle())
@@ -40,37 +36,43 @@ struct AnnouncementListView: View {
         .navigationSubtitle(course.name ?? "Course")
     }
     
-    func openAnnouncement(_ item: DiscussionTopic) {
-        if let url = URL(string: item.htmlURL!) {
-            openURL(url)
-        }
-    }
+
 }
 
 struct AnnouncementRowView: View {
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var manager: Manager
     @ObservedObject var announcement: DiscussionTopic
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Label {
-                    Text(self.announcement.title ?? "No title")
-                        .font(.headline)
-                } icon: {
-                    if (self.announcement.readState ?? nil) == .Unread { Image(systemName: "circle.fill") }
+        Button(action: self.open) {
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    Label {
+                        Text(self.announcement.title ?? "No title")
+                            .font(.headline)
+                    } icon: {
+                        if (self.announcement.readState ?? nil) == .Unread { Image(systemName: "circle.fill") }
+                    }
+                    Spacer()
+                    Text(self.getDateAsString())
+                        .font(.body)
+                        .foregroundColor(.secondary)
                 }
-                Spacer()
-                Text(self.getDateAsString())
+                Text(self.getPreviewText())
                     .font(.body)
-                    .foregroundColor(.secondary)
+                    .truncationMode(.tail)
+                    .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                Divider()
             }
-            Text(self.getPreviewText())
-                .font(.body)
-                .truncationMode(.tail)
-                .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-            Divider()
         }
-        
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    func open() {
+        if announcement.htmlURL != nil {
+            openURL(announcement.htmlURL!)
+        }
     }
     
     func getPreviewText() -> String {

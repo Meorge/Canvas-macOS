@@ -35,7 +35,7 @@ struct CourseTabView: View {
         "people": "person.2",
         "rubrics": "doc.text.magnifyingglass",
         "assignments": "square.and.pencil",
-        "discussions": "bubble.left",
+        "discussions": "bubble.left.and.bubble.right",
         "grades": "character.book.closed",
         "quizzes": "flag",
         "pages": "doc",

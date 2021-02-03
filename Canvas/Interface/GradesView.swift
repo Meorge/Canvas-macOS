@@ -72,6 +72,7 @@ struct AssignmentGroupHeaderView: View {
 
 struct SingleGradeRowView: View {
     @ObservedObject var assignment: Assignment
+    @Environment(\.openURL) var openURL
     var allowModifyingGrade: Bool = false
     
     var scoreLabel: some View {
@@ -81,27 +82,36 @@ struct SingleGradeRowView: View {
     }
     
     var body: some View {
-        Label {
-            HStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text(self.assignment.name ?? "Assignment")
-                        .font(.title3)
-                        .bold()
-                    Text(self.assignment.getFormattedDueDate())
-                        .font(.subheadline)
+        Button(action: self.open) {
+            Label {
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading) {
+                        Text(self.assignment.name ?? "Assignment")
+                            .font(.title3)
+                            .bold()
+                        Text(self.assignment.getFormattedDueDate())
+                            .font(.subheadline)
+                    }
+                    Spacer()
+                    
+                    if allowModifyingGrade {
+                        Button(action: {}) { scoreLabel }
+                            .buttonStyle(PlainButtonStyle())
+                    } else {
+                        scoreLabel
+                    }
+                    
                 }
-                Spacer()
-                
-                if allowModifyingGrade {
-                    Button(action: {}) { scoreLabel }
-                        .buttonStyle(PlainButtonStyle())
-                } else {
-                    scoreLabel
-                }
-                
+            } icon: {
+                Image(systemName: assignment.getIcon())
             }
-        } icon: {
-            Image(systemName: assignment.getIcon())
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+        
+    func open() {
+        if assignment.htmlURL != nil {
+            openURL(assignment.htmlURL!)
         }
     }
     

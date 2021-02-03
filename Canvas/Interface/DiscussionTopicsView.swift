@@ -48,29 +48,45 @@ struct DiscussionTopicsView: View {
                 }
             }
         }
+        .navigationTitle("Discussions")
+        .navigationSubtitle(course.name ?? "Course")
     }
 }
 
 struct DiscussionTopicRowView: View {
+    @Environment(\.openURL) var openURL
     @ObservedObject var topic: DiscussionTopic
     
     var body: some View {
-        Label {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(topic.title ?? "Topic")
-                        .font(.title3)
-                        .bold()
-                    Text("2 unread, 3 replies")
-                        .font(.subheadline)
-                    Text("Last reply at \(topic.lastReplyAt?.formatted(dateStyle: .medium, timeStyle: .short) ?? "Unknown")")
-                        .font(.subheadline)
+        Button(action: self.open) {
+            Label {
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(topic.title ?? "Topic")
+                                .font(.title3)
+                                .bold()
+                            
+                            if (topic.unreadCount ?? 0) > 0 { Badge(text: "\(topic.unreadCount!)", color: .red, minWidth: 25) }
+                            if (topic.discussionSubentryCount ?? 0) > 0 { Badge(text: "\(topic.discussionSubentryCount!)", color: .gray, minWidth: 25) }
+                        }
+                        Text("Last reply at \(topic.lastReplyAt?.formatted(dateStyle: .medium, timeStyle: .short) ?? "Unknown")")
+                            .font(.subheadline)
+                    }
                 }
-                Spacer()
-//                Image(systemName: "bookmark")
+            } icon: {
+                VStack {
+                    Image(systemName: "\(topic.assignmentID == nil ? "bubble.left" : "exclamationmark.bubble")\(topic.unreadCount ?? 0 > 0 ? ".fill" : "")")
+
+                }
             }
-        } icon: {
-            Image(systemName: "bubble.left.and.bubble.right")
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    func open() {
+        if topic.htmlURL != nil {
+            openURL(topic.htmlURL!)
         }
     }
 }
