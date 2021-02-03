@@ -110,6 +110,11 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, custom_parameters: ["only_announcements": true], handler: handler)
     }
     
+    func getDiscussionTopics(forCourse course: Course, handler: @escaping ((DataResponse<[DiscussionTopic], AFError>) -> Void)) {
+        let url = "/courses/\(course.id!)/discussion_topics"
+        makeRequest(url, handler: handler)
+    }
+    
     func getUsers(forCourse course: Course, handler: @escaping ((DataResponse<[User], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/users"
         makeRequest(url, custom_parameters: ["per_page": 200, "include": ["enrollments", "bio", "avatar_url"]], handler: handler)

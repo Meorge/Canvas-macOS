@@ -21,6 +21,8 @@ struct CourseTabView: View {
         case "people": return AnyView(PeopleView(course: course))
         case "grades": return AnyView(GradesView(course: course))
         case "assignments": return AnyView(AssignmentsView(course: course))
+        case "quizzes": return AnyView(QuizzesView(course: course))
+        case "discussions": return AnyView(DiscussionTopicsView(course: course))
         default: return AnyView(getPlaceholderView(id))
         }
     }

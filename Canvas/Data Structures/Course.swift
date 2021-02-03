@@ -42,6 +42,8 @@ class Course: Decodable, Hashable, ObservableObject {
         }
     }
     
+    @Published var discussionTopics: [DiscussionTopic] = []
+    
     @Published var unreadAnnouncements: Int = 0
     
     @Published var people: [User] = []
@@ -80,6 +82,7 @@ class Course: Decodable, Hashable, ObservableObject {
         updateModules()
         updatePeople()
         updateAnnouncements()
+        updateDiscussionTopics()
         
         updateAssignments()
         updateAssignmentGroups()
@@ -123,6 +126,13 @@ class Course: Decodable, Hashable, ObservableObject {
             
             self.announcements = newAnnouncements
             
+            self.objectWillChange.send()
+        }
+    }
+    
+    func updateDiscussionTopics() {
+        Manager.instance?.canvasAPI.getDiscussionTopics(forCourse: self) { data in
+            self.discussionTopics = data.value ?? []
             self.objectWillChange.send()
         }
     }

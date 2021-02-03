@@ -68,8 +68,9 @@ struct AnnouncementRowView: View {
                 .font(.body)
                 .truncationMode(.tail)
                 .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+            Divider()
         }
-        .padding(.vertical, 8)
+        
     }
     
     func getPreviewText() -> String {
