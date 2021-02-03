@@ -59,6 +59,8 @@ class Course: Decodable, Hashable, ObservableObject {
         case defaultView = "default_view"
     }
     
+    required init() {}
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 

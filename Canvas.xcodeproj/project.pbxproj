@@ -48,6 +48,7 @@
 		5FA7223025BD35A4007D05E0 /* GradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7222F25BD35A4007D05E0 /* GradesView.swift */; };
 		5FA7223425BD3962007D05E0 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7223325BD3962007D05E0 /* Assignment.swift */; };
 		5FB2199E25B7A49000428CC3 /* CustomizeCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB2199D25B7A49000428CC3 /* CustomizeCourseView.swift */; };
+		5FB2F6E625CA1FED00256962 /* AssignmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB2F6E525CA1FED00256962 /* AssignmentsView.swift */; };
 		5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C0251EDC77007E651B /* CanvasApp.swift */; };
 		5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C2251EDC77007E651B /* ContentView.swift */; };
 		5FBFD3C5251EDC78007E651B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3C4251EDC78007E651B /* Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		5FA7222F25BD35A4007D05E0 /* GradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesView.swift; sourceTree = "<group>"; };
 		5FA7223325BD3962007D05E0 /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		5FB2199D25B7A49000428CC3 /* CustomizeCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeCourseView.swift; sourceTree = "<group>"; };
+		5FB2F6E525CA1FED00256962 /* AssignmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsView.swift; sourceTree = "<group>"; };
 		5FBFD3BD251EDC77007E651B /* Canvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBFD3C0251EDC77007E651B /* CanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasApp.swift; sourceTree = "<group>"; };
 		5FBFD3C2251EDC77007E651B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				5FA7222725BD1B51007D05E0 /* SinglePersonView.swift */,
 				5FA7222B25BD2F08007D05E0 /* DashboardView.swift */,
 				5FA7222F25BD35A4007D05E0 /* GradesView.swift */,
+				5FB2F6E525CA1FED00256962 /* AssignmentsView.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				5FA7223025BD35A4007D05E0 /* GradesView.swift in Sources */,
 				5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */,
 				5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */,
+				5FB2F6E625CA1FED00256962 /* AssignmentsView.swift in Sources */,
 				5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */,
 				5FBFD3C3251EDC77007E651B /* ContentView.swift in Sources */,
 				5FA7222C25BD2F08007D05E0 /* DashboardView.swift in Sources */,

@@ -151,6 +151,8 @@ class Assignment: Decodable, ObservableObject {
         case canSubmit = "can_submit"
     }
     
+    required init() {}
+    
     // wow I do not envy you lol
     // - malcolm, 23 jan 2021 at 9:58 pm
     required init(from decoder: Decoder) throws {
@@ -299,7 +301,7 @@ class Submission: Decodable, ObservableObject {
     @Published var latePolicyStatus: LatePolicyStatus?
     @Published var pointsDeducted: Double?
     @Published var secondsLate: Double?
-    @Published var workflowState: String?
+    @Published var workflowState: SubmissionState?
     @Published var extraAttempts: Int?
     @Published var anonymousID: String?
     @Published var postedAt: Date?
@@ -359,7 +361,7 @@ class Submission: Decodable, ObservableObject {
         latePolicyStatus = try? v.decode(LatePolicyStatus?.self, forKey: .latePolicyStatus)
         pointsDeducted = try? v.decode(Double?.self, forKey: .pointsDeducted)
         secondsLate = try? v.decode(Double?.self, forKey: .secondsLate)
-        workflowState = try? v.decode(String?.self, forKey: .workflowState)
+        workflowState = try? v.decode(SubmissionState?.self, forKey: .workflowState)
         extraAttempts = try? v.decode(Int?.self, forKey: .extraAttempts)
         anonymousID = try? v.decode(String?.self, forKey: .anonymousID)
         postedAt = try? v.decode(Date?.self, forKey: .postedAt)
@@ -470,4 +472,10 @@ enum GradingType: String, Decodable {
     case LetterGrade = "letter_grade"
     case GPAScale = "gpa_scale"
     case Points = "points"
+}
+
+enum SubmissionState: String, Decodable {
+    case Unsubmitted = "unsubmitted"
+    case Submitted = "submitted"
+    case Graded = "graded"
 }

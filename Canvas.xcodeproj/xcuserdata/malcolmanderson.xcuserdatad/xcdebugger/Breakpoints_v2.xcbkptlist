@@ -52,5 +52,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F080A84D-8632-4FF0-AA57-E17022A23601"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Canvas/Data Structures/Assignment.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "CodingKeys"
+            landmarkType = "13">
+            <Locations>
+               <Location
+                  uuid = "F080A84D-8632-4FF0-AA57-E17022A23601 - 84a3a1922185dae8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Canvas.Assignment.CodingKeys.init(rawValue: Swift.String) -&gt; Swift.Optional&lt;Canvas.Assignment.CodingKeys&gt;"
+                  moduleName = "Canvas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/Data%20Structures/Assignment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "1379">
+               </Location>
+               <Location
+                  uuid = "F080A84D-8632-4FF0-AA57-E17022A23601 - e3eb51ae66734bc0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Canvas.Assignment.CodingKeys.rawValue.getter : Swift.String"
+                  moduleName = "Canvas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/Data%20Structures/Assignment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "1028">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

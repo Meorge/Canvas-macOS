@@ -112,7 +112,7 @@ class CanvasAPI: ObservableObject {
     
     func getUsers(forCourse course: Course, handler: @escaping ((DataResponse<[User], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/users"
-        makeRequest(url, custom_parameters: ["per_page": 100, "include": ["enrollments", "bio", "avatar_url"]], handler: handler)
+        makeRequest(url, custom_parameters: ["per_page": 200, "include": ["enrollments", "bio", "avatar_url"]], handler: handler)
     }
     
     func getCourseNickname(forCourse course: Course, handler: @escaping ((DataResponse<CourseNickname, AFError>) -> Void)) {
@@ -157,7 +157,7 @@ class CanvasAPI: ObservableObject {
     
     func getAssignments(forCourse course: Course, handler: @escaping ((DataResponse<[Assignment], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/assignments"
-        makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics"]], handler: handler)
+        makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics"], "per_page": 100], handler: handler)
     }
     
     func getAssignmentGroups(forCourse course: Course, handler: @escaping ((DataResponse<[AssignmentGroup], AFError>) -> Void)) {
@@ -165,7 +165,12 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics", "assignments"]], handler: handler)
     }
     
-    func makeRequest<T>(_ url: String, custom_parameters: [String: Any] = [:], method: HTTPMethod = .get, handler: @escaping ((DataResponse<T, AFError>) -> Void) = {_ in }) where T: Decodable {
+    func makeRequest<T>(
+        _ url: String,
+        custom_parameters: [String: Any] = [:],
+        method: HTTPMethod = .get,
+        handler: @escaping ((DataResponse<T, AFError>) -> Void) = {_ in }
+    ) where T: Decodable {
         var parameters: [String: Any] = ["access_token": self.token]
         parameters.merge(custom_parameters) { (_, new) in new }
         
@@ -178,7 +183,6 @@ class CanvasAPI: ObservableObject {
             handler(response)
         }
     }
-    
 }
 
 extension Color {
