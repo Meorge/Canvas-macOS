@@ -51,6 +51,27 @@ class Course: Decodable, Hashable, ObservableObject {
     
     @Published var assignmentGroups: [AssignmentGroup]? = []
     @Published var assignments: [Assignment]? = []
+    
+    @Published var courseStreamSummary: [ActivityStreamSummaryItem]? = []
+    
+    var totalNotifications: Int {
+        var total = 0
+        for item in courseStreamSummary ?? [] {
+            // TODO: figure out how these work so I can incorporate the rest of them!
+            if ![.Announcement, .DiscussionTopic].contains(item.type) { continue }
+            total += item.unreadCount ?? 0
+        }
+        return total
+    }
+    
+    func totalNotificationsOfType(_ type: ActivityStreamItemType) -> Int {
+        var total = 0
+        for item in courseStreamSummary ?? [] {
+            if item.type != type { continue }
+            total += item.unreadCount ?? 0
+        }
+        return total
+    }
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -75,9 +96,15 @@ class Course: Decodable, Hashable, ObservableObject {
 
     }
     
-    func update() {
-        updateCourseIcon()
+    func updateTopLevel() {
         updateCourseColor()
+        updateCourseIcon()
+        updateCourseStreamSummary()
+//        updateAnnouncements()
+    }
+    
+    func update() {
+        updateTopLevel()
         updateTabs()
         updateModules()
         updatePeople()
@@ -86,6 +113,12 @@ class Course: Decodable, Hashable, ObservableObject {
         
         updateAssignments()
         updateAssignmentGroups()
+    }
+    
+    func updateCourseStreamSummary() {
+        Manager.instance?.canvasAPI.getCourseStreamSummary(forCourse: self) { result in
+            self.courseStreamSummary = result.value ?? []
+        }
     }
     
     func updateCourseIcon() {
@@ -114,9 +147,6 @@ class Course: Decodable, Hashable, ObservableObject {
                 module.course = self
                 module.updateModuleItems()
             }
-            
-            // its hacky but It Works
-//            CanvasAPI.instance?.objectWillChange.send()
         }
     }
     
@@ -194,6 +224,36 @@ class CourseNickname: Decodable, Hashable {
     var courseID: Int? = nil
     var name: String? = nil
     var nickname: String? = nil
+}
+
+class ActivityStreamSummaryItem: Decodable, Identifiable, ObservableObject {
     
+    @Published var type: ActivityStreamItemType?
+    @Published var unreadCount: Int?
+    @Published var count: Int?
     
+    enum CodingKeys: String, CodingKey {
+        case type
+        case notificationCategory = "notification_category"
+        case unreadCount = "unread_count"
+        case count
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        type = try? values.decode(ActivityStreamItemType.self, forKey: .type)
+        unreadCount = try? values.decode(Int.self, forKey: .unreadCount)
+        count = try? values.decode(Int.self, forKey: .count)
+    }
+}
+
+enum ActivityStreamItemType: String, Decodable {
+    case DiscussionTopic
+    case Announcement
+    case Conversation
+    case Message
+    case Submission
+    case Conference
+    case Collaboration
+    case AssessmentRequest
 }

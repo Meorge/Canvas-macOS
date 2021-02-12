@@ -13,6 +13,8 @@ class Manager: ObservableObject {
     static var instance: Manager? = nil
     @Published var canvasAPI: CanvasAPI
     
+    var onRefresh: () -> Void = {}
+    
     
     var anyCancellable: AnyCancellable? = nil
     init() {
@@ -39,6 +41,11 @@ class Manager: ObservableObject {
     }
     
     func refresh() {
-        self.canvasAPI.getCourses()
+        // Refresh the top-level info
+        // That would be base course data, and the activity stream stuff
+        self.canvasAPI.getCourses(onlyTopLevelInfo: true)
+        
+        // Refresh whatever the current info is
+        self.onRefresh()
     }
 }

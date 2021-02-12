@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GradesView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
     var body: some View {
         VStack {
@@ -34,6 +35,14 @@ struct GradesView: View {
         .padding()
         .navigationTitle("Grades")
         .navigationSubtitle(course.name ?? "Course")
+        .onAppear {
+            self.manager.onRefresh = {
+                self.course.updateAssignmentGroups()
+                self.course.updateAssignments()
+            }
+            self.course.updateAssignmentGroups()
+            self.course.updateAssignments()
+        }
     }
 }
 

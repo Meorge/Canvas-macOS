@@ -12,8 +12,7 @@ import SwiftUI
 class CanvasAPI: ObservableObject {
     static var subdomain = "wsu"
     static var baseURL = "https://\(subdomain).instructure.com/api/v1"
-//    static var instance: CanvasAPI? = nil
-    
+
     let token: String
     
     let jsonDecoder = JSONDecoder()
@@ -27,8 +26,6 @@ class CanvasAPI: ObservableObject {
         self.jsonDecoder.dateDecodingStrategy = .iso8601
         
         self.token = token
-//        CanvasAPI.instance = self
-//        self.getCourses()
     }
 
     // TODO: Instead of using this to get the courses, use the enrollments:
@@ -38,48 +35,17 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: onlyTopLevelInfo ? self.updateAllCoursesTopLevel : self.updateAllCourses)
     }
     
-    // TODO: clean this up
-    // it's the same code as the other function but without quite as much updating
     func updateAllCoursesTopLevel(data: DataResponse<[Course], AFError>) {
-        let newCourses = data.value ?? []
-        
-        // If a course has been added, add it!
-        for course in newCourses {
-            if !self.courses.contains(course) {
-                self.courses.append(course)
-            }
-        }
-        
-        // If a course has been removed, remove it!
-        for course in self.courses {
-            if !newCourses.contains(course) {
-                self.courses.remove(at: self.courses.firstIndex(of: course)!)
-            }
-        }
+        self.courses = data.value ?? []
         
         for course in self.courses {
-            course.updateCourseIcon()
-            course.updateCourseColor()
+            course.updateTopLevel()
         }
     }
     
     func updateAllCourses(data: DataResponse<[Course], AFError>) {
-        let newCourses = data.value ?? []
-        
-        // If a course has been added, add it!
-        for course in newCourses {
-            if !self.courses.contains(course) {
-                self.courses.append(course)
-            }
-        }
-        
-        // If a course has been removed, remove it!
-        for course in self.courses {
-            if !newCourses.contains(course) {
-                self.courses.remove(at: self.courses.firstIndex(of: course)!)
-            }
-        }
-        
+        self.courses = data.value ?? []
+
         for course in self.courses {
             course.update()
         }
@@ -168,6 +134,11 @@ class CanvasAPI: ObservableObject {
     func getAssignmentGroups(forCourse course: Course, handler: @escaping ((DataResponse<[AssignmentGroup], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/assignment_groups"
         makeRequest(url, custom_parameters: ["include": ["submission", "score_statistics", "assignments"]], handler: handler)
+    }
+    
+    func getCourseStreamSummary(forCourse course: Course, handler: @escaping ((DataResponse<[ActivityStreamSummaryItem], AFError>) -> Void)) {
+        let url = "/courses/\(course.id!)/activity_stream/summary"
+        makeRequest(url, handler: handler)
     }
     
     func makeRequest<T>(

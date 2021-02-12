@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AssignmentsView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course = Course()
     
     var upcomingAssignments: [Assignment] {
@@ -42,6 +43,14 @@ struct AssignmentsView: View {
         }
         .navigationTitle("Assignments")
         .navigationSubtitle(course.name ?? "Course")
+        .onAppear {
+            self.manager.onRefresh = {
+                self.course.updateAssignmentGroups()
+                self.course.updateAssignments()
+            }
+            self.course.updateAssignmentGroups()
+            self.course.updateAssignments()
+        }
     }
 }
 

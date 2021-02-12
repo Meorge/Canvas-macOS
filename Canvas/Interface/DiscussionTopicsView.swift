@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DiscussionTopicsView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course = Course()
     
     var pinnedTopics: [DiscussionTopic] {
@@ -50,6 +51,10 @@ struct DiscussionTopicsView: View {
         }
         .navigationTitle("Discussions")
         .navigationSubtitle(course.name ?? "Course")
+        .onAppear {
+            self.manager.onRefresh = self.course.updateDiscussionTopics
+            self.course.updateDiscussionTopics()
+        }
     }
 }
 

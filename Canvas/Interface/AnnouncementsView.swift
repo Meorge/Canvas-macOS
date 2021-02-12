@@ -31,12 +31,13 @@ struct AnnouncementListView: View {
                 }
             }
         }
-        .onAppear(perform: self.course.updateAnnouncements)
+        .onAppear {
+            self.manager.onRefresh = self.course.updateAnnouncements
+            self.course.updateAnnouncements()
+        }
         .navigationTitle("Announcements")
         .navigationSubtitle(course.name ?? "Course")
     }
-    
-
 }
 
 struct AnnouncementRowView: View {

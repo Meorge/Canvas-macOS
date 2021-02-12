@@ -24,9 +24,12 @@ struct CourseView: View {
             }
         }
         .navigationTitle(course.name ?? "Course")
-//        .navigationSubtitle(course.name!)
         .sheet(isPresented: self.$customizationSheetVisible) {
             CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course)
+        }
+        .onAppear {
+            self.manager.onRefresh = self.course.updateTabs
+            self.course.updateTabs()
         }
         
     }

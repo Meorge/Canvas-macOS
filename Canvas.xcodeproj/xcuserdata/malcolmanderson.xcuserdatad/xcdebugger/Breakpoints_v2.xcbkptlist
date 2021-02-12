@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Canvas/CanvasAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "getCourses(onlyTopLevelInfo:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD - 7239142e2eae3861"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Canvas.CanvasAPI.getCourses() -&gt; ()"
-                  moduleName = "Canvas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/CanvasAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "74">
-               </Location>
-               <Location
-                  uuid = "F4560C68-682B-46AC-8E8D-FBABBDA8BFDD - dc4e123273db2b04"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 (Alamofire.DataResponse&lt;Swift.Array&lt;Canvas.Course&gt;, Alamofire.AFError&gt;) -&gt; () in implicit closure #1 (Canvas.CanvasAPI) -&gt; (Alamofire.DataResponse&lt;Swift.Array&lt;Canvas.Course&gt;, Alamofire.AFError&gt;) -&gt; () in Canvas.CanvasAPI.getCourses() -&gt; ()"
-                  moduleName = "Canvas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/malcolmanderson/Documents/Repositories/Canvas-macOS/Canvas/CanvasAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "34">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F080A84D-8632-4FF0-AA57-E17022A23601"
             shouldBeEnabled = "No"
             ignoreCount = "0"

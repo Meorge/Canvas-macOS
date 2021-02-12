@@ -68,7 +68,10 @@ struct PeopleView: View {
         }
         .navigationTitle("People")
         .navigationSubtitle(course.name ?? "Course")
-        .onAppear(perform: self.course.updatePeople)
+        .onAppear {
+            self.manager.onRefresh = self.course.updatePeople
+            self.course.updatePeople()
+        }
         
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

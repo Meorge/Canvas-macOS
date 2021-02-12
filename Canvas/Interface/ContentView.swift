@@ -43,8 +43,8 @@ struct ContentView: View {
                 Spacer()
             }.listStyle(SidebarListStyle())
             .toolbar {
-                ToolbarItem {
-                    Button(action: self.manager.refresh) {
+                ToolbarItem(placement: .automatic) {
+                    Button(action: { print("Overall refresh"); self.manager.refresh(); }) {
                         Label("Refresh", systemImage: "arrow.clockwise")
                     }
                 }
@@ -68,8 +68,8 @@ struct CourseItem: View {
                     
                 Spacer()
                 
-                if self.course.unreadAnnouncements > 0 {
-                    Badge(text: "\(self.course.unreadAnnouncements)", color: Color.red, minWidth: 25)
+                if self.course.totalNotifications > 0 {
+                    Badge(text: "\(self.course.totalNotifications)", color: Color.red, minWidth: 25)
                 }
                 if (self.course.getScoreAsString() != nil) {
                     Badge(text: self.course.getScoreAsString()!, color: Color.secondary.opacity(0.5), minWidth: 60)

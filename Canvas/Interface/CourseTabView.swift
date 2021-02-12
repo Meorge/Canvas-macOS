@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CourseTabView: View {
     @Environment(\.openURL) var openURL
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course
     @ObservedObject var tab: Tab
     
@@ -62,12 +63,20 @@ struct CourseTabView: View {
         standardIcons[self.tab.id!] ?? "link"
     }
     
+    var badgeCount: Int {
+        switch (self.tab.id) {
+        case "announcements": return self.course.totalNotificationsOfType(.Announcement)
+        case "discussions": return self.course.totalNotificationsOfType(.DiscussionTopic)
+        default: return 0
+        }
+    }
+    
     var label: some View {
         HStack {
             Label(self.tab.label ?? "Tab", systemImage: icon)
             Spacer()
-            if self.tab.id == "announcements" && self.course.unreadAnnouncements > 0 {
-                Badge(text: "\(self.course.unreadAnnouncements)", color: .red, minWidth: 25)
+            if badgeCount > 0 {
+                Badge(text: "\(badgeCount)", color: .red, minWidth: 25)
             }
         }
     }

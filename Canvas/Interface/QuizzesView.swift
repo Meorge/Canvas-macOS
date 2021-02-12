@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuizzesView: View {
+    @EnvironmentObject var manager: Manager
     @ObservedObject var course: Course = Course()
     
     var quizzes: [Assignment] {
@@ -21,6 +22,10 @@ struct QuizzesView: View {
         }
         .navigationTitle("Quizzes")
         .navigationSubtitle(course.name ?? "Course")
+        .onAppear {
+            self.manager.onRefresh = self.course.updateAssignments
+            self.course.updateAssignments()
+        }
     }
 }
 
