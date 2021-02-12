@@ -16,12 +16,6 @@ class Course: Decodable, Hashable, ObservableObject {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(name)
-//        hasher.combine(unreadAnnouncements)
-//        hasher.combine(announcements.hashValue)
-//        hasher.combine(modules)
-//        hasher.combine(announcements)
-//        hasher.combine(people)
     }
     
     @Published var name: String?

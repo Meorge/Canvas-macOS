@@ -18,6 +18,7 @@ class CanvasAPI: ObservableObject {
     let jsonDecoder = JSONDecoder()
     
     @Published var courses: [Course] = []
+    @Published var groups: [CanvasGroup] = []
     @Published var numberOfActiveRequests: Int = 0
     @Published var courseIconData: CourseIconData = CourseIconData()
     
@@ -30,9 +31,18 @@ class CanvasAPI: ObservableObject {
 
     // TODO: Instead of using this to get the courses, use the enrollments:
     // https://canvas.instructure.com/api/v1/users/self/enrollments
-    func getCourses(onlyTopLevelInfo: Bool = false) {
+    func getCourses() {
         let url = "/courses"
-        makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: onlyTopLevelInfo ? self.updateAllCoursesTopLevel : self.updateAllCourses)
+        makeRequest(url, custom_parameters: ["include": ["total_scores"]], handler: self.updateAllCoursesTopLevel)
+    }
+    
+    func getGroups() {
+        let url = "/users/self/groups"
+        makeRequest(url, custom_parameters: ["include": ["users"]], handler: self.updateGroups)
+    }
+    
+    func updateGroups(data: DataResponse<[CanvasGroup], AFError>) {
+        self.groups = data.value ?? []
     }
     
     func updateAllCoursesTopLevel(data: DataResponse<[Course], AFError>) {

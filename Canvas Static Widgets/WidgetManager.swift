@@ -36,8 +36,7 @@ class WidgetManager: ObservableObject {
         }
         
         WidgetManager.instance = self
-        
-        // TODO: only get the grades n stuff
-        self.canvasAPI.getCourses(onlyTopLevelInfo: true)
+
+        self.canvasAPI.getCourses()
     }
 }

@@ -40,6 +40,18 @@ struct ContentView: View {
                             .accentColor(course.courseColor)
                     }
                 }
+                Divider()
+                
+                Group {
+                    Text("Groups")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.secondary)
+                    
+                    ForEach(self.manager.canvasAPI.groups, id: \.self) { group in
+                        Label(group.name ?? "Unnamed Course", systemImage: "book")
+                    }
+                }
                 Spacer()
             }.listStyle(SidebarListStyle())
             .toolbar {

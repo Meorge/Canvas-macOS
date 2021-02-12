@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F21A6F025D745EF00769AF7 /* CanvasGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */; };
 		5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
 		5F301E4B25BE317700A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
 		5F301E7025BE3B4200A6ECCB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */; };
@@ -31,6 +32,7 @@
 		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
 		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
 		5F50A9E325B5409B00DD255B /* DiscussionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */; };
+		5F5FC7D025D7454F0087E602 /* CanvasGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */; };
 		5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
 		5F879927251FD72F009904BC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
 		5F87992E251FDA1A009904BC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
@@ -122,6 +124,7 @@
 		5F50A9D125B51D1400DD255B /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
+		5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasGroup.swift; sourceTree = "<group>"; };
 		5F879922251FD6BD009904BC /* CanvasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasAPI.swift; sourceTree = "<group>"; };
 		5F879926251FD72F009904BC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		5F87992D251FDA1A009904BC /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				5F87992D251FDA1A009904BC /* Course.swift */,
+				5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */,
 				5F50A9D125B51D1400DD255B /* Enrollment.swift */,
 				5F879935251FE5B9009904BC /* Module.swift */,
 				5F91BEB125B89970009B1BD9 /* Tab.swift */,
@@ -494,6 +498,7 @@
 				5F301E7425BE3B4300A6ECCB /* Canvas_Static_Widgets.swift in Sources */,
 				5F301E9225BE3C0400A6ECCB /* Enrollment.swift in Sources */,
 				5F301E9025BE3C0400A6ECCB /* Course.swift in Sources */,
+				5F21A6F025D745EF00769AF7 /* CanvasGroup.swift in Sources */,
 				5F301E9325BE3C0400A6ECCB /* Module.swift in Sources */,
 				5F301E8325BE3BF200A6ECCB /* WidgetManager.swift in Sources */,
 				5F301E8825BE3BFF00A6ECCB /* CanvasAPI.swift in Sources */,
@@ -526,6 +531,7 @@
 				5FBFD3F0251EE3B2007E651B /* Dashboard.swift in Sources */,
 				5F879936251FE5B9009904BC /* Module.swift in Sources */,
 				5FB2199E25B7A49000428CC3 /* CustomizeCourseView.swift in Sources */,
+				5F5FC7D025D7454F0087E602 /* CanvasGroup.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 				5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */,
 				5FB710D825CB2CB80067D348 /* QuizzesView.swift in Sources */,

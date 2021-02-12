@@ -43,7 +43,9 @@ class Manager: ObservableObject {
     func refresh() {
         // Refresh the top-level info
         // That would be base course data, and the activity stream stuff
-        self.canvasAPI.getCourses(onlyTopLevelInfo: true)
+        self.canvasAPI.getCourses()
+        
+        self.canvasAPI.getGroups()
         
         // Refresh whatever the current info is
         self.onRefresh()
