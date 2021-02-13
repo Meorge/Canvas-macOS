@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DiscussionTopicsView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course = Course()
+    @ObservedObject var course: CourseLike
     
     var pinnedTopics: [DiscussionTopic] {
         course.discussionTopics.filter { topic in
@@ -31,28 +31,38 @@ struct DiscussionTopicsView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Pinned")) {
-                ForEach(pinnedTopics, id: \.id) { topic in
-                    DiscussionTopicRowView(topic: topic)
+            if pinnedTopics.count > 0 {
+                Section(header: Text("Pinned")) {
+                    ForEach(pinnedTopics, id: \.id) { topic in
+                        DiscussionTopicRowView(topic: topic)
+                    }
                 }
             }
             
-            Section(header: Text("Discussions")) {
-                ForEach(normalTopics, id: \.id) { topic in
-                    DiscussionTopicRowView(topic: topic)
+            if normalTopics.count > 0 {
+                Section(header: Text("Discussions")) {
+                    ForEach(normalTopics, id: \.id) { topic in
+                        DiscussionTopicRowView(topic: topic)
+                    }
                 }
             }
             
-            Section(header: Text("Closed for Comments")) {
-                ForEach(closedTopics, id: \.id) { topic in
-                    DiscussionTopicRowView(topic: topic)
+            if closedTopics.count > 0 {
+                Section(header: Text("Closed for Comments")) {
+                    ForEach(closedTopics, id: \.id) { topic in
+                        DiscussionTopicRowView(topic: topic)
+                    }
                 }
             }
         }
         .navigationTitle("Discussions")
         .navigationSubtitle(course.name ?? "Course")
         .onAppear {
-            self.manager.onRefresh = self.course.updateDiscussionTopics
+            self.manager.onRefresh = {
+                self.course.updateTopLevel()
+                self.course.updateDiscussionTopics()
+                
+            }
             self.course.updateDiscussionTopics()
         }
     }
@@ -96,8 +106,8 @@ struct DiscussionTopicRowView: View {
     }
 }
 
-struct DiscussionTopicsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DiscussionTopicsView()
-    }
-}
+//struct DiscussionTopicsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DiscussionTopicsView()
+//    }
+//}

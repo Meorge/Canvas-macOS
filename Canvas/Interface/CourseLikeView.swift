@@ -7,25 +7,27 @@
 
 import SwiftUI
 
-struct CourseView: View {
+struct CourseLikeView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course
+    @ObservedObject var course: CourseLike
     
     @State var customizationSheetVisible: Bool = false
     var body: some View {
         NavigationView {
             List {
                 ForEach(self.course.tabs, id: \.self) { tab in
-                    CourseTabView(course: course, tab: tab)
+                    TabItemView(course: course, tab: tab)
                 }
-                Divider()
-                Button(action: self.openCustomizationSheet) { Label("Customize", systemImage: "paintbrush")}
+                if course is Course {
+                    Divider()
+                    Button(action: self.openCustomizationSheet) { Label("Customize", systemImage: "paintbrush")}
                     .buttonStyle(PlainButtonStyle())
+                }
             }
         }
         .navigationTitle(course.name ?? "Course")
         .sheet(isPresented: self.$customizationSheetVisible) {
-            CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course)
+            CustomizeCourseView(isVisible: self.$customizationSheetVisible, course: course as! Course)
         }
         .onAppear {
             self.manager.onRefresh = self.course.updateTabs

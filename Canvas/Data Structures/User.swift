@@ -80,10 +80,13 @@ class User: Decodable, Hashable, ObservableObject {
         bio = try? values.decode(String?.self, forKey: .bio)
     }
     
-    func getEnrollment(forCourse course: Course) -> Enrollment? {
-        let courseID = course.id
+    func getEnrollment(forCourse course: CourseLike) -> Enrollment? {
         
-        let enrollment = enrollments?.filter { $0.courseID == courseID }.first
-        return enrollment
+        if let courseObj = course as? Course {
+            let courseID = courseObj.id
+            
+            let enrollment = enrollments?.filter { $0.courseID == courseID }.first
+            return enrollment
+        } else { return nil }
     }
 }

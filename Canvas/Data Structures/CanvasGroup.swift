@@ -7,17 +7,7 @@
 
 import Foundation
 
-class CanvasGroup: Identifiable, Decodable, Hashable, ObservableObject {
-    static func == (lhs: CanvasGroup, rhs: CanvasGroup) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    @Published var id: Int? = nil
-    @Published var name: String? = nil
+class CanvasGroup: CourseLike {
     @Published var description: String? = nil
     @Published var isPublic: Bool? = nil
     @Published var followedByUser: Bool? = nil
@@ -33,11 +23,8 @@ class CanvasGroup: Identifiable, Decodable, Hashable, ObservableObject {
     @Published var sisImportID: Int? = nil
     @Published var storageQuotaMB: Int? = nil
     @Published var permissions: GroupPermissions? = nil
-    @Published var users: [User]? = []
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case name
         case description
         case isPublic = "is_public"
         case followedByUser = "followed_by_user"
@@ -53,14 +40,13 @@ class CanvasGroup: Identifiable, Decodable, Hashable, ObservableObject {
         case sisImportID = "sis_import_id"
         case storageQuotaMB = "storage_quota_mb"
         case permissions
-        case users
     }
     
     required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        
         let c = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try? c.decode(Int?.self, forKey: .id)
-        name = try? c.decode(String?.self, forKey: .name)
         description = try? c.decode(String?.self, forKey: .description)
         isPublic = try? c.decode(Bool?.self, forKey: .isPublic)
         followedByUser = try? c.decode(Bool?.self, forKey: .followedByUser)
@@ -76,7 +62,36 @@ class CanvasGroup: Identifiable, Decodable, Hashable, ObservableObject {
         sisImportID = try? c.decode(Int?.self, forKey: .sisImportID)
         storageQuotaMB = try? c.decode(Int?.self, forKey: .storageQuotaMB)
         permissions = try? c.decode(GroupPermissions?.self, forKey: .permissions)
-        users = try? c.decode([User]?.self, forKey: .users)
+    }
+    
+    override func updateTopLevel() {
+        updateTabs()
+        updateStreamSummary()
+    }
+    
+    override func updateTabs() {
+        Manager.instance?.canvasAPI.getGroupTabs(forGroup: self) { result in
+            self.tabs = result.value ?? []
+        }
+    }
+    
+    override func updateDiscussionTopics() {
+        Manager.instance?.canvasAPI.getDiscussionTopics(forGroup: self) { data in
+            self.discussionTopics = data.value ?? []
+        }
+    }
+    
+    override func updatePeople() {
+        Manager.instance?.canvasAPI.getUsers(forGroup: self) { data in
+            self.people = data.value ?? []
+        }
+    }
+    
+    override func updateStreamSummary() {
+        Manager.instance?.canvasAPI.getGroupStreamSummary(forGroup: self) { result in
+            print(result.value?.count)
+            self.streamSummary = result.value ?? []
+        }
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizzesView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course = Course()
+    @ObservedObject var course: Course
     
     var quizzes: [Assignment] {
         (course.assignments ?? []).filter { assignment in
@@ -23,14 +23,14 @@ struct QuizzesView: View {
         .navigationTitle("Quizzes")
         .navigationSubtitle(course.name ?? "Course")
         .onAppear {
-            self.manager.onRefresh = self.course.updateAssignments
+            self.manager.onRefresh = {
+                self.course.updateTopLevel()
+                self.course.updateAssignmentGroups()
+                self.course.updateAssignments()
+            }
+            self.course.updateAssignmentGroups()
             self.course.updateAssignments()
         }
     }
 }
 
-struct QuizzesView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizzesView()
-    }
-}

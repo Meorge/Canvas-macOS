@@ -43,6 +43,10 @@ class CanvasAPI: ObservableObject {
     
     func updateGroups(data: DataResponse<[CanvasGroup], AFError>) {
         self.groups = data.value ?? []
+        
+        for group in self.groups {
+            group.updateTopLevel()
+        }
     }
     
     func updateAllCoursesTopLevel(data: DataResponse<[Course], AFError>) {
@@ -63,6 +67,11 @@ class CanvasAPI: ObservableObject {
     
     func getCourseTabs(forCourse course: Course, handler: @escaping ((DataResponse<[Tab], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/tabs"
+        makeRequest(url, handler: handler)
+    }
+    
+    func getGroupTabs(forGroup group: CanvasGroup, handler: @escaping ((DataResponse<[Tab], AFError>) -> Void)) {
+        let url = "/groups/\(group.id!)/tabs"
         makeRequest(url, handler: handler)
     }
     
@@ -91,8 +100,19 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, handler: handler)
     }
     
+    func getDiscussionTopics(forGroup group: CanvasGroup, handler: @escaping ((DataResponse<[DiscussionTopic], AFError>) -> Void)) {
+        let url = "/groups/\(group.id!)/discussion_topics"
+        makeRequest(url, handler: handler)
+    }
+    
     func getUsers(forCourse course: Course, handler: @escaping ((DataResponse<[User], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/users"
+        makeRequest(url, custom_parameters: ["per_page": 200, "include": ["enrollments", "bio", "avatar_url"]], handler: handler)
+    }
+    
+    func getUsers(forGroup group: CanvasGroup, handler: @escaping ((DataResponse<[User], AFError>) -> Void)) {
+        let url = "/groups/\(group.id!)/users"
+        print(url)
         makeRequest(url, custom_parameters: ["per_page": 200, "include": ["enrollments", "bio", "avatar_url"]], handler: handler)
     }
     
@@ -148,6 +168,11 @@ class CanvasAPI: ObservableObject {
     
     func getCourseStreamSummary(forCourse course: Course, handler: @escaping ((DataResponse<[ActivityStreamSummaryItem], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/activity_stream/summary"
+        makeRequest(url, handler: handler)
+    }
+    
+    func getGroupStreamSummary(forGroup group: CanvasGroup, handler: @escaping ((DataResponse<[ActivityStreamSummaryItem], AFError>) -> Void)) {
+        let url = "/groups/\(group.id!)/activity_stream/summary"
         makeRequest(url, handler: handler)
     }
     

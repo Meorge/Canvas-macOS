@@ -37,6 +37,7 @@ struct GradesView: View {
         .navigationSubtitle(course.name ?? "Course")
         .onAppear {
             self.manager.onRefresh = {
+                self.course.updateTopLevel()
                 self.course.updateAssignmentGroups()
                 self.course.updateAssignments()
             }

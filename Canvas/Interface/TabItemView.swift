@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct CourseTabView: View {
+struct TabItemView: View {
     @Environment(\.openURL) var openURL
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course
+    @ObservedObject var course: CourseLike
     @ObservedObject var tab: Tab
     
     
     func getDestination(_ id: String) -> some View {
         switch (id) {
-        case "home": return AnyView(self.getDestination(self.course.defaultView!))
+        case "home": return AnyView(self.getDestination(self.course.defaultView ?? "none"))
         case "announcements": return AnyView(AnnouncementListView(course: course))
-        case "modules": return AnyView(ModuleListView(course: course))
+        case "modules": return AnyView(ModuleListView(course: course as! Course))
         case "people": return AnyView(PeopleView(course: course))
-        case "grades": return AnyView(GradesView(course: course))
-        case "assignments": return AnyView(AssignmentsView(course: course))
-        case "quizzes": return AnyView(QuizzesView(course: course))
+        case "grades": return AnyView(GradesView(course: course as! Course))
+        case "assignments": return AnyView(AssignmentsView(course: course as! Course))
+        case "quizzes": return AnyView(QuizzesView(course: course as! Course))
         case "discussions": return AnyView(DiscussionTopicsView(course: course))
         default: return AnyView(getPlaceholderView(id))
         }

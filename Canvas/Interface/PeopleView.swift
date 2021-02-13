@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct PeopleView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course
+    @ObservedObject var course: CourseLike
     
     @State var filter = FilterCategory.all
     
@@ -27,9 +27,10 @@ struct PeopleView: View {
         
         var id: FilterCategory { self }
     }
-    
+
     var filteredPeople: [User] {
-        self.course.people.filter { user in
+//        print(self.course.people.count)
+        return self.course.people.filter { user in
             self.filter == .all
             ||
             (
@@ -69,7 +70,10 @@ struct PeopleView: View {
         .navigationTitle("People")
         .navigationSubtitle(course.name ?? "Course")
         .onAppear {
-            self.manager.onRefresh = self.course.updatePeople
+            self.manager.onRefresh = {
+                self.course.updateTopLevel()
+                self.course.updatePeople()
+            }
             self.course.updatePeople()
         }
         
@@ -85,6 +89,7 @@ struct PeopleView: View {
                 } label: {
                     Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
                 }
+                .disabled(!(course is Course))
             }
 //            ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                // adapting from https://github.com/Dimillian/RedditOS/blob/master/RedditOs/Features/Search/ToolbarSearchBar.swift
@@ -102,7 +107,7 @@ struct PeopleView: View {
 
 struct PeopleRowView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course
+    @ObservedObject var course: CourseLike
     @ObservedObject var person: User
     var body: some View {
         NavigationLink(destination: SinglePersonView(person: person)) {
@@ -119,7 +124,7 @@ struct PeopleRowView: View {
     
     func getPositionInCourse() -> String {
         let enrollment = self.person.getEnrollment(forCourse: course)
-        if enrollment == nil { return "Not enrolled" }
+        if enrollment == nil { return "" }
         
         return self.getHumanReadablePosition(enrollment!.role)
     }

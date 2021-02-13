@@ -36,7 +36,7 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                 
                     ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
-                        NavigationLink(destination: CourseView(course: course).accentColor(course.courseColor)) {CourseItem(course: course)}
+                        NavigationLink(destination: CourseLikeView(course: course).accentColor(course.courseColor)) {CourseItem(course: course)}
                             .accentColor(course.courseColor)
                     }
                 }
@@ -49,7 +49,8 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                     
                     ForEach(self.manager.canvasAPI.groups, id: \.self) { group in
-                        Label(group.name ?? "Unnamed Course", systemImage: "book")
+                        GroupItem(group: group)
+//                        Label(group.name ?? "Unnamed Course", systemImage: "book")
                     }
                 }
                 Spacer()
@@ -66,6 +67,26 @@ struct ContentView: View {
             print(phase)
             if phase == .active {
                 self.manager.refresh()
+            }
+        }
+    }
+}
+
+struct GroupItem: View {
+    @ObservedObject var group: CanvasGroup
+    var body: some View {
+        NavigationLink(destination: CourseLikeView(course: group)) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Label(self.group.name ?? "Unnamed Course", systemImage: "person.3")
+                    
+                    Spacer()
+                    
+                    if self.group.totalNotifications > 0 {
+                        Badge(text: "\(self.group.totalNotifications)", color: Color.red, minWidth: 25)
+                    }
+                    
+                }
             }
         }
     }

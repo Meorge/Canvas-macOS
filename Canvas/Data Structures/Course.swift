@@ -9,80 +9,33 @@ import Foundation
 import Combine
 import SwiftUI
 
-class Course: Decodable, Hashable, ObservableObject {
-    static func == (lhs: Course, rhs: Course) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    @Published var name: String?
-    @Published var id: Int?
+class Course: CourseLike {
     @Published var courseCode: String?
     @Published var accountID: Int?
-    @Published var defaultView: String?
+    
     
     @Published var courseColor: Color? = Color.accentColor
     @Published var courseIcon: String? = "book"
-    
-    @Published var tabs: [Tab] = []
+
     @Published var modules: [Module] = []
-    @Published var announcements: [DiscussionTopic] = [] {
-        didSet {
-            self.unreadAnnouncements = self.announcements.filter { $0.readState! == .Unread }.count
-            self.objectWillChange.send()
-        }
-    }
     
-    @Published var discussionTopics: [DiscussionTopic] = []
     
-    @Published var unreadAnnouncements: Int = 0
-    
-    @Published var people: [User] = []
     var enrollments: [Enrollment]? = []
     
     @Published var assignmentGroups: [AssignmentGroup]? = []
     @Published var assignments: [Assignment]? = []
-    
-    @Published var courseStreamSummary: [ActivityStreamSummaryItem]? = []
-    
-    var totalNotifications: Int {
-        var total = 0
-        for item in courseStreamSummary ?? [] {
-            // TODO: figure out how these work so I can incorporate the rest of them!
-            if ![.Announcement, .DiscussionTopic].contains(item.type) { continue }
-            total += item.unreadCount ?? 0
-        }
-        return total
-    }
-    
-    func totalNotificationsOfType(_ type: ActivityStreamItemType) -> Int {
-        var total = 0
-        for item in courseStreamSummary ?? [] {
-            if item.type != type { continue }
-            total += item.unreadCount ?? 0
-        }
-        return total
-    }
 
     enum CodingKeys: String, CodingKey {
-        case name
-        case id
         case courseCode = "course_code"
         case accountID = "account_id"
         case enrollments
         case defaultView = "default_view"
     }
     
-    required init() {}
-    
     required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        name = try? values.decode(String?.self, forKey: .name)
-        id = try? values.decode(Int?.self, forKey: .id)
         courseCode = try? values.decode(String?.self, forKey: .courseCode)
         accountID = try? values.decode(Int?.self, forKey: .accountID)
         enrollments = try? values.decode([Enrollment]?.self, forKey: .enrollments)
@@ -90,10 +43,11 @@ class Course: Decodable, Hashable, ObservableObject {
 
     }
     
-    func updateTopLevel() {
+    override func updateTopLevel() {
+        updateTabs()
         updateCourseColor()
         updateCourseIcon()
-        updateCourseStreamSummary()
+        updateStreamSummary()
 //        updateAnnouncements()
     }
     
@@ -109,9 +63,9 @@ class Course: Decodable, Hashable, ObservableObject {
         updateAssignmentGroups()
     }
     
-    func updateCourseStreamSummary() {
+    override func updateStreamSummary() {
         Manager.instance?.canvasAPI.getCourseStreamSummary(forCourse: self) { result in
-            self.courseStreamSummary = result.value ?? []
+            self.streamSummary = result.value ?? []
         }
     }
     
@@ -128,7 +82,7 @@ class Course: Decodable, Hashable, ObservableObject {
         }
     }
     
-    func updateTabs() {
+    override func updateTabs() {
         Manager.instance?.canvasAPI.getCourseTabs(forCourse: self) { result in
             self.tabs = result.value ?? []
         }
@@ -144,7 +98,7 @@ class Course: Decodable, Hashable, ObservableObject {
         }
     }
     
-    func updateAnnouncements() {
+    override func updateAnnouncements() {
         Manager.instance?.canvasAPI.getAnnouncements(forCourse: self) { data in
             let newAnnouncements = data.value ?? []
             
@@ -154,14 +108,13 @@ class Course: Decodable, Hashable, ObservableObject {
         }
     }
     
-    func updateDiscussionTopics() {
+    override func updateDiscussionTopics() {
         Manager.instance?.canvasAPI.getDiscussionTopics(forCourse: self) { data in
             self.discussionTopics = data.value ?? []
-            self.objectWillChange.send()
         }
     }
     
-    func updatePeople() {
+    override func updatePeople() {
         Manager.instance?.canvasAPI.getUsers(forCourse: self) { data in
             self.people = data.value ?? []
         }

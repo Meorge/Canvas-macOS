@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AnnouncementListView: View {
     @EnvironmentObject var manager: Manager
-    @ObservedObject var course: Course
+    @ObservedObject var course: CourseLike
     var body: some View {
         Group {
             VStack {
@@ -32,7 +32,10 @@ struct AnnouncementListView: View {
             }
         }
         .onAppear {
-            self.manager.onRefresh = self.course.updateAnnouncements
+            self.manager.onRefresh = {
+                self.course.updateTopLevel()
+                self.course.updateAnnouncements()
+            }
             self.course.updateAnnouncements()
         }
         .navigationTitle("Announcements")
