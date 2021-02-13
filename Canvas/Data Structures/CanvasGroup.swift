@@ -89,7 +89,6 @@ class CanvasGroup: CourseLike {
     
     override func updateStreamSummary() {
         Manager.instance?.canvasAPI.getGroupStreamSummary(forGroup: self) { result in
-            print(result.value?.count)
             self.streamSummary = result.value ?? []
         }
     }
