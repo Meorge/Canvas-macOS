@@ -150,11 +150,18 @@ struct EnterAccessTokenPageView: View {
     
     func checkIfValid() {
         self.manager.canvasAPI.domain = self.domain!.domain
-        self.manager.canvasAPI.tryLogin { response in
-            if response.error != nil {
-                print("Error logging in: \(response.error!.localizedDescription)")
+        self.manager.canvasAPI.token = self.token
+        self.manager.canvasAPI.tryLogin { data in
+            if data.error != nil {
+                print("Error logging in: \(data.error!.localizedDescription)")
             } else {
-                print("Success!")
+                
+                // check code?
+                print("Code returned was \(data.response!.statusCode)")
+                
+                // if code is 401, the token was invalid
+                
+                // if code is 200, then its all good
             }
         }
     }

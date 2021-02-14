@@ -15,7 +15,7 @@ class CanvasAPI: ObservableObject {
         "https://\(domain)/api/v1"
     }
 
-    let token: String
+    var token: String = ""
     
     let jsonDecoder = JSONDecoder()
     
@@ -209,6 +209,11 @@ class CanvasAPI: ObservableObject {
         var parameters: [String: Any] = ["access_token": self.token]
         parameters.merge(custom_parameters) { (_, new) in new }
         
+        
+        // debug stuff
+        let fullURL = baseURL + url
+        
+        print("url = \(fullURL), token = \(self.token)")
         
         let request = AF.request(baseURL + url, method: method, parameters: parameters)
         
