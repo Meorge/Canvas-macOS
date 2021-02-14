@@ -1,3 +1,4 @@
+
 //
 //  LoginView.swift
 //  Canvas
@@ -33,48 +34,116 @@ struct UserAccountView: View {
 
 struct LoginView: View {
     @EnvironmentObject var manager: Manager
+    
+    
+    @State var currentDomainSearch: String = ""
+    @State var currentToken: String = ""
+    @State var domain: Domain? = nil
+    
+    @State var state: LoginViewState = .FindAccountDomain
+    
     var body: some View {
-        FindAccountDomainPageView()
+        switch (state) {
+        case .FindAccountDomain: FindAccountDomainPageView(search: $currentDomainSearch, selection: $domain, state: $state)
+        case .EnterAccessToken: EnterAccessTokenPageView(token: $currentToken, domain: $domain, state: $state)
+        }
+    }
+    
+    enum LoginViewState {
+        case FindAccountDomain
+        case EnterAccessToken
     }
 }
 
 struct FindAccountDomainPageView: View {
-    @State var selection: Domain? = nil
-    @EnvironmentObject var manager: Manager
-    @State var currentSearch: String = ""
+    @Binding var search: String
+    @Binding var selection: Domain?
+    @Binding var state: LoginView.LoginViewState
     
+    
+    @EnvironmentObject var manager: Manager
     @State var possibilities: [Domain] = []
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Find Your School")
-                .fontWeight(.bold)
+            VStack(alignment: .center) {
+                Text("Find Your School")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            
             Text("First, let's find your school's domain.")
             
-            
-            TextField("Search", text: $currentSearch)
-                .onChange(of: currentSearch, perform: self.updateDomains)
+            TextField("Search", text: $search)
+                .onChange(of: search, perform: self.updateDomains)
             
             List(possibilities, id: \.self, selection: $selection) { item in
                 Text("\(item.name)")
             }
             .listStyle(InsetListStyle())
+            .frame(minHeight: 100)
             
             Spacer()
             HStack {
                 Spacer()
                 Button(action: {}) { Text("Cancel") }
-                Button(action: {}) { Text("Next") }
+                Button(action: self.progressToTokenPage) { Text("Next") }
                     .disabled(self.selection == nil)
             }
         }
         .padding()
+        .onAppear { self.updateDomains(search) }
     }
     
     func updateDomains(_ search: String) {
         self.manager.canvasAPI.getAccountDomains(forQuery: search) { data in
             self.possibilities = data.value ?? []
         }
+    }
+    
+    func progressToTokenPage() {
+        self.state = .EnterAccessToken
+    }
+}
+
+
+struct EnterAccessTokenPageView: View {
+    @Binding var token: String
+    @Binding var domain: Domain?
+    @Binding var state: LoginView.LoginViewState
+    @EnvironmentObject var manager: Manager
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                Text("Enter Your Access Token")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+                
+            Text("Next, enter your access token below. To generate an access token, go to your account settings on the Canvas website, and click \"New Access Token\".")
+            
+            TextField("Token", text: $token)
+            Label("Authentication was unsuccessful. Please double-check your access token and domain, then try again.", systemImage: "exclamationmark.triangle.fill")
+                .foregroundColor(.red)
+            
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: self.returnToDomainPage) { Text("Back") }
+                Button(action: {}) { Text("Log in") }
+            }
+        }
+        .padding()
+    }
+    
+    func returnToDomainPage() {
+        self.token = ""
+        self.state = .FindAccountDomain
     }
 }
 struct LoginView_Previews: PreviewProvider {

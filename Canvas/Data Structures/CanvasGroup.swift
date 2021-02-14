@@ -62,8 +62,6 @@ class CanvasGroup: CourseLike {
         sisImportID = try? c.decode(Int?.self, forKey: .sisImportID)
         storageQuotaMB = try? c.decode(Int?.self, forKey: .storageQuotaMB)
         permissions = try? c.decode(GroupPermissions?.self, forKey: .permissions)
-        
-        print(permissions)
     }
     
     override func updateTopLevel() {

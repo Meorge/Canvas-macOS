@@ -73,7 +73,6 @@ struct ContentView: View {
             }
         }
         .onChange(of: scenePhase) { phase in
-            print(phase)
             if phase == .active {
                 self.manager.refresh()
             }
