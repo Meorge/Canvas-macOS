@@ -17,6 +17,7 @@ class CanvasAPI: ObservableObject {
     
     let jsonDecoder = JSONDecoder()
     
+    @Published var currentUser: User?
     @Published var courses: [Course] = []
     @Published var groups: [CanvasGroup] = []
     @Published var numberOfActiveRequests: Int = 0
@@ -175,6 +176,22 @@ class CanvasAPI: ObservableObject {
         let url = "/groups/\(group.id!)/activity_stream/summary"
         makeRequest(url, handler: handler)
     }
+    
+    
+    func getCurrentUser() {
+        let url = "/users/self"
+        makeRequest(url, handler: self.updateCurrentUser)
+    }
+    
+    func updateCurrentUser(data: DataResponse<User, AFError>) {
+        self.currentUser = data.value!
+    }
+    
+    func getAccountDomains(forQuery query: String, handler: @escaping ((DataResponse<[Domain], AFError>) -> Void)) {
+        let url = "/accounts/search"
+        makeRequest(url, custom_parameters: ["name": query], handler: handler)
+    }
+    
     
     func makeRequest<T>(
         _ url: String,

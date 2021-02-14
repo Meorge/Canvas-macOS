@@ -48,7 +48,8 @@ class Course: CourseLike {
         updateCourseColor()
         updateCourseIcon()
         updateStreamSummary()
-//        updateAnnouncements()
+        updateAnnouncements()
+        updateDiscussionTopics()
     }
     
     func update() {

@@ -22,7 +22,7 @@ struct CustomizeCourseView: View {
         VStack(alignment: .leading) {
             Text("Edit Course")
                 .fontWeight(.bold)
-            Text("here you can change your course's nickname and color and icon that's pretty cool huh")
+            Text("here you can change your course's nickname, color and icon.")
                 
             Form {
                 TextField(self.defaultClassName, text: $className)

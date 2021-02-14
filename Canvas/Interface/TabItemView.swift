@@ -65,8 +65,8 @@ struct TabItemView: View {
     
     var badgeCount: Int {
         switch (self.tab.id) {
-        case "announcements": return self.course.totalNotificationsOfType(.Announcement)
-        case "discussions": return self.course.totalNotificationsOfType(.DiscussionTopic)
+        case "announcements": return self.course.announcementNotifications
+        case "discussions": return self.course.discussionTopicsNotifications
         default: return 0
         }
     }

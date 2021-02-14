@@ -11,50 +11,59 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var manager: Manager
     
+    @State var loginViewPresented: Bool = true
+    
     var body: some View {
         NavigationView {
-            
-            List {
-                Group {
-                    NavigationLink(destination: DashboardView()) {
-                        Label("Dashboard", systemImage: "square.grid.2x2")
+            ZStack {
+                List {
+                    Group {
+                        NavigationLink(destination: DashboardView()) {
+                            Label("Dashboard", systemImage: "square.grid.2x2")
+                        }
+                        NavigationLink(destination: Calendar()) {
+                            Label("Calendar", systemImage: "calendar")
+                        }
+                        NavigationLink(destination: Inbox()) {
+                            Label("Inbox", systemImage: "tray")
+                        }
                     }
-                    NavigationLink(destination: Calendar()) {
-                        Label("Calendar", systemImage: "calendar")
-                    }
-                    NavigationLink(destination: Inbox()) {
-                        Label("Inbox", systemImage: "tray")
-                    }
-                }
-                
-                Divider()
-                
-                Group {
-                    Text("Courses")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
-                
-                    ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
-                        NavigationLink(destination: CourseLikeView(course: course).accentColor(course.courseColor)) {CourseItem(course: course)}
-                            .accentColor(course.courseColor)
-                    }
-                }
-                Divider()
-                
-                Group {
-                    Text("Groups")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
                     
-                    ForEach(self.manager.canvasAPI.groups, id: \.self) { group in
-                        GroupItem(group: group)
-//                        Label(group.name ?? "Unnamed Course", systemImage: "book")
+                    Divider()
+                    
+                    Group {
+                        Text("Courses")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.secondary)
+                    
+                        ForEach(self.manager.canvasAPI.courses, id: \.self) { course in
+                            NavigationLink(destination: CourseLikeView(course: course).accentColor(course.courseColor)) {CourseItem(course: course)}
+                                .accentColor(course.courseColor)
+                        }
                     }
+                    Divider()
+                    
+                    Group {
+                        Text("Groups")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.secondary)
+                        
+                        ForEach(self.manager.canvasAPI.groups, id: \.self) { group in
+                            GroupItem(group: group)
+    //                        Label(group.name ?? "Unnamed Course", systemImage: "book")
+                        }
+                    }
+                }.listStyle(SidebarListStyle())
+                .frame(maxHeight: .infinity)
+                
+                VStack {
+                    Spacer()
+                    UserAccountRowView()
                 }
-                Spacer()
-            }.listStyle(SidebarListStyle())
+                .frame(maxHeight: .infinity)
+            }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button(action: { print("Overall refresh"); self.manager.refresh(); }) {
@@ -68,6 +77,10 @@ struct ContentView: View {
             if phase == .active {
                 self.manager.refresh()
             }
+        }
+        
+        .sheet(isPresented: $loginViewPresented) {
+            LoginView()
         }
     }
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F03E89F25D8746A00F08254 /* CourseLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F03E89E25D8746A00F08254 /* CourseLike.swift */; };
+		5F03E8A325D8747F00F08254 /* CourseLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F03E89E25D8746A00F08254 /* CourseLike.swift */; };
+		5F03E8A825D8A05B00F08254 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F03E8A725D8A05B00F08254 /* LoginView.swift */; };
+		5F03E8AD25D8A7A000F08254 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F03E8AC25D8A7A000F08254 /* Domain.swift */; };
+		5F03E8B125D8A9D400F08254 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F03E8AC25D8A7A000F08254 /* Domain.swift */; };
 		5F21A6F025D745EF00769AF7 /* CanvasGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */; };
 		5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */; };
 		5F301E4B25BE317700A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
@@ -111,6 +116,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5F03E89E25D8746A00F08254 /* CourseLike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseLike.swift; sourceTree = "<group>"; };
+		5F03E8A725D8A05B00F08254 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5F03E8AC25D8A7A000F08254 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentGroup.swift; sourceTree = "<group>"; };
 		5F301E1F25BE2DEE00A6ECCB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		5F301E2125BE2DEE00A6ECCB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -229,6 +237,8 @@
 				5F9D16E425B601A20098F1E4 /* User.swift */,
 				5FA7223325BD3962007D05E0 /* Assignment.swift */,
 				5F301E1625BE186D00A6ECCB /* AssignmentGroup.swift */,
+				5F03E89E25D8746A00F08254 /* CourseLike.swift */,
+				5F03E8AC25D8A7A000F08254 /* Domain.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -250,6 +260,7 @@
 				5FB2F6E525CA1FED00256962 /* AssignmentsView.swift */,
 				5FB710D725CB2CB80067D348 /* QuizzesView.swift */,
 				5FB710DF25CB36200067D348 /* DiscussionTopicsView.swift */,
+				5F03E8A725D8A05B00F08254 /* LoginView.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -498,6 +509,7 @@
 				5F301E7425BE3B4300A6ECCB /* Canvas_Static_Widgets.swift in Sources */,
 				5F301E9225BE3C0400A6ECCB /* Enrollment.swift in Sources */,
 				5F301E9025BE3C0400A6ECCB /* Course.swift in Sources */,
+				5F03E8A325D8747F00F08254 /* CourseLike.swift in Sources */,
 				5F21A6F025D745EF00769AF7 /* CanvasGroup.swift in Sources */,
 				5F301E9325BE3C0400A6ECCB /* Module.swift in Sources */,
 				5F301E8325BE3BF200A6ECCB /* WidgetManager.swift in Sources */,
@@ -509,6 +521,7 @@
 				5F301E8F25BE3C0400A6ECCB /* AssignmentGroup.swift in Sources */,
 				5F301E8D25BE3C0400A6ECCB /* Tab.swift in Sources */,
 				5F301E9425BE3C0400A6ECCB /* User.swift in Sources */,
+				5F03E8B125D8A9D400F08254 /* Domain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,9 +547,12 @@
 				5F5FC7D025D7454F0087E602 /* CanvasGroup.swift in Sources */,
 				5FBFD3C1251EDC77007E651B /* CanvasApp.swift in Sources */,
 				5F301E1725BE186D00A6ECCB /* AssignmentGroup.swift in Sources */,
+				5F03E8AD25D8A7A000F08254 /* Domain.swift in Sources */,
+				5F03E89F25D8746A00F08254 /* CourseLike.swift in Sources */,
 				5FB710D825CB2CB80067D348 /* QuizzesView.swift in Sources */,
 				5F91BEB225B89970009B1BD9 /* Tab.swift in Sources */,
 				5FA7223425BD3962007D05E0 /* Assignment.swift in Sources */,
+				5F03E8A825D8A05B00F08254 /* LoginView.swift in Sources */,
 				5FA7222825BD1B51007D05E0 /* SinglePersonView.swift in Sources */,
 				5F301E4B25BE317700A6ECCB /* Extensions.swift in Sources */,
 				5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */,
