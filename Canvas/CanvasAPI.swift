@@ -10,8 +10,10 @@ import Alamofire
 import SwiftUI
 
 class CanvasAPI: ObservableObject {
-    static var subdomain = "wsu"
-    static var baseURL = "https://\(subdomain).instructure.com/api/v1"
+    var domain = "wsu.instructure.com"
+    var baseURL: String {
+        "https://\(domain)/api/v1"
+    }
 
     let token: String
     
@@ -177,6 +179,10 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, handler: handler)
     }
     
+    func tryLogin(handler: @escaping ((DataResponse<User, AFError>) -> Void)) {
+        let url = "/users/self"
+        makeRequest(url, handler: handler)
+    }
     
     func getCurrentUser() {
         let url = "/users/self"
@@ -187,6 +193,7 @@ class CanvasAPI: ObservableObject {
         self.currentUser = data.value!
     }
     
+    // TODO: make this just use canvas.instructure.com, not whatever custom domain is set
     func getAccountDomains(forQuery query: String, handler: @escaping ((DataResponse<[Domain], AFError>) -> Void)) {
         let url = "/accounts/search"
         makeRequest(url, custom_parameters: ["name": query], handler: handler)
@@ -203,7 +210,7 @@ class CanvasAPI: ObservableObject {
         parameters.merge(custom_parameters) { (_, new) in new }
         
         
-        let request = AF.request(CanvasAPI.baseURL + url, method: method, parameters: parameters)
+        let request = AF.request(baseURL + url, method: method, parameters: parameters)
         
         self.numberOfActiveRequests += 1
         request.responseDecodable(of: T.self, decoder: jsonDecoder) { response in

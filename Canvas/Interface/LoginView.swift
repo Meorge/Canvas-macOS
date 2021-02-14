@@ -106,6 +106,8 @@ struct FindAccountDomainPageView: View {
     func progressToTokenPage() {
         self.state = .EnterAccessToken
     }
+    
+
 }
 
 
@@ -135,7 +137,7 @@ struct EnterAccessTokenPageView: View {
             HStack {
                 Spacer()
                 Button(action: self.returnToDomainPage) { Text("Back") }
-                Button(action: {}) { Text("Log in") }
+                Button(action: self.checkIfValid) { Text("Log in") }
             }
         }
         .padding()
@@ -144,6 +146,17 @@ struct EnterAccessTokenPageView: View {
     func returnToDomainPage() {
         self.token = ""
         self.state = .FindAccountDomain
+    }
+    
+    func checkIfValid() {
+        self.manager.canvasAPI.domain = self.domain!.domain
+        self.manager.canvasAPI.tryLogin { response in
+            if response.error != nil {
+                print("Error logging in: \(response.error!.localizedDescription)")
+            } else {
+                print("Success!")
+            }
+        }
     }
 }
 struct LoginView_Previews: PreviewProvider {
