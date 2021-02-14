@@ -60,6 +60,8 @@ struct FindAccountDomainPageView: View {
     @Binding var selection: Domain?
     @Binding var state: LoginView.LoginViewState
     
+    @State var domainQueryResult: ConnectionAttemptResult = .Success
+    
     
     @EnvironmentObject var manager: Manager
     @State var possibilities: [Domain] = []
@@ -85,6 +87,11 @@ struct FindAccountDomainPageView: View {
             .listStyle(InsetListStyle())
             .frame(minHeight: 100)
             
+            if case .Failure(let errorText) = domainQueryResult {
+                Label("Error encountered: \"\(errorText)\"", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundColor(.red)
+            }
+            
             Spacer()
             HStack {
                 Spacer()
@@ -99,15 +106,23 @@ struct FindAccountDomainPageView: View {
     
     func updateDomains(_ search: String) {
         self.manager.canvasAPI.getAccountDomains(forQuery: search) { data in
-            self.possibilities = data.value ?? []
+            if data.error != nil {
+                self.domainQueryResult = .Failure(message: data.error!.localizedDescription)
+                return
+            }
+            
+            if data.response!.statusCode != 200 {
+                self.domainQueryResult = .Failure(message: "Response code \(data.response!.statusCode)")
+            }
+            
+            self.domainQueryResult = .Success
+            self.possibilities = data.value!
         }
     }
     
     func progressToTokenPage() {
         self.state = .EnterAccessToken
     }
-    
-
 }
 
 
@@ -116,6 +131,9 @@ struct EnterAccessTokenPageView: View {
     @Binding var domain: Domain?
     @Binding var state: LoginView.LoginViewState
     @EnvironmentObject var manager: Manager
+    
+    @State var connectionAttemptResult: ConnectionAttemptResult = .Success
+    @State var connecting = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -130,8 +148,14 @@ struct EnterAccessTokenPageView: View {
             Text("Next, enter your access token below. To generate an access token, go to your account settings on the Canvas website, and click \"New Access Token\".")
             
             TextField("Token", text: $token)
-            Label("Authentication was unsuccessful. Please double-check your access token and domain, then try again.", systemImage: "exclamationmark.triangle.fill")
-                .foregroundColor(.red)
+            if case .Failure(let errorText) = connectionAttemptResult {
+                Label("Error encountered: \"\(errorText)\"", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundColor(.red)
+            }
+            
+            if connecting {
+                ProgressView()
+            }
             
             Spacer()
             HStack {
@@ -149,20 +173,12 @@ struct EnterAccessTokenPageView: View {
     }
     
     func checkIfValid() {
+        self.connecting = true
         self.manager.canvasAPI.domain = self.domain!.domain
         self.manager.canvasAPI.token = self.token
-        self.manager.canvasAPI.tryLogin { data in
-            if data.error != nil {
-                print("Error logging in: \(data.error!.localizedDescription)")
-            } else {
-                
-                // check code?
-                print("Code returned was \(data.response!.statusCode)")
-                
-                // if code is 401, the token was invalid
-                
-                // if code is 200, then its all good
-            }
+        self.manager.canvasAPI.attemptToConnect { result in
+            self.connecting = false
+            self.connectionAttemptResult = result
         }
     }
 }

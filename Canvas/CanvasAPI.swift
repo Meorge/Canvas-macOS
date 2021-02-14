@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import SwiftUI
+import SwiftyJSON
 
 class CanvasAPI: ObservableObject {
     var domain = "wsu.instructure.com"
@@ -179,11 +180,6 @@ class CanvasAPI: ObservableObject {
         makeRequest(url, handler: handler)
     }
     
-    func tryLogin(handler: @escaping ((DataResponse<User, AFError>) -> Void)) {
-        let url = "/users/self"
-        makeRequest(url, handler: handler)
-    }
-    
     func getCurrentUser() {
         let url = "/users/self"
         makeRequest(url, handler: self.updateCurrentUser)
@@ -193,10 +189,12 @@ class CanvasAPI: ObservableObject {
         self.currentUser = data.value!
     }
     
-    // TODO: make this just use canvas.instructure.com, not whatever custom domain is set
     func getAccountDomains(forQuery query: String, handler: @escaping ((DataResponse<[Domain], AFError>) -> Void)) {
-        let url = "/accounts/search"
-        makeRequest(url, custom_parameters: ["name": query], handler: handler)
+        let request = AF.request("https://canvas.instructure.com/api/v1/accounts/search", method: .get, parameters: ["name": query])
+        
+        request.responseDecodable(of: [Domain].self, decoder: jsonDecoder) { response in
+            handler(response)
+        }
     }
     
     
@@ -209,13 +207,9 @@ class CanvasAPI: ObservableObject {
         var parameters: [String: Any] = ["access_token": self.token]
         parameters.merge(custom_parameters) { (_, new) in new }
         
-        
-        // debug stuff
         let fullURL = baseURL + url
         
-        print("url = \(fullURL), token = \(self.token)")
-        
-        let request = AF.request(baseURL + url, method: method, parameters: parameters)
+        let request = AF.request(fullURL, method: method, parameters: parameters)
         
         self.numberOfActiveRequests += 1
         request.responseDecodable(of: T.self, decoder: jsonDecoder) { response in
@@ -223,6 +217,37 @@ class CanvasAPI: ObservableObject {
             handler(response)
         }
     }
+    
+    
+    func attemptToConnect(handler: @escaping ((ConnectionAttemptResult) -> Void)) {
+        let request = AF.request(baseURL + "/users/self", method: .get, parameters: ["access_token": self.token])
+        
+        request.responseData { data in
+            // Failed - there was some other kind of error
+            if data.error != nil {
+                handler(ConnectionAttemptResult.Failure(message: data.error!.localizedDescription))
+                return
+            }
+            
+            if let json = try? JSON(data: data.value!) {
+                // Failed
+                // Invalid access token, probably?
+                if data.response!.statusCode == 401 {
+                    handler(ConnectionAttemptResult.Failure(message: json["errors"][0]["message"].stringValue))
+                }
+                
+                // Succeeded
+                else if data.response!.statusCode == 200 {
+                    handler(ConnectionAttemptResult.Success)
+                }
+            }
+        }
+    }
+}
+
+enum ConnectionAttemptResult {
+    case Failure(message: String)
+    case Success
 }
 
 extension Color {
