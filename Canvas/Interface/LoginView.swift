@@ -27,8 +27,15 @@ struct UserAccountView: View {
     @StateObject var user: User
     
     var body: some View {
-        Text("\(user.shortName ?? "No short name")")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(alignment: .leading) {
+            HStack(alignment: .center) {
+                AvatarView(person: self.user)
+                Text(self.user.shortName ?? "No name")
+            }
+            
+        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
