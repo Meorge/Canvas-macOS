@@ -214,6 +214,7 @@ class CanvasAPI: ObservableObject {
         
         let fullURL = baseURL + url
         
+        print(fullURL)
         let request = AF.request(fullURL, method: method, parameters: parameters)
         
         self.numberOfActiveRequests += 1

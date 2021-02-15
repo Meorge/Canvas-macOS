@@ -11,7 +11,7 @@ import AppKit
 
 @main
 struct CanvasApp: App {
-    @StateObject private var canvasAPI = Manager()
+    @ObservedObject private var canvasAPI = Manager()
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
@@ -26,6 +26,12 @@ struct CanvasApp: App {
                     }
                 }
         }
-
+        .commands {
+            CommandMenu("Account") {
+                Button("Log Out") {
+                    self.canvasAPI.logout()
+                }
+            }
+        }
     }
 }

@@ -44,9 +44,10 @@ class CourseLike: Identifiable, Decodable, Hashable, ObservableObject {
     
     var announcementNotifications: Int {
         var total = 0
-        
+
         // Unread count from announcements
         for announcement in announcements {
+            if announcement.readState ?? .Read == .Unread { total += 1 }
             total += announcement.unreadCount ?? 0
         }
         

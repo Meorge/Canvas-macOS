@@ -11,15 +11,12 @@ import SwiftUI
 struct UserAccountRowView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
-        NavigationLink(destination: self.manager.canvasAPI.currentUser != nil ? AnyView(UserAccountView(user: self.manager.canvasAPI.currentUser!)) : AnyView(LoginView())) {
-            HStack {
-                if self.manager.canvasAPI.currentUser != nil { AvatarView(person: self.manager.canvasAPI.currentUser!) }
-                Text(self.manager.canvasAPI.currentUser?.shortName ?? "Log in")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            }
+        HStack {
+            if self.manager.canvasAPI.currentUser != nil { AvatarView(person: self.manager.canvasAPI.currentUser!) }
+            Text(self.manager.canvasAPI.currentUser?.shortName ?? "Log in")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
         }
         .buttonStyle(PlainButtonStyle())
-        .padding()
     }
 }
 

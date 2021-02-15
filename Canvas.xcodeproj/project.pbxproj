@@ -32,7 +32,7 @@
 		5F301E9425BE3C0400A6ECCB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D16E425B601A20098F1E4 /* User.swift */; };
 		5F301E9E25BE3C9100A6ECCB /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
 		5F301EA325BE3C9A00A6ECCB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F301E4A25BE317700A6ECCB /* Extensions.swift */; };
-		5F301EA825BE3CB400A6ECCB /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* token.txt */; };
+		5F301EA825BE3CB400A6ECCB /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* login.json */; };
 		5F301EAE25BE3CD400A6ECCB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5F301EAD25BE3CD400A6ECCB /* Alamofire */; };
 		5F50A9D225B51D1400DD255B /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9D125B51D1400DD255B /* Enrollment.swift */; };
 		5F50A9DF25B52F7400DD255B /* AnnouncementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */; };
@@ -42,6 +42,7 @@
 		5F780A8D25D98D570023C0CB /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A8C25D98D570023C0CB /* SwiftyJSON */; };
 		5F780A9325DA0DF00023C0CB /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A9225DA0DF00023C0CB /* KeychainSwift */; };
 		5F780A9825DA0DF70023C0CB /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A9725DA0DF70023C0CB /* KeychainSwift */; };
+		5F7A2F3C25DADDED001DCF63 /* LogoutCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7A2F3B25DADDED001DCF63 /* LogoutCommand.swift */; };
 		5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
 		5F879927251FD72F009904BC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
 		5F87992E251FDA1A009904BC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
@@ -68,7 +69,7 @@
 		5FBFD3D4251EDC78007E651B /* CanvasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3D3251EDC78007E651B /* CanvasTests.swift */; };
 		5FBFD3DF251EDC78007E651B /* CanvasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3DE251EDC78007E651B /* CanvasUITests.swift */; };
 		5FBFD3F0251EE3B2007E651B /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBFD3EF251EE3B2007E651B /* Dashboard.swift */; };
-		5FBFD3F5251EF537007E651B /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* token.txt */; };
+		5FBFD3F5251EF537007E651B /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FBFD3F4251EF537007E651B /* login.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		5F50A9DE25B52F7400DD255B /* AnnouncementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsView.swift; sourceTree = "<group>"; };
 		5F50A9E225B5409B00DD255B /* DiscussionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionTopic.swift; sourceTree = "<group>"; };
 		5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasGroup.swift; sourceTree = "<group>"; };
+		5F7A2F3B25DADDED001DCF63 /* LogoutCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCommand.swift; sourceTree = "<group>"; };
 		5F879922251FD6BD009904BC /* CanvasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasAPI.swift; sourceTree = "<group>"; };
 		5F879926251FD72F009904BC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		5F87992D251FDA1A009904BC /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -168,7 +170,7 @@
 		5FBFD3DE251EDC78007E651B /* CanvasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasUITests.swift; sourceTree = "<group>"; };
 		5FBFD3E0251EDC78007E651B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FBFD3EF251EE3B2007E651B /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
-		5FBFD3F4251EF537007E651B /* token.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = token.txt; sourceTree = "<group>"; };
+		5FBFD3F4251EF537007E651B /* login.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 				5FB710D725CB2CB80067D348 /* QuizzesView.swift */,
 				5FB710DF25CB36200067D348 /* DiscussionTopicsView.swift */,
 				5F03E8A725D8A05B00F08254 /* LoginView.swift */,
+				5F7A2F3B25DADDED001DCF63 /* LogoutCommand.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -305,7 +308,7 @@
 				5FBFD3C9251EDC78007E651B /* Info.plist */,
 				5FBFD3CA251EDC78007E651B /* Canvas.entitlements */,
 				5FBFD3C6251EDC78007E651B /* Preview Content */,
-				5FBFD3F4251EF537007E651B /* token.txt */,
+				5FBFD3F4251EF537007E651B /* login.json */,
 				5F879922251FD6BD009904BC /* CanvasAPI.swift */,
 				5F879926251FD72F009904BC /* Manager.swift */,
 				5F301E4A25BE317700A6ECCB /* Extensions.swift */,
@@ -484,7 +487,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F301EA825BE3CB400A6ECCB /* token.txt in Resources */,
+				5F301EA825BE3CB400A6ECCB /* login.json in Resources */,
 				5F301E7625BE3B4300A6ECCB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,7 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FBFD3F5251EF537007E651B /* token.txt in Resources */,
+				5FBFD3F5251EF537007E651B /* login.json in Resources */,
 				5FBFD3C8251EDC78007E651B /* Preview Assets.xcassets in Resources */,
 				5FBFD3C5251EDC78007E651B /* Assets.xcassets in Resources */,
 			);
@@ -544,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F9D16E525B601A20098F1E4 /* User.swift in Sources */,
+				5F7A2F3C25DADDED001DCF63 /* LogoutCommand.swift in Sources */,
 				5F87992E251FDA1A009904BC /* Course.swift in Sources */,
 				5F91BEB625B8A292009B1BD9 /* TabItemView.swift in Sources */,
 				5F879932251FE382009904BC /* CourseLikeView.swift in Sources */,

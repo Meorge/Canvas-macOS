@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import KeychainSwift
+import SwiftyJSON
 
 class Manager: ObservableObject {
     static var instance: Manager? = nil
@@ -20,16 +21,17 @@ class Manager: ObservableObject {
     
     var anyCancellable: AnyCancellable? = nil
     init() {
-//        var token = ""
-//        if let filepath = Bundle.main.path(forResource: "token", ofType: "txt") {
-//            do {
-//                token = try String(contentsOfFile: filepath)
-//            } catch {
-//                print("contents couldn't be loaded")
-//            }
-//        } else {
-//            print("not found")
-//        }
+        let useKeychain: Bool
+        #if DEBUG
+        useKeychain = false
+        #else
+        useKeychain = true
+        #endif
+        
+        // Check if login is possible
+        if !login(useKeychain: useKeychain) {
+            self.loggedOut = true
+        }
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
             self!.objectWillChange.send()
@@ -38,24 +40,48 @@ class Manager: ObservableObject {
         print(Bundle.main.bundleIdentifier!)
         Manager.instance = self
         
-        // Check if login is possible
-        if !login() {
-            self.loggedOut = true
-        }
+
     }
     
-    
-    func login() -> Bool {
-        // Log in if possible
+    func logout() {
         let keychain = KeychainSwift(keyPrefix: "\(Bundle.main.bundleIdentifier!).")
-        if let token = keychain.get("token"), let domain = keychain.get("domain") {
-            self.canvasAPI.token = token
-            self.canvasAPI.domain = domain
-            self.refresh()
-            self.loggedOut = false
-            return true
+        keychain.delete("token")
+        keychain.delete("domain")
+        self.loggedOut = true
+    }
+    
+    func login(useKeychain: Bool = true) -> Bool {
+        // Log in if possible
+        if (useKeychain) {
+            let keychain = KeychainSwift(keyPrefix: "\(Bundle.main.bundleIdentifier!).")
+            if let token = keychain.get("token"), let domain = keychain.get("domain") {
+                self.canvasAPI.token = token
+                self.canvasAPI.domain = domain
+                self.refresh()
+                self.loggedOut = false
+                return true
+            }
+            return false
         }
-        return false
+        
+        else {
+            if let filepath = Bundle.main.path(forResource: "login", ofType: "json") {
+                do {
+                    let jsonData = JSON(NSData(contentsOfFile: filepath))
+                    self.canvasAPI.token = jsonData["token"].stringValue
+                    self.canvasAPI.domain = jsonData["domain"].stringValue
+                    self.refresh()
+                    self.loggedOut = false
+                    return true
+                } catch {
+                    print("contents couldn't be loaded")
+                    return false
+                }
+            } else {
+                print("not found")
+                return false
+            }
+        }
     }
     
     func setAccessTokenAndDomain(withToken token: String, forDomain domain: String) {
