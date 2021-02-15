@@ -191,6 +191,7 @@ struct EnterAccessTokenPageView: View {
             // If we succeeded, let's log in!!
             if case .Success = result {
                 self.manager.setAccessTokenAndDomain(withToken: token, forDomain: domain)
+                self.manager.login()
             }
         }
     }

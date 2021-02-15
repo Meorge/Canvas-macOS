@@ -13,7 +13,7 @@ import KeychainSwift
 class Manager: ObservableObject {
     static var instance: Manager? = nil
     @Published var canvasAPI: CanvasAPI = CanvasAPI()
-    @Published var loggedIn = false
+    @Published var loggedOut = false
     
     var onRefresh: () -> Void = {}
     
@@ -35,22 +35,31 @@ class Manager: ObservableObject {
             self!.objectWillChange.send()
         }
         
+        print(Bundle.main.bundleIdentifier!)
         Manager.instance = self
+        
+        // Check if login is possible
+        if !login() {
+            self.loggedOut = true
+        }
     }
     
     
-    func login() {
+    func login() -> Bool {
         // Log in if possible
-        let keychain = KeychainSwift()
+        let keychain = KeychainSwift(keyPrefix: "\(Bundle.main.bundleIdentifier!).")
         if let token = keychain.get("token"), let domain = keychain.get("domain") {
             self.canvasAPI.token = token
             self.canvasAPI.domain = domain
             self.refresh()
+            self.loggedOut = false
+            return true
         }
+        return false
     }
     
     func setAccessTokenAndDomain(withToken token: String, forDomain domain: String) {
-        let keychain = KeychainSwift()
+        let keychain = KeychainSwift(keyPrefix: "\(Bundle.main.bundleIdentifier!).")
         keychain.set(token, forKey: "token")
         keychain.set(domain, forKey: "domain")
     }

@@ -78,7 +78,7 @@ struct ContentView: View {
             }
         }
         
-        .sheet(isPresented: $loginViewPresented) {
+        .sheet(isPresented: self.$manager.loggedOut) {
             LoginView()
         }
     }
