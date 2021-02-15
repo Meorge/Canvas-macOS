@@ -69,6 +69,10 @@ struct FindAccountDomainPageView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .center) {
+                Image(systemName: "building.columns.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
                 Text("Find Your School")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -138,6 +142,10 @@ struct EnterAccessTokenPageView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .center) {
+                Image(systemName: "key.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
                 Text("Enter Your Access Token")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -149,7 +157,7 @@ struct EnterAccessTokenPageView: View {
             
             TextField("Token", text: $token)
             if case .Failure(let errorText) = connectionAttemptResult {
-                Label("Error encountered: \"\(errorText)\"", systemImage: "exclamationmark.triangle.fill")
+                Label(errorText, systemImage: "exclamationmark.triangle.fill")
                     .foregroundColor(.red)
             }
             
@@ -174,11 +182,16 @@ struct EnterAccessTokenPageView: View {
     
     func checkIfValid() {
         self.connecting = true
-        self.manager.canvasAPI.domain = self.domain!.domain
-        self.manager.canvasAPI.token = self.token
-        self.manager.canvasAPI.attemptToConnect { result in
+        let domain = self.domain!.domain
+        let token = self.token
+        self.manager.canvasAPI.attemptToConnect(token, domain) { result in
             self.connecting = false
             self.connectionAttemptResult = result
+            
+            // If we succeeded, let's log in!!
+            if case .Success = result {
+                self.manager.setAccessTokenAndDomain(withToken: token, forDomain: domain)
+            }
         }
     }
 }

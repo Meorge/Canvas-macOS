@@ -8,36 +8,51 @@
 import Foundation
 import SwiftUI
 import Combine
+import KeychainSwift
 
 class Manager: ObservableObject {
     static var instance: Manager? = nil
-    @Published var canvasAPI: CanvasAPI
+    @Published var canvasAPI: CanvasAPI = CanvasAPI()
+    @Published var loggedIn = false
     
     var onRefresh: () -> Void = {}
     
     
     var anyCancellable: AnyCancellable? = nil
     init() {
-        var token = ""
-        if let filepath = Bundle.main.path(forResource: "token", ofType: "txt") {
-            do {
-                token = try String(contentsOfFile: filepath)
-            } catch {
-                print("contents couldn't be loaded")
-            }
-        } else {
-            print("not found")
-        }
-        
-        self.canvasAPI = CanvasAPI(token)
+//        var token = ""
+//        if let filepath = Bundle.main.path(forResource: "token", ofType: "txt") {
+//            do {
+//                token = try String(contentsOfFile: filepath)
+//            } catch {
+//                print("contents couldn't be loaded")
+//            }
+//        } else {
+//            print("not found")
+//        }
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
             self!.objectWillChange.send()
         }
         
         Manager.instance = self
-        
-        self.refresh()
+    }
+    
+    
+    func login() {
+        // Log in if possible
+        let keychain = KeychainSwift()
+        if let token = keychain.get("token"), let domain = keychain.get("domain") {
+            self.canvasAPI.token = token
+            self.canvasAPI.domain = domain
+            self.refresh()
+        }
+    }
+    
+    func setAccessTokenAndDomain(withToken token: String, forDomain domain: String) {
+        let keychain = KeychainSwift()
+        keychain.set(token, forKey: "token")
+        keychain.set(domain, forKey: "domain")
     }
     
     func refresh() {

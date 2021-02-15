@@ -26,11 +26,16 @@ class CanvasAPI: ObservableObject {
     @Published var numberOfActiveRequests: Int = 0
     @Published var courseIconData: CourseIconData = CourseIconData()
     
-    init(_ token: String) {
+    init() {
+        self.jsonDecoder.dateDecodingStrategy = .iso8601
+    }
+    
+    init(_ token: String, _ domain: String) {
         // set up date decoding strategy
         self.jsonDecoder.dateDecodingStrategy = .iso8601
         
         self.token = token
+        self.domain = domain
     }
 
     // TODO: Instead of using this to get the courses, use the enrollments:
@@ -219,9 +224,10 @@ class CanvasAPI: ObservableObject {
     }
     
     
-    func attemptToConnect(handler: @escaping ((ConnectionAttemptResult) -> Void)) {
-        let request = AF.request(baseURL + "/users/self", method: .get, parameters: ["access_token": self.token])
-        
+    func attemptToConnect(_ token: String, _ domain: String, handler: @escaping ((ConnectionAttemptResult) -> Void)) {
+        let url = "https://\(domain)/api/v1/users/self"
+        let request = AF.request(url, method: .get, parameters: ["access_token": token])
+
         request.responseData { data in
             // Failed - there was some other kind of error
             if data.error != nil {
@@ -232,14 +238,16 @@ class CanvasAPI: ObservableObject {
             if let json = try? JSON(data: data.value!) {
                 // Failed
                 // Invalid access token, probably?
-                if data.response!.statusCode == 401 {
-                    handler(ConnectionAttemptResult.Failure(message: json["errors"][0]["message"].stringValue))
+                if data.response!.statusCode != 200 {
+                    handler(ConnectionAttemptResult.Failure(message: "Error code \(data.response!.statusCode) - \(json["errors"][0]["message"].stringValue)"))
                 }
                 
                 // Succeeded
-                else if data.response!.statusCode == 200 {
+                else {
                     handler(ConnectionAttemptResult.Success)
                 }
+            } else {
+                handler(ConnectionAttemptResult.Failure(message: "Error code \(data.response!.statusCode) - \"\(String(decoding: data.value!, as: UTF8.self))\""))
             }
         }
     }

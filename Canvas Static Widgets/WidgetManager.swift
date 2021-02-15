@@ -11,7 +11,7 @@ import WidgetKit
 
 class WidgetManager: ObservableObject {
     static var instance: WidgetManager? = nil
-    @Published var canvasAPI: CanvasAPI
+    @Published var canvasAPI: CanvasAPI = CanvasAPI()
     
     var anyCancellable: AnyCancellable? = nil
     init() {
@@ -26,7 +26,7 @@ class WidgetManager: ObservableObject {
             print("not found")
         }
         
-        self.canvasAPI = CanvasAPI(token)
+//        self.canvasAPI = CanvasAPI(token)
         
         anyCancellable = self.canvasAPI.objectWillChange.sink { [weak self] (_) in
             self!.objectWillChange.send()

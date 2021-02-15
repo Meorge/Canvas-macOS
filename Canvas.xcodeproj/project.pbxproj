@@ -40,6 +40,8 @@
 		5F5FC7D025D7454F0087E602 /* CanvasGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5FC7C225D73EA20087E602 /* CanvasGroup.swift */; };
 		5F780A8825D98CC00023C0CB /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A8725D98CC00023C0CB /* SwiftyJSON */; };
 		5F780A8D25D98D570023C0CB /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A8C25D98D570023C0CB /* SwiftyJSON */; };
+		5F780A9325DA0DF00023C0CB /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A9225DA0DF00023C0CB /* KeychainSwift */; };
+		5F780A9825DA0DF70023C0CB /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5F780A9725DA0DF70023C0CB /* KeychainSwift */; };
 		5F879923251FD6BD009904BC /* CanvasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879922251FD6BD009904BC /* CanvasAPI.swift */; };
 		5F879927251FD72F009904BC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F879926251FD72F009904BC /* Manager.swift */; };
 		5F87992E251FDA1A009904BC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87992D251FDA1A009904BC /* Course.swift */; };
@@ -176,6 +178,7 @@
 			files = (
 				5F301EAE25BE3CD400A6ECCB /* Alamofire in Frameworks */,
 				5F301E7125BE3B4200A6ECCB /* SwiftUI.framework in Frameworks */,
+				5F780A9825DA0DF70023C0CB /* KeychainSwift in Frameworks */,
 				5F780A8D25D98D570023C0CB /* SwiftyJSON in Frameworks */,
 				5F301E7025BE3B4200A6ECCB /* WidgetKit.framework in Frameworks */,
 			);
@@ -187,6 +190,7 @@
 			files = (
 				5F780A8825D98CC00023C0CB /* SwiftyJSON in Frameworks */,
 				5F9D16F525B616F70098F1E4 /* SDWebImageSwiftUI in Frameworks */,
+				5F780A9325DA0DF00023C0CB /* KeychainSwift in Frameworks */,
 				5F9D16FC25B617430098F1E4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +358,7 @@
 			packageProductDependencies = (
 				5F301EAD25BE3CD400A6ECCB /* Alamofire */,
 				5F780A8C25D98D570023C0CB /* SwiftyJSON */,
+				5F780A9725DA0DF70023C0CB /* KeychainSwift */,
 			);
 			productName = "Canvas Static WidgetsExtension";
 			productReference = 5F301E6F25BE3B4200A6ECCB /* Canvas Static WidgetsExtension.appex */;
@@ -379,6 +384,7 @@
 				5F9D16F425B616F70098F1E4 /* SDWebImageSwiftUI */,
 				5F9D16FB25B617430098F1E4 /* Alamofire */,
 				5F780A8725D98CC00023C0CB /* SwiftyJSON */,
+				5F780A9225DA0DF00023C0CB /* KeychainSwift */,
 			);
 			productName = Canvas;
 			productReference = 5FBFD3BD251EDC77007E651B /* Canvas.app */;
@@ -459,6 +465,7 @@
 				5F9D16F325B616F70098F1E4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				5F9D16FA25B617430098F1E4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				5F780A8625D98CC00023C0CB /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				5F780A9125DA0DF00023C0CB /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 5FBFD3BE251EDC77007E651B /* Products */;
 			projectDirPath = "";
@@ -963,6 +970,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		5F780A9125DA0DF00023C0CB /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 		5F9D16E825B6139D0098F1E4 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
@@ -1004,6 +1019,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F780A8625D98CC00023C0CB /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		5F780A9225DA0DF00023C0CB /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F780A9125DA0DF00023C0CB /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		5F780A9725DA0DF70023C0CB /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F780A9125DA0DF00023C0CB /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		5F9D16F425B616F70098F1E4 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
