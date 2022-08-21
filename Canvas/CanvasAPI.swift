@@ -15,7 +15,7 @@ class CanvasAPI: ObservableObject {
     var baseURL: String {
         "https://\(domain)/api/v1"
     }
-
+    
     var token: String = ""
     
     let jsonDecoder = JSONDecoder()
@@ -37,7 +37,7 @@ class CanvasAPI: ObservableObject {
         self.token = token
         self.domain = domain
     }
-
+    
     // TODO: Instead of using this to get the courses, use the enrollments:
     // https://canvas.instructure.com/api/v1/users/self/enrollments
     func getCourses() {
@@ -65,15 +65,7 @@ class CanvasAPI: ObservableObject {
             course.updateTopLevel()
         }
     }
-    
-    func updateAllCourses(data: DataResponse<[Course], AFError>) {
-        self.courses = data.value ?? []
 
-        for course in self.courses {
-            course.update()
-        }
-    }
-    
     func getCourseTabs(forCourse course: Course, handler: @escaping ((DataResponse<[Tab], AFError>) -> Void)) {
         let url = "/courses/\(course.id!)/tabs"
         makeRequest(url, handler: handler)
@@ -214,21 +206,26 @@ class CanvasAPI: ObservableObject {
         
         let fullURL = baseURL + url
         
-        print(fullURL)
-        let request = AF.request(fullURL, method: method, parameters: parameters)
+        print("Making request for \(fullURL)")
         
-        self.numberOfActiveRequests += 1
+        let interceptor = CanvasRequestInterceptor()
+        
+        let request: DataRequest = AF.request(fullURL, method: method, parameters: parameters, interceptor: interceptor)
+        
         request.responseDecodable(of: T.self, decoder: jsonDecoder) { response in
+            print("Received response for \(fullURL): \(response.debugDescription)")
             self.numberOfActiveRequests -= 1
             handler(response)
         }
+        
+        self.numberOfActiveRequests += 1
     }
     
     
     func attemptToConnect(_ token: String, _ domain: String, handler: @escaping ((ConnectionAttemptResult) -> Void)) {
         let url = "https://\(domain)/api/v1/users/self"
         let request = AF.request(url, method: .get, parameters: ["access_token": token])
-
+        
         request.responseData { data in
             // Failed - there was some other kind of error
             if data.error != nil {
@@ -286,20 +283,34 @@ class CustomColor: Decodable {
         let r, g, b: Double
         let start = hexcode.index(hexcode.startIndex, offsetBy: 1)
         let hexColor = String(hexcode[start...])
-
+        
         if hexColor.count == 6 {
             let scanner = Scanner(string: hexColor)
             var hexNumber: UInt64 = 0
-
+            
             if scanner.scanHexInt64(&hexNumber) {
                 r = Double((hexNumber & 0xff0000) >> 16) / 255
                 g = Double((hexNumber & 0x00ff00) >> 8) / 255
                 b = Double(hexNumber & 0x0000ff) / 255
-
+                
                 return Color(red: r, green: g, blue: b)
             }
         }
         
         return Color.red
+    }
+}
+
+class CanvasRequestInterceptor : RequestInterceptor {
+    // Using https://www.raywenderlich.com/11668143-alamofire-tutorial-for-ios-advanced-usage as base
+    let retryCount: Int = 5
+    let retryDelay: TimeInterval = 10
+    
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        if let code = request.response?.statusCode, code == 403, request.retryCount < retryCount {
+            completion(.retryWithDelay(retryDelay))
+        } else {
+            return completion(.doNotRetry)
+        }
     }
 }

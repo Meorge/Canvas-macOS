@@ -112,7 +112,6 @@ struct CourseItem: View {
                 }
                 if (self.course.getScoreAsString() != nil) {
                     Badge(text: self.course.getScoreAsString()!, color: Color.secondary.opacity(0.5), minWidth: 60)
-                    
                 }
                 
             }

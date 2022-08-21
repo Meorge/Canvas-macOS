@@ -44,24 +44,8 @@ class Course: CourseLike {
     }
     
     override func updateTopLevel() {
-        updateTabs()
         updateCourseColor()
         updateCourseIcon()
-        updateStreamSummary()
-        updateAnnouncements()
-        updateDiscussionTopics()
-    }
-    
-    func update() {
-        updateTopLevel()
-        updateTabs()
-        updateModules()
-        updatePeople()
-        updateAnnouncements()
-        updateDiscussionTopics()
-        
-        updateAssignments()
-        updateAssignmentGroups()
     }
     
     override func updateStreamSummary() {
@@ -79,6 +63,7 @@ class Course: CourseLike {
     
     func updateCourseColor() {
         Manager.instance?.canvasAPI.getCourseColor(forCourse: self) { result in
+//            print("Tried to get course color for \(self.name), result was \(result.debugDescription)")
             self.courseColor = (result.value ?? CustomColor()).asColor
         }
     }

@@ -65,10 +65,7 @@ class CanvasGroup: CourseLike {
     }
     
     override func updateTopLevel() {
-        updateTabs()
         updateStreamSummary()
-        updateAnnouncements()
-        updateDiscussionTopics()
     }
     
     override func updateTabs() {
